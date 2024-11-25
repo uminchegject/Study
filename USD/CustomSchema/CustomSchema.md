@@ -2,7 +2,7 @@
 CustomSchemaを用いた検証
 
 ## ToDo
-* テキ各プラットフォームでの使用方法の調査スト
+* テキ各プラットフォームでの使用方法の調査
     * Houdini
     * Maya
     * UE4
@@ -10,4 +10,3 @@ CustomSchemaを用いた検証
 ## Houdini
 
 ### Solaris
-どうするべ
