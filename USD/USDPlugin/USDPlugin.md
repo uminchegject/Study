@@ -2,9 +2,9 @@
 プラグインの実装方法の調査
 
 ## ToDo
-* ビルドに必要な情報を調査
-    * Tutorialフォルダの中身を確認
-* 実装できる内容を確認
+* Tutorialフォルダの中身を確認
+    * ビルドに必要な情報を調査
+    * 実装できる内容を確認
 
 ## Build手順
 ### CMakeLists.txtにビルド対象を記載
@@ -15,8 +15,21 @@ add_subdirectory(作業フォルダ名)
 ```
 
 ### ソースの用意
+PythonとC++の場合で必要なソースが変わってくる
+**※一部中身を変える必要あり**
+* Pythonの場合
+    * Pythonソース
+    * CMakeLists
+* C++の場合
+    * usdGenSchemaで生成したファイル
+    * __init__.py
+    * module.cpp
+    * moduleDeps.cpp
+    * CMakeLists
+    * pch.h
 
 ### CMakeList.txtに読み込むソースを追加
+
 
 ### build_usd.pyでビルド
 build_usd.pyでUSD全体をビルド
@@ -41,3 +54,5 @@ pxr_python_bin("Plugin名"
 https://openusd.org/docs/Creating-a-Usdview-Plugin.html
 * USDTutorialの日本語解説
 https://fereria.github.io/reincarnation_tech/usd/python/usdview_plugin_01
+* PluginSystem
+https://lucascheller.github.io/VFX-UsdSurvivalGuide/pages/core/plugins/overview.html
