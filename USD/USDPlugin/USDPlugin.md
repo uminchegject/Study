@@ -7,11 +7,19 @@
 * 実装できる内容を確認
 
 ## Build手順
-### CMakeLists.txtにソースを追加
+### CMakeLists.txtにビルド対象を記載
+
+作業フォルダにCMakeListsを配置し下記のソースを書いてビルド対象に加える
+```CMakeLists.txt
+add_subdirectory(作業フォルダ名)
+```
 
 ### ソースの用意
 
+### CMakeList.txtに読み込むソースを追加
+
 ### build_usd.pyでビルド
+build_usd.pyでUSD全体をビルド
 
 
 ## Tips
