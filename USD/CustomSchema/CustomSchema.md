@@ -10,3 +10,11 @@ CustomSchemaを用いた検証
 ## Houdini
 
 ### Solaris
+
+## Tips
+### usdGenSchemaが呼び出せない
+ninja2がPythonにインストールされていないとビルドの際にusdGenSchemaがビルドされない。
+下記のコマンドでpipからインストールする。
+```install ninja2
+pip install Jinja2
+```
