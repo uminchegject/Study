@@ -1,0 +1,53 @@
+●ツールの概要
+
+
+■CodelessSchema
+●ツールの概要
+・
+
+●ツールの使い方
+・作業フォルダにschemaを定義しているusdaファイルとBatファイルを配置
+ -※usdaファイルは必ず"schema"と命名する(schema.usda)
+・Batを起動
+・schemaLibraryNameの設定
+ -schema.usdaで定義しているLibraryNameをそのまま設定する
+・releaseフォルダ内にschema定義に必要なデータが作成されるので、作成されたフォルダをHPATHが通っているフォルダに配置すればschema定義完了
+
+●注意点
+下記のフォルダがデフォルトパスにない場合はbat内を書き換える必要あり
+・Houdiniのインストールフォルダパスが下記パスでない場合は書き換える
+C:\Program Files\Side Effects Software\Houdini 20.0.751
+ ※20.5.410以外のバージョンで行う場合も書き換える必要あり
+・VsDevCmd.bat(Develop Command Prompt VS 2022)がデフォルトの下記のパスと違う場合は書き換える
+C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat
+
+
+■BuildSchema
+●ツールの概要
+・
+
+●準備
+・Open_USDを持ってきたファイルの用意
+
+
+●USDビルドの準備
+※USDのビルドには2時間弱かかるため
+
+
+●ツールの使い方
+・作業フォルダにschemaを定義しているusdaファイルとBatファイルを配置
+ -※usdaファイルは必ず"schema"と命名する(schema.usda)
+・Batを起動
+・schemaLibraryNameの設定
+ -schema.usdaで定義しているLibraryNameをそのまま設定する
+・schemaPrefixNameの設定
+ -schema.usdaで定義しているPrefixNameをそのまま設定する
+・USDのリリースフォルダパスを設定
+・USDのビルドフォルダパスを設定
+・処理
+・releaseフォルダ内にschema定義に必要なデータが作成されるので、作成されたフォルダをHPATHが通っているフォルダに配置すればschema定義完了
+
+●注意点
+下記のフォルダがデフォルトパスにない場合はbat内を書き換える必要あり
+・VsDevCmd.bat(Develop Command Prompt VS 2022)がデフォルトの下記のパスと違う場合は書き換える
+C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat
