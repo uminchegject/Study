@@ -1,5 +1,3 @@
-@echo off
-
 :: 入力箇所
 set /p schema_library_name=" Set SchemaLibraryName: "
 
@@ -31,26 +29,24 @@ echo command = ["usdGenSchema", "schema.usda", "."] >> hcmd.py
 echo subprocess.run(command, shell=True, check=True) >> hcmd.py
 
 ::hython経由でusdGenSchemaを呼び出し
-echo call C:\Program Files\Side Effects Software\Houdini 20.5.410\bin\hython.exe
-set PATH=C:\Program Files\Side Effects Software\Houdini 20.5.410\bin
+set PATH=C:\Program Files\Side Effects Software\Houdini 20.5.278\bin
 hython.exe hcmd.py
-if %errorlevel% neq 0 (
-    echo ERROR: The program failed with error code %errorlevel%.
-	echo -----------Check Houdini Folder Path-----------
-)
 del hcmd.py
 
-
+pause
 ::cmakeによるビルド
 echo Step 3: build CMake ...
 mkdir build
 cd build
-echo call C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat
 call "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
+
+
 
 cmake ..
 cmake --build .
 cmake --install . --prefix ..
+
+pause
 
 ::releaseフォルダの構成
 cd "%work_folder_path%\release\%schema_library_name%\resources
