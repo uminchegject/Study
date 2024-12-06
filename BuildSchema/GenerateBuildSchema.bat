@@ -1,12 +1,22 @@
 @echo off
 
+::※下記のbatはデフォルトパスで設定しているため、別のフォルダにある場合は修正して下さい。
+set vsdevcmd_path="C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
+
 ::入力箇所
 set /p schema_library_name="Set SchemaLibraryName: "
 set /p schema_library_prefix="Set SchemaLibraryPrefix: "
-set /p usd_release_folder_path="Set USDReleaseFolderPath: "
+set /p open_usd_folder_path="Set OpenUSDFolderPath: "
 set /p usd_build_folder_path="Set USDBuildFolderPath: "
 
 ::ビルドに必要なフォルダを用意
+
+::前作業のファイルが残っていた場合削除
+for %%f in (*.*) do (
+    if not "%%f"=="schema.usda" if not "%%f"=="generateBuildSchema.bat" del /q "%%f"
+)
+if exist "release" rmdir /s /q "release"
+if exist "build" rmdir /s /q "build"
 
 :: CMakeListsの作成
 echo Step 1: Make CMakeLists.txt ...
@@ -57,9 +67,9 @@ echo PXR_NAMESPACE_CLOSE_SCOPE >> %moduledeps_cpp%
 
 ::既存のTutorialデータから不足データをコピー
 echo Step 3: Copy module.cpp __init__.py pch.h ...
-copy %usd_release_folder_path%\extras\usd\examples\usdSchemaExamples\module.cpp %work_folder_path%\
-copy %usd_release_folder_path%\extras\usd\examples\usdSchemaExamples\__init__.py %work_folder_path%\
-copy %usd_release_folder_path%\extras\usd\examples\usdSchemaExamples\pch.h %work_folder_path%\
+copy %open_usd_folder_path%\extras\usd\examples\usdSchemaExamples\module.cpp %work_folder_path%\
+copy %open_usd_folder_path%\extras\usd\examples\usdSchemaExamples\__init__.py %work_folder_path%\
+copy %open_usd_folder_path%\extras\usd\examples\usdSchemaExamples\pch.h %work_folder_path%\
 
 ::usdGenSchema処理
 echo Step 4: Call usdGenSchema ...
@@ -77,7 +87,7 @@ python script.py
 del script.py
 
 ::ビルド対象としてCMakeListsに追加
-cd %usd_release_folder_path%\extras\usd\examples
+cd %open_usd_folder_path%\extras\usd\examples
 set cmakelists_txt=%cd%\CMakeLists.txt
 copy %cmakelists_txt% %cmakelists_txt%.bak
 echo. >> %cmakelists_txt%
@@ -91,8 +101,8 @@ xcopy %work_folder_path% .\ /H /Y
 
 ::CMakeBuild
 echo Step 5: build_usd ...
-call "C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat"
-cd %usd_release_folder_path%\build_scripts
+call %vsdevcmd_path%
+cd %open_usd_folder_path%\build_scripts
 python build_usd.py "%usd_build_folder_path%"
 
 
@@ -104,6 +114,8 @@ del %cmakelists_txt%.bak
 cd %work_folder_path%
 mkdir release
 cd release
+mkdir %schema_library_name%
+cd %schema_library_name%
 
 copy %usd_build_folder_path%\share\usd\examples\plugin\%schema_library_name%.dll .\
 copy %usd_build_folder_path%\share\usd\examples\plugin\%schema_library_name%.lib .\
