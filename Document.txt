@@ -64,3 +64,29 @@ UsdAbcAlembicFileFormat::WriteToFile(
 	// レイヤーのSdfAbstractDataを引数にUsdAbc_AlembicDataクラスでAbcに書き込む処理を呼び出す
     return TF_VERIFY(data) && UsdAbc_AlembicData::Write(data, filePath, comment);
 }
+
+
+
+■alembicFileFormatについて
+SceneDescriptionDataを格納するためのコンテナです
+任意のSdfPathに対して、１つ以上のキー(filed)と値のペアを保持でき、その値にアクセスしたり変更したりできます。
+また、TimeLineAPIを用いることで、Timeに対しての値を取得するような実装ができ、usdAbcのアニメーション周りの情報をTimeLineAPIを用いて実装しています。
+alembicのような動的な情報を管理する際にSdfAbstractDataが用いられています。
+既存TutorialのDancingTutorialも動的なusdデータの管理方法の一例としてSdfAbstractDataを用いた実装がされているので参考になると思います。
+AlembicAbstractDataでの処理の大半が「alembicReader」「alembicWriter」で行われているため、現在こちらを調査しています。
+
+
+●Time-sample API
+    virtual std::set<double> ListAllTimeSamples() const;
+    virtual std::set<double> ListTimeSamplesForPath(const SdfPath&) const;
+    virtual bool GetBracketingTimeSamples(double time, double* tLower, double* tUpper) const;
+    virtual size_t GetNumTimeSamplesForPath(const SdfPath& path) const;
+    virtual bool GetBracketingTimeSamplesForPath(const SdfPath&,
+                                    double time,
+                                    double* tLower, double* tUpper) const;
+    virtual bool QueryTimeSample(const SdfPath&, double time,
+                    SdfAbstractDataValue* value) const;
+    virtual bool QueryTimeSample(const SdfPath&, double time,
+                    VtValue* value) const;
+    virtual void SetTimeSample(const SdfPath&, double, const VtValue&);
+    virtual void EraseTimeSample(const SdfPath&, double);
