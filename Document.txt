@@ -1,53 +1,66 @@
-●ツールの概要
+■概要
+処理の流れとしては
+・alembicFileFormat→alembicData→alembicReader,Writerの流れで実装されています。
 
 
-■CodelessSchema
-●ツールの概要
-・
-
-●ツールの使い方
-・作業フォルダにschemaを定義しているusdaファイルとBatファイルを配置
- -※usdaファイルは必ず"schema"と命名する(schema.usda)
-・Batを起動
-・schemaLibraryNameの設定
- -schema.usdaで定義しているLibraryNameをそのまま設定する
-・releaseフォルダ内にschema定義に必要なデータが作成されるので、作成されたフォルダをHPATHが通っているフォルダに配置すればschema定義完了
-
-●注意点
-下記のフォルダがデフォルトパスにない場合はbat内を書き換える必要あり
-・Houdiniのインストールフォルダパスが下記パスでない場合は書き換える
-C:\Program Files\Side Effects Software\Houdini 20.0.751
- ※20.5.410以外のバージョンで行う場合も書き換える必要あり
-・VsDevCmd.bat(Develop Command Prompt VS 2022)がデフォルトの下記のパスと違う場合は書き換える
-C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat
+■SdfFileFormatについて
+特定のファイルフォーマットからUSDへの読み込み、書き込み機能を実装するための基底クラスです。
+基本的にはRoad,Write関数をOverRideしてファイルフォーマットの読み込み、書き込み処理を実装します。
+SdfFileFormatを用いたファイルフォーマットプラグイン実装だけで考えたら、既存TutorialのusdObjが下記のSdfAbstractDataを用いない最低限の実装がされているので参考になると思います。
 
 
-■BuildSchema
-●ツールの概要
-・
+●クラス内の主要関数
+・fileFormatPluginに対応した形式かを確認する関数
+・usdAbcではTfGetExtension関数を用いてフォーマットを取得し、PluginのFormatIdと照らし合わせる処理が実装されている
+UsdAbcAlembicFileFormat::CanRead(const string& filePath) const
+{
+    // TfGetExtension関数を用いてfilePathの形式を取得
+    auto extension = TfGetExtension(filePath);
+    if (extension.empty()) {
+        return false;
+    }
+	//取得した形式がjsonで定義しているformatIdと同じか確認し返す
+    return extension == this->GetFormatId();
+}
 
-●準備
-・Open_USDを持ってきたファイルの用意
+
+・Fileを呼び込みLayerに設定する処理を行う関数
+・「ReadFromString」という関数もあるがusdAbcでは未実装(実装はされているが基底クラスの処理を読んでいるだけ)
+・usdAbcではSdfAbstractDataを継承したUsdAbc_AlembicDataクラスでAbcファイルを呼び込むため、UsdAbc_AlembicDataを定義しクラス内で呼み込むように実装している
+bool UsdAbcAlembicFileFormat::Read(
+    SdfLayer* layer,
+    const string& resolvedPath,
+    bool metadataOnly) const
+{
+
+    TRACE_FUNCTION();
+
+    SdfAbstractDataRefPtr data = InitData(layer->GetFileFormatArguments());
+    UsdAbc_AlembicDataRefPtr abcData = TfStatic_cast<UsdAbc_AlembicDataRefPtr>(data);
+	
+	//UsdAbc_AlembicDataクラスでabcフォーマットを開く
+    if (!abcData->Open(resolvedPath)) {
+        return false;
+    }
+
+	//UsdAbc_AlembicDataクラスでabcフォーマットを開く処理がうまくいった際は、Layerにを設定する。
+    _SetLayerData(layer, data);
+    return true;
+}
 
 
-●USDビルドの準備
-※USDのビルドには2時間弱かかるため
-
-
-●ツールの使い方
-・作業フォルダにschemaを定義しているusdaファイルとBatファイルを配置
- -※usdaファイルは必ず"schema"と命名する(schema.usda)
-・Batを起動
-・schemaLibraryNameの設定
- -schema.usdaで定義しているLibraryNameをそのまま設定する
-・schemaPrefixNameの設定
- -schema.usdaで定義しているPrefixNameをそのまま設定する
-・USDのリリースフォルダパスを設定
-・USDのビルドフォルダパスを設定
-・処理
-・releaseフォルダ内にschema定義に必要なデータが作成されるので、作成されたフォルダをHPATHが通っているフォルダに配置すればschema定義完了
-
-●注意点
-下記のフォルダがデフォルトパスにない場合はbat内を書き換える必要あり
-・VsDevCmd.bat(Develop Command Prompt VS 2022)がデフォルトの下記のパスと違う場合は書き換える
-C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\VsDevCmd.bat
+・usdのLayerからAbcファイルに書き込む処理を行う関数
+・「WriteToString」「WriteToStream」という関数もあるがusdAbcでは未実装(実装はされているが基底クラスの処理を読んでいるだけ)
+・usdAbcではSdfAbstractDataを継承したUsdAbc_AlembicDataクラスで書き込み処理を行うため、UsdAbc_AlembicDataのWrite処理を呼ぶように実装している
+bool
+UsdAbcAlembicFileFormat::WriteToFile(
+    const SdfLayer& layer,
+    const std::string& filePath,
+    const std::string& comment,
+    const FileFormatArguments& args) const
+{
+    // レイヤーからSdfAbstractDataを取得
+    SdfAbstractDataConstPtr data = _GetLayerData(layer);
+	// レイヤーのSdfAbstractDataを引数にUsdAbc_AlembicDataクラスでAbcに書き込む処理を呼び出す
+    return TF_VERIFY(data) && UsdAbc_AlembicData::Write(data, filePath, comment);
+}
