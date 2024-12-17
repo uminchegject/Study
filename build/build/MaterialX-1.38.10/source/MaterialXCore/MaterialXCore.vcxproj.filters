@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Definition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Document.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Element.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Geom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Interface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Look.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Property.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Traversal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Variant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\MaterialX-1.38.10\source\MaterialXCore\Generated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Definition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Document.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Geom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Library.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Look.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Property.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Traversal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\Variant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXCore\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\MaterialX-1.38.10\source\MaterialXCore\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{20120BC7-245A-3E21-8CF3-8F7FBA7614D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{AC4D9B1B-399F-3F3B-BFF7-5F4A5B964E62}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,93 @@
+2024-12-04 20:30
+cmake -DCMAKE_INSTALL_PREFIX="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts" -DCMAKE_PREFIX_PATH="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts" -DCMAKE_BUILD_TYPE=Release  -G "Visual Studio 17 2022" -A x64   "C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\zlib-1.2.13"
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.22631.
+-- The C compiler identification is MSVC 19.42.34433.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of off64_t
+-- Check size of off64_t - failed
+-- Looking for fseeko
+-- Looking for fseeko - not found
+-- Looking for unistd.h
+-- Looking for unistd.h - not found
+-- Renaming
+--     C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/src/zlib-1.2.13/zconf.h
+-- to 'zconf.h.included' because this file is included with zlib
+-- but CMake generates it automatically in the build directory.
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_BUILD_TYPE
+
+
+-- Build files have been written to: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13
+2024-12-04 20:31
+cmake --build . --config Release --target install -- /M:12
+MSBuild のバージョン 17.12.6+db5f6012c (.NET Framework)
+
+  Checking Build System
+  Building Custom Rule C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/src/zlib-1.2.13/CMakeLists.txt
+  Building Custom Rule C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/src/zlib-1.2.13/CMakeLists.txt
+  adler32.c
+  compress.c
+  crc32.c
+  deflate.c
+  adler32.c
+  gzclose.c
+  compress.c
+  crc32.c
+  gzlib.c
+  deflate.c
+  gzread.c
+  gzclose.c
+  gzwrite.c
+  gzlib.c
+  inflate.c
+  gzread.c
+  infback.c
+  gzwrite.c
+  inftrees.c
+  inffast.c
+  inflate.c
+  trees.c
+  infback.c
+  uncompr.c
+  inftrees.c
+  zutil.c
+  inffast.c
+  コードを生成中...
+  trees.c
+  uncompr.c
+  zutil.c
+  コードを生成中...
+     ライブラリ C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/Release/zlib.lib とオブジェクト C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/Release/zlib.exp を作成中
+  zlib.vcxproj -> C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\Release\zlib.dll
+  zlibstatic.vcxproj -> C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\Release\zlibstatic.lib
+  Building Custom Rule C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/src/zlib-1.2.13/CMakeLists.txt
+  -- Install configuration: "Release"
+  -- Installing: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/lib/zlib.lib
+  -- Installing: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/bin/zlib.dll
+  -- Installing: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/lib/zlibstatic.lib
+  -- Installing: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/include/zconf.h
+  -- Installing: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/include/zlib.h
+  -- Installing: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/share/man/man3/zlib.3
+  -- Installing: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/share/pkgconfig/zlib.pc

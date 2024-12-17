@@ -1,0 +1,96 @@
+Determining size of off64_t failed with the following output:
+Change Dir: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/CMakeScratch/TryCompile-wht64z
+
+Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_4b6e1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && MSBuild 縺ｮ繝舌・繧ｸ繝ｧ繝ｳ 17.12.6+db5f6012c (.NET Framework)
+
+  Microsoft(R) C/C++ Optimizing Compiler Version 19.42.34433 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _LARGEFILE64_SOURCE=1 /D HAVE_SYS_TYPES_H /D HAVE_STDINT_H /D HAVE_STDDEF_H /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4b6e1.dir\Debug\\" /Fd"cmTC_4b6e1.dir\Debug\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\OFF64_T.c"
+  OFF64_T.c
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\OFF64_T.c(29,12): error C2065: 'off64_t': 螳夂ｾｩ縺輔ｌ縺ｦ縺・↑縺・ｭ伜挨蟄舌〒縺吶・[C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\cmTC_4b6e1.vcxproj]
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\OFF64_T.c(30,12): error C2065: 'off64_t': 螳夂ｾｩ縺輔ｌ縺ｦ縺・↑縺・ｭ伜挨蟄舌〒縺吶・[C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\cmTC_4b6e1.vcxproj]
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\OFF64_T.c(31,12): error C2065: 'off64_t': 螳夂ｾｩ縺輔ｌ縺ｦ縺・↑縺・ｭ伜挨蟄舌〒縺吶・[C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\cmTC_4b6e1.vcxproj]
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\OFF64_T.c(32,12): error C2065: 'off64_t': 螳夂ｾｩ縺輔ｌ縺ｦ縺・↑縺・ｭ伜挨蟄舌〒縺吶・[C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\cmTC_4b6e1.vcxproj]
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\OFF64_T.c(33,12): error C2065: 'off64_t': 螳夂ｾｩ縺輔ｌ縺ｦ縺・↑縺・ｭ伜挨蟄舌〒縺吶・[C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-wht64z\cmTC_4b6e1.vcxproj]
+
+
+OFF64_T.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__PPC64__)
+# define KEY '_','_','P','P','C','6','4','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__PPC__)
+# define KEY '_','_','P','P','C','_','_'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(off64_t))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the function fseeko exists failed with the following output:
+Change Dir: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/CMakeScratch/TryCompile-gx3hyp
+
+Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_cfdb1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && MSBuild 縺ｮ繝舌・繧ｸ繝ｧ繝ｳ 17.12.6+db5f6012c (.NET Framework)
+
+  Microsoft(R) C/C++ Optimizing Compiler Version 19.42.34433 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=fseeko /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cfdb1.dir\Debug\\" /Fd"cmTC_cfdb1.dir\Debug\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-gx3hyp\CheckFunctionExists.c"
+  CheckFunctionExists.c
+CheckFunctionExists.obj : error LNK2019: 譛ｪ隗｣豎ｺ縺ｮ螟夜Κ繧ｷ繝ｳ繝懊Ν fseeko 縺碁未謨ｰ main 縺ｧ蜿ら・縺輔ｌ縺ｾ縺励◆ [C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-gx3hyp\cmTC_cfdb1.vcxproj]
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-gx3hyp\Debug\cmTC_cfdb1.exe : fatal error LNK1120: 1 莉ｶ縺ｮ譛ｪ隗｣豎ｺ縺ｮ螟夜Κ蜿ら・ [C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-gx3hyp\cmTC_cfdb1.vcxproj]
+
+
+
+Determining if the include file unistd.h exists failed with the following output:
+Change Dir: C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/CMakeScratch/TryCompile-2qzbly
+
+Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_82414.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && MSBuild 縺ｮ繝舌・繧ｸ繝ｧ繝ｳ 17.12.6+db5f6012c (.NET Framework)
+
+  Microsoft(R) C/C++ Optimizing Compiler Version 19.42.34433 for x64
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_82414.dir\Debug\\" /Fd"cmTC_82414.dir\Debug\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-2qzbly\CheckIncludeFile.c"
+  CheckIncludeFile.c
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-2qzbly\CheckIncludeFile.c(1,10): error C1083: include 繝輔ぃ繧､繝ｫ繧帝幕縺代∪縺帙ｓ縲・unistd.h':No such file or directory [C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\zlib-1.2.13\CMakeFiles\CMakeScratch\TryCompile-2qzbly\cmTC_82414.vcxproj]
+
+
+

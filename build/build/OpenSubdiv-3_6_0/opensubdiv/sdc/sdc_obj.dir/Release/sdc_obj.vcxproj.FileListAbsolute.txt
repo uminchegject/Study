@@ -1,0 +1,1 @@
+C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\OpenSubdiv-3_6_0\opensubdiv\sdc\sdc_obj.dir\Release\sdc_obj.lib

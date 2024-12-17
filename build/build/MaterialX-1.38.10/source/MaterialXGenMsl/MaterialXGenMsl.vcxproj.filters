@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslResourceBindingContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslShaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslSyntax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\BlurNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomColorNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomPropValueNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\HeightToNormalNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightCompoundNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightSamplerNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightShaderNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\NumLightsNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceShaderNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\UnlitSurfaceNodeMsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslResourceBindingContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslShaderGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\BlurNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomColorNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomPropValueNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\HeightToNormalNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightCompoundNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightSamplerNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightShaderNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\NumLightsNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceShaderNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\UnlitSurfaceNodeMsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenMsl\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\MaterialX-1.38.10\source\MaterialXGenMsl\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{20120BC7-245A-3E21-8CF3-8F7FBA7614D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{D27888E8-4C08-38F0-B1BC-C42DB28CB89E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{AC4D9B1B-399F-3F3B-BFF7-5F4A5B964E62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{6CBF4096-3724-383C-A8DF-B4EBE638FBCC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

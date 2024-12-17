@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\BlurNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\ClosureLayerNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\MaterialNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\SurfaceNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslShaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslSyntax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\BlurNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\ClosureLayerNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\MaterialNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\SurfaceNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslShaderGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\src\MaterialX-1.38.10\source\MaterialXGenOsl\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\MaterialX-1.38.10\source\MaterialXGenOsl\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{20120BC7-245A-3E21-8CF3-8F7FBA7614D4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{D27888E8-4C08-38F0-B1BC-C42DB28CB89E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{AC4D9B1B-399F-3F3B-BFF7-5F4A5B964E62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{6CBF4096-3724-383C-A8DF-B4EBE638FBCC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

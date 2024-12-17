@@ -1,0 +1,10 @@
+^C:\USERS\YUSUKE.NAKAMURA\DESKTOP\OPENUSD\OPENUSD-RELEASE\BUILD_SCRIPTS\SRC\ZLIB-1.2.13\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/src/zlib-1.2.13 -BC:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13 --check-stamp-file C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

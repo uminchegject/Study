@@ -1,0 +1,6 @@
+C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/zlib.dir
+C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/zlibstatic.dir
+C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/RUN_TESTS.dir
+C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/INSTALL.dir
+C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/ALL_BUILD.dir
+C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/build/zlib-1.2.13/CMakeFiles/ZERO_CHECK.dir
