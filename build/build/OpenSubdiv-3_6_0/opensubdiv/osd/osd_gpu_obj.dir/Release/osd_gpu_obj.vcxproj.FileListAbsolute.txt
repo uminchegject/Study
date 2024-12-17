@@ -1,1 +1,0 @@
-C:\Users\yusuke.nakamura\Desktop\OpenUSD\OpenUSD-release\build_scripts\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_gpu_obj.dir\Release\osd_gpu_obj.lib

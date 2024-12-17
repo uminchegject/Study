@@ -1,7 +1,0 @@
-C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/lib/zlib.lib
-C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/bin/zlib.dll
-C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/lib/zlibstatic.lib
-C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/include/zconf.h
-C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/include/zlib.h
-C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/share/man/man3/zlib.3
-C:/Users/yusuke.nakamura/Desktop/OpenUSD/OpenUSD-release/build_scripts/share/pkgconfig/zlib.pc
