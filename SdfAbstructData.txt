@@ -1,0 +1,72 @@
+■SdfAbstructData
+
+・Alembicを読み込む際に呼び出される処理です。
+読み込み処理を行うクラスUsdAbc_AlembicDataReaderを生成しOpen処理を呼び出します
+bool UsdAbc_AlembicData::Open(const std::string& filePath)
+{
+    TfAutoMallocTag2 tag("UsdAbc_AlembicData", "UsdAbc_AlembicData::Open");
+    TRACE_FUNCTION();
+
+	//Abc_AlembicDataReaderを生成
+    _reader.reset(new UsdAbc_AlembicDataReader);
+
+	//TfEnvSettingsの制御フラグの設定
+    if (TfGetEnvSetting(USD_ABC_EXPAND_INSTANCES)) {
+        _reader->SetFlag(UsdAbc_AlembicContextFlagNames->expandInstances);
+    }
+    if (TfGetEnvSetting(USD_ABC_DISABLE_INSTANCING)) {
+        _reader->SetFlag(UsdAbc_AlembicContextFlagNames->disableInstancing);
+    }	
+    if (TfGetEnvSetting(USD_ABC_PARENT_INSTANCES)) {
+        _reader->SetFlag(UsdAbc_AlembicContextFlagNames->promoteInstances);
+    }
+	
+	//Abc_AlembicDataReader読み込み処理を呼び出し
+    if (_reader->Open(filePath, _arguments)) {
+        return true;
+    }
+
+    TF_RUNTIME_ERROR("Failed to open Alembic archive \"%s\": %s",
+                     filePath.c_str(),
+                     _reader->GetErrors().c_str());
+    Close();
+    return false;
+}
+
+
+・USDをAlembicに書き込む際の処理です。
+読み込み処理を行うクラスUsdAbc_AlembicDataWriterを生成しOpen処理,Write処理を呼び出します
+bool
+UsdAbc_AlembicData::Write(
+    const SdfAbstractDataConstPtr& data,
+    const std::string& filePath,
+    const std::string& comment)
+{
+    TfAutoMallocTag2 tag("UsdAbc_AlembicData", "UsdAbc_AlembicData::Write");
+    TRACE_FUNCTION();
+
+	//コメントをフィールドから検索して、コメント変数に入れる
+    std::string finalComment = comment;
+    if (data && finalComment.empty()) {
+        VtValue value = data->Get(
+            SdfPath::AbsoluteRootPath(), SdfFieldKeys->Comment);
+        if (value.IsHolding<std::string>()) {
+            finalComment = value.UncheckedGet<std::string>();
+        }
+    }
+
+	//UsdAbc_AlembicDataWriterの生成
+    UsdAbc_AlembicDataWriter writer;
+
+    // UsdAbc_AlembicDataWriterに書き込むためのarchive(alembicのデータ管理クラス)を生成
+    if (writer.Open(filePath, finalComment)) {
+		//書き込み処理
+        if (writer.Write(data) && writer.Close()) {
+            return true;
+        }
+        TfDeleteFile(filePath);
+    }
+    TF_RUNTIME_ERROR("Alembic error: %s", writer.GetErrors().c_str());
+    return false;
+}
+

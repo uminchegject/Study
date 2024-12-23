@@ -1,0 +1,716 @@
+■UsdAbc_AlembicDataReader
+
+・Alembicのデータ管理を行うためのクラスArchiveを生成し、書き込み処理を行う_WriterContextクラスに設定する
+class UsdAbc_AlembicDataReaderImpl : public _ReaderContext { };
+
+UsdAbc_AlembicDataReader::UsdAbc_AlembicDataReader() :
+    _impl(new UsdAbc_AlembicDataReaderImpl)
+{
+    _impl->SetSchema(&_GetSchema());
+}
+
+・読み込み処理
+bool
+UsdAbc_AlembicDataReader::Open(const std::string& filePath,
+                               const SdfFileFormat::FileFormatArguments& args)
+{
+    TRACE_FUNCTION();
+
+    _errorLog.clear();
+    try {
+        if (_impl->Open(filePath, &_errorLog, args)) {
+            return true;
+        }
+    }
+    catch (std::exception& e) {
+        _errorLog.append(e.what());
+        _errorLog.append("\n");
+    }
+    return false;
+}
+
+・Alembic読み込み及びUSDへの書き込み処理
+bool
+_ReaderContext::Open(const std::string& filePath, std::string* errorLog,
+                     const SdfFileFormat::FileFormatArguments& args)
+{
+    Close();
+
+//----------------------------------------------------------------------------------
+//Alembicの読み込み	
+
+	//Archiveを取得するためにファイル名の文字列を用意
+    std::vector<std::string> layeredABC;
+    {
+        auto abcLayers = args.find("abcLayers");
+        if (abcLayers != args.end()) {
+            for (auto&& l : TfStringSplit(abcLayers->second, ",")) {
+                layeredABC.emplace_back(std::move(l));
+            }
+        }
+    }
+    layeredABC.emplace_back(filePath);
+
+#if PXR_HDF5_SUPPORT_ENABLED && !H5_HAVE_THREADSAFE
+    // HDF5 may not be thread-safe.
+    using lock_guard = std::lock_guard<std::recursive_mutex>;
+    std::unique_ptr<std::lock_guard<std::recursive_mutex>> hfd5Lock(new lock_guard(*_hdf5));
+#endif
+
+    using IFactory = ::Alembic::AbcCoreFactory::IFactory;
+    IFactory factory;
+    IFactory::CoreType abcType;
+    factory.setPolicy(Abc::ErrorHandler::Policy::kQuietNoopPolicy);
+    factory.setOgawaNumStreams(_GetNumOgawaStreams());
+
+#if ALEMBIC_LIBRARY_VERSION >= 10709
+    if (!TfGetEnvSetting(USD_ABC_READ_ARCHIVE_USE_MMAP)) {
+        factory.setOgawaReadStrategy(Alembic::AbcCoreFactory::IFactory::kFileStreams);
+    }
+#endif
+
+    IArchive archive = factory.getArchive(layeredABC, abcType);
+
+#if PXR_HDF5_SUPPORT_ENABLED && !H5_HAVE_THREADSAFE
+    if (abcType == IFactory::kHDF5 || abcType == IFactory::kLayer) {
+        // An HDF5, or layered which may have an HDF5 layer
+        _mutex = &*_hdf5;
+    } else {
+        // Don't need the HDF5 lock
+        hfd5Lock.reset();
+    }
+#endif
+
+    std::string format;
+    switch (abcType) {
+        case IFactory::kHDF5: format = "HDF5"; break;
+        case IFactory::kOgawa: format = "Ogawa"; break;
+        case IFactory::kLayer: format = "Layer"; break;
+        default:
+        case IFactory::kUnknown: format = "Unknown"; break;
+    }
+    if (!archive.valid()) {
+        *errorLog = TfStringPrintf("Unsupported format: '%s'", format.c_str());
+        return false;
+    }
+
+	
+    // Get info.
+    uint32_t apiVersion;
+    std::string writer, version, date, comment;
+    double fps = 0.0;
+#if ALEMBIC_LIBRARY_VERSION >= 10712
+    GetArchiveInfo(archive, writer, version, apiVersion, date, comment, fps);
+#else
+    GetArchiveInfo(archive, writer, version, apiVersion, date, comment);
+#endif
+
+    // Report.
+    if (IsFlagSet(UsdAbc_AlembicContextFlagNames->verbose)) {
+        TF_STATUS("Opened %s file written by Alembic %s",
+                  format.c_str(),
+                  UsdAbc_FormatAlembicVersion(apiVersion).c_str());
+    }
+
+    // Cut over.
+    _archive = std::move(archive);	
+//----------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------
+//USDに書き込み
+    // Report.
+    if (IsFlagSet(UsdAbc_AlembicContextFlagNames->verbose)) {
+        TF_STATUS("Opened %s file written by Alembic %s",
+                  format.c_str(),
+                  UsdAbc_FormatAlembicVersion(apiVersion).c_str());
+    }
+
+    // Cut over.
+    _archive = std::move(archive);
+
+    // Fill pseudo-root in the cache.
+    const SdfPath rootPath = SdfPath::AbsoluteRootPath();
+    _pseudoRoot = &_prims[rootPath];
+    _pseudoRoot->metadata[SdfFieldKeys->Documentation] = comment;
+
+    // Gather the names of the root prims.  Instancing will want to create
+    // new root prims.  Those must have unique names that don't modify the
+    // names of existing root prims.  So we have to have the existing names
+    // first.
+    IObject root = _archive.getTop();
+    std::set<std::string> usedRootNames;
+    for (size_t i = 0, n = root.getNumChildren(); i != n; ++i) {
+        IObject child(root, root.getChildHeader(i).getName());
+        std::string name = _CleanName(child.getName(), " _", usedRootNames,
+                                      _AlembicFixName(),
+                                      &SdfPath::IsValidIdentifier);
+        usedRootNames.insert(name);
+    }
+
+    // Fetch authored timeCodesPerSecond early so that we can use it 
+    // for rescaling timeSamples.
+    if (const PropertyHeader* property =
+            root.getProperties().getPropertyHeader("Usd")) {
+        const MetaData& metadata = property->getMetaData();
+        _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond] = 24.0;
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->TimeCodesPerSecond);
+        _timeScale = _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond].Get<double>();
+    }
+    else if (fps != 0.0) {
+        _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond] = fps;
+        _timeScale = _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond].Get<double>();
+    }
+
+    // Collect instancing information.
+    // Skipping this step makes later code expand instances.
+    if (!IsFlagSet(UsdAbc_AlembicContextFlagNames->expandInstances)) {
+        // Find the instance sources and their instances.
+        _SourceToInstancesMap instances;
+        _FindInstances(root, &instances);
+
+        // If we're allowing instance promotion find the candidates.
+        _ObjectReaderSet promotable;
+        if (IsFlagSet(UsdAbc_AlembicContextFlagNames->promoteInstances)) {
+            _FindPromotable(instances, &promotable);
+        }
+
+        // Save instancing info to lookup during main traversal, including
+        // choosing paths for the prototypes.
+        _SetupInstancing(instances, promotable, &usedRootNames);
+    }
+
+    // Re-root so the <defaultPrim> is actually the archive!
+    TfToken abcReRoot;
+    {
+        auto reRoot = args.find("abcReRoot");
+        if (reRoot != args.end()) {
+            if (!TfIsValidIdentifier(reRoot->second)) {
+                TF_WARN("[usdAbc] Ignoring re-root because identifer '%s' is"
+                        " not valid (%s).", reRoot->second.c_str(),
+                        filePath.c_str());
+            } else
+                abcReRoot = TfToken(reRoot->second);
+        }
+    }
+
+    // Fill rest of the cache.
+    if (!abcReRoot.IsEmpty()) {
+        SdfPath compPath = rootPath.AppendChild(abcReRoot);
+        auto& xform = _prims[compPath];
+        xform.typeName = UsdAbcPrimTypeNames->Xform;
+        xform.specifier = SdfSpecifierDef;
+        _ReadPrimChildren(*this, root, compPath, xform);
+        _pseudoRoot->children.emplace_back(std::move(abcReRoot));
+    } else
+        _ReadPrimChildren(*this, root, rootPath, *_pseudoRoot);
+		
+//----------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------
+時間周りの設定
+    // Guess the start and end timeCode using the sample times.
+    if (!_allTimeSamples.empty()) {
+        _pseudoRoot->metadata[SdfFieldKeys->StartTimeCode] =
+            *_allTimeSamples.begin();
+        _pseudoRoot->metadata[SdfFieldKeys->EndTimeCode]   =
+            *_allTimeSamples.rbegin();
+    }	
+//----------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------
+軸周りの設定
+    // If no upAxis is authored, pretend that it was authored as 'Y'.  This
+    // is primarily to facilitate working with externally-generated abc
+    // files at Pixar, where we unfortunately still work in a Z-up pipeline,
+    // and therefore configure UsdGeomGetFallbackUpAxis() to return 'Z'.
+    _pseudoRoot->metadata[UsdGeomTokens->upAxis] = UsdGeomTokens->y;
+
+//----------------------------------------------------------------------------------
+//metaDataへの設定
+    // Get the Usd metadata.  This will overwrite any metadata previously
+    // set on _pseudoRoot.
+    if (const PropertyHeader* property =
+            root.getProperties().getPropertyHeader("Usd")) {
+        const MetaData& metadata = property->getMetaData();
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->StartTimeCode);
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->EndTimeCode);
+
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->FramesPerSecond);
+
+        _GetTokenMetadata(metadata, _pseudoRoot->metadata,
+                          UsdGeomTokens->upAxis);
+
+        // Read the default prim name.
+        _GetTokenMetadata(metadata, _pseudoRoot->metadata,
+                          SdfFieldKeys->DefaultPrim);
+    }
+
+    // If no default prim then choose one by a heuristic (first root prim).
+    if (!_pseudoRoot->children.empty()) {
+        // Use emplace to leave existing property above untouched and avoid the
+        // VtValue construction if possible (gcc-4.8 requires the fun syntax)
+        _pseudoRoot->metadata.emplace(std::piecewise_construct,
+            std::forward_as_tuple(SdfFieldKeys->DefaultPrim),
+            std::forward_as_tuple(_pseudoRoot->children.front()));
+    }
+//----------------------------------------------------------------------------------
+
+    return true;
+}
+
+
+・各スキーマに対して呼び出すべき処理を_ReaderSchemaに設定しておく
+struct _ReaderSchemaBuilder {
+    _ReaderSchema schema;
+
+    _ReaderSchemaBuilder();
+};
+
+_ReaderSchemaBuilder::_ReaderSchemaBuilder()
+{
+    schema.AddType(GeomBaseSchemaInfo::title())
+        .AppendReader(_ReadGeomBase)
+        .AppendReader(_ReadMayaColor)
+        .AppendReader(_ReadGprim)
+        .AppendReader(_ReadImageable)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+    schema.AddType(XformSchemaInfo::title())
+        .AppendReader(_ReadXform)
+        .AppendReader(_ReadImageable)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+    schema.AddType(SubDSchemaInfo::title())
+        .AppendReader(_ReadOrientation)
+        .AppendReader(_ReadSubD)
+        .AppendReader(_ReadMayaColor)
+        .AppendReader(_ReadGprim)
+        .AppendReader(_ReadImageable)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+    schema.AddType(PolyMeshSchemaInfo::title())
+        .AppendReader(_ReadOrientation)
+        .AppendReader(_ReadPolyMesh)
+        .AppendReader(_ReadMayaColor)
+        .AppendReader(_ReadGprim)
+        .AppendReader(_ReadImageable)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+    schema.AddType(FaceSetSchemaInfo::title())
+        .AppendReader(_ReadFaceSet)
+        ;
+    schema.AddType(CurvesSchemaInfo::title())
+        .AppendReader(_ReadOrientation)
+        .AppendReader(_ReadCurves)
+        .AppendReader(_ReadMayaColor)
+        .AppendReader(_ReadGprim)
+        .AppendReader(_ReadImageable)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+    schema.AddType(PointsSchemaInfo::title())
+        .AppendReader(_ReadOrientation)
+        .AppendReader(_ReadPoints)
+        .AppendReader(_ReadMayaColor)
+        .AppendReader(_ReadGprim)
+        .AppendReader(_ReadImageable)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+    schema.AddType(CameraSchemaInfo::title())
+        .AppendReader(_ReadCameraParameters)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+
+    // This handles overs with no type and any unknown prim type.
+    schema.AddFallbackType()
+        .AppendReader(_ReadGeomBase)        // Assume GeomBase.
+        .AppendReader(_ReadMayaColor)
+        .AppendReader(_ReadGprim)
+        .AppendReader(_ReadImageable)
+        .AppendReader(_ReadArbGeomParams)
+        .AppendReader(_ReadUserProperties)
+        .AppendReader(_ReadOther)
+        ;
+}
+
+} // anonymous namespace
+
+static
+const _ReaderSchema&
+_GetSchema()
+{
+    static _ReaderSchemaBuilder builder;
+    return builder.schema;
+}
+
+
+・Xformを書き込む際の手順
+
+
+static void _ReadPrimChildren(
+    _ReaderContext& context,
+    const IObject& object,
+    const SdfPath& path,
+    _ReaderContext::Prim& prim)
+{
+    // Collect children names.  By prepopulating usedNames we ensure that
+    // the child with the valid name gets its name even if a child with a
+    // lower index has a name that mangles to the valid name.
+    std::set<std::string> usedNames;
+    for (size_t i = 0, n = object.getNumChildren(); i != n; ++i) {
+        usedNames.insert(object.getChildHeader(i).getName());
+    }
+
+    // Read the children.
+    for (size_t i = 0, n = object.getNumChildren(); i != n; ++i) {
+        IObject child(object, object.getChildHeader(i).getName());
+		//-----------------------------------------------------------------------------
+		//ここで_ReadPrimを呼ぶ
+        const std::string childName = _ReadPrim(context, child, path, &usedNames);
+		//-----------------------------------------------------------------------------
+        if (!childName.empty()) {
+            prim.children.push_back(TfToken(childName));
+        }
+    }
+}
+
+
+
+
+static
+std::string
+_ReadPrim(
+    _ReaderContext& context,
+    const IObject& object,
+    const SdfPath& parentPath,
+    std::set<std::string>* usedSiblingNames)
+{
+    // Choose the name.
+    std::string name = _CleanName(object.getName(), " _", *usedSiblingNames,
+                                  _AlembicFixName(),
+                                  &SdfPath::IsValidIdentifier);
+    usedSiblingNames->insert(name);
+    SdfPath path = parentPath.AppendChild(TfToken(name));
+
+    // Compute the schema name.
+    const std::string schemaName = _ComputeSchemaName(context, object);
+
+    // Handle non-instances.
+    _ReaderContext::Prim* instance = nullptr;
+    if (!context.IsInstance(object)) {
+        // Combine geom with parent if parent is a transform with only a single
+        // child. There are several cases where we want to bail out and, rather
+        // than use a huge if statement or deep if nesting, we'll use do/while
+        // and break to do it.
+        do {
+            if (!TfGetEnvSetting(USD_ABC_XFORM_PRIM_COLLAPSE)) {
+                // Transform collapse is specified as unwanted behavior
+                break;
+            }
+            // Parent has to be a transform.
+            IObject parent = object.getParent();
+            if (!IXform::matches(parent.getHeader())) {
+                break;
+            }
+            ICompoundProperty parentProperties =
+                _GetSchemaProperty<IXform>(parent);
+            if (!parentProperties.valid()) {
+                break;
+            }
+
+            // The parent must not be the root of an instance.
+            if (context.IsInstance(parent)) {
+                break;
+            }
+
+            // The parent must not have more than this one object as a child.
+            if (parent.getNumChildren() > 1u) {
+                break;
+            }
+
+            // This object must be an IGeomBase or ICamera.
+            // XXX: May want to be more selective here.
+            ICompoundProperty objectProperties;
+            if (IGeomBase::matches(object.getMetaData())) {
+                objectProperties = _GetSchemaProperty<IGeomBaseObject>(object);
+            }
+            else if (ICamera::matches(object.getMetaData(),
+                                     kSchemaTitleMatching)) {
+                objectProperties = _GetSchemaProperty<ICamera>(object);
+            }
+            if (!objectProperties.valid()) {
+                break;
+            }
+
+            // We can't merge .arbGeomParams and .userProperties so
+            // bail if either are in both this object and the parent.
+            if (objectProperties.getPropertyHeader(".arbGeomParams") && 
+                parentProperties.getPropertyHeader(".arbGeomParams")) {
+                break;
+            }
+            if (objectProperties.getPropertyHeader(".userProperties") && 
+                parentProperties.getPropertyHeader(".userProperties")) {
+                break;
+            }
+
+            // We can combine!  Cache into our parent's entry.
+            path = parentPath;
+
+            // Don't add this object to the parent's children.
+            name.clear();
+        } while (false);
+    }
+
+    // If this is an instance then we create a prim at the path and
+    // give it a reference to the prototype.  Then we change the path to
+    // be that of the prototype and continue traversal.  This puts the
+    // entire prototype hierarchy under the new path and puts a simple
+    // prim with nothing but a reference at the old path.
+    else {
+        instance = &context.AddInstance(path, object);
+        if (!instance->prototype.IsEmpty()) {
+            path = instance->prototype;
+        }
+        else {
+            instance = nullptr;
+            const std::string prototypePath =
+                object.isInstanceRoot()
+                    ? IObject(object).instanceSourcePath()
+                    : object.getFullName();
+            TF_CODING_ERROR(
+                "Instance %s has no prototype at %s.",
+                object.getFullName().c_str(),
+                prototypePath.c_str());
+            // Continue and we'll simply expand the instance.
+        }
+    }
+
+    // At this point if instance != nullptr then we're instancing,
+    // path points to the prototype, and instance points to the instance
+    // prim's cache.
+
+    // If the instance source was promoted then we need to copy the
+    // prim's metadata and properties to the instance.  But we don't
+    // need quite everything because the prototype will supply some of it.
+    // For simplicity, we copy all data as usual then discard what we
+    // don't want.
+    if (instance && instance->promoted) {
+        // Read the metadata.
+        _GetPrimMetadata(object.getMetaData(), *instance);
+
+        // Read the properties.  Reconstruct the instance path since we've
+        // changed path to point at the prototype.
+        const SdfPath instancePath = parentPath.AppendChild(TfToken(name));
+        _PrimReaderContext primContext(context, object, instancePath);
+        for (const auto& reader : context.GetSchema().GetPrimReaders(schemaName)) {
+            TRACE_SCOPE("UsdAbc_AlembicDataReader:_ReadPrim");
+            reader(&primContext);
+        }
+
+        // Discard name children ordering since we don't have any name
+        // children (except via the prototype reference).
+        instance->primOrdering = std::nullopt;
+    }
+
+    // Get the prim cache.  If instance is true then prim is the prototype,
+    // otherwise it's a non-instanced prim or a descendant of a prototype.
+    _ReaderContext::Prim& prim = context.AddPrim(path);
+
+    // If we're instancing but the prototype prim cache already has a type
+    // name then we've already found a previous instance of this prototype
+    // and we've already traversed the prototype once.  Don't traverse a
+    // prototype again.
+    if (!instance || prim.typeName.IsEmpty()) {
+        // Add prim metadata.
+        _GetPrimMetadata(object.getMetaData(), prim);
+
+#ifdef USDABC_ALEMBIC_DEBUG
+        fprintf(stdout, "%*s%s%s%s \"%s\" { # %s, %s\n",
+                2 * (int)(path.GetPathElementCount() - 1), "",
+                prim.specifier == SdfSpecifierOver ? "over" : "def",
+                prim.typeName.IsEmpty() ? "" : " ",
+                prim.typeName.GetText(),
+                name.empty() ? "<merge-with-parent>" : name.c_str(),
+                schemaName.c_str(), object.getName().c_str());
+#endif
+
+        if (path != SdfPath::AbsoluteRootPath()) {
+            // Read the properties.
+            _PrimReaderContext primContext(context, object, path);
+            for (const auto& reader : context.GetSchema().GetPrimReaders(schemaName)) {
+                TRACE_SCOPE("UsdAbc_AlembicDataReader:_ReadPrim");
+                reader(&primContext);
+            }
+        }
+
+        // Recurse.
+        _ReadPrimChildren(context, object, path, prim);
+
+#ifdef USDABC_ALEMBIC_DEBUG
+        fprintf(stdout, "%*s}\n",
+                2 * (int)(path.GetPathElementCount() - 1), "");
+#endif
+
+        // If the instance source was promoted then we don't need or want
+        // any of the instance source's properties on the prototype since each
+        // Usd instance will have its own.  We also don't want the prototype
+        // to have most metadata for the same reason.  For the sake of
+        // simplicity of the code, we already copied all of that info so
+        // we'll discard it now.
+        if (instance && instance->promoted) {
+            // prim is the prototype.
+            prim.properties.clear();
+            prim.propertyOrdering = std::nullopt;
+            prim.metadata.clear();
+            prim.propertiesCache.clear();
+        }
+
+        // If this is a prototype then make it an over.
+        if (instance) {
+            prim.specifier = SdfSpecifierOver;
+        }
+    }
+
+    // Modify the metadata for an instance.  We wait until now because we
+    // want to get the prototype's type name.
+    if (instance) {
+        instance->typeName  = prim.typeName;
+        instance->specifier = SdfSpecifierDef;
+    }
+
+    return name;
+}
+
+
+static
+void
+_ReadXform(_PrimReaderContext* context)
+{
+    typedef IXform Type;
+
+    // Wrap the object.
+    if (!Type::matches(context->GetObject().getHeader())) {
+        // Not of type Type.
+        return;
+    }
+    Type object(context->GetObject(), kWrapExisting);
+    Type::schema_type& schema = object.getSchema();
+
+    // Add child properties under schema.
+    context->SetSchema(Type::schema_type::info_type::defaultName());
+
+    const index_t nSamples = _GetNumSamples(schema);
+
+    // Error checking.
+    for (index_t i = 0; i < nSamples; ++i) {
+        if (!schema.getInheritsXforms(ISampleSelector(i))) {
+            TF_WARN("Ignoring transform that doesn't inherit at "
+                    "samples at time %f at <%s>",
+                    schema.getTimeSampling()->getSampleTime(i),
+                    context->GetPath().GetText());
+            return;
+        }
+    }
+
+    // Set prim type.
+    context->GetPrim().typeName = UsdAbcPrimTypeNames->Xform;
+
+    // Add properties.
+    if (nSamples > 0) {
+        // We could author individual component transforms here, just 
+        // as the transform is represented in alembic, but round-tripping 
+        // will be an issue because of the way the alembicWriter reads
+        // transforms out of USD. 
+        // 
+        // For now, we're exporting the composed transform value, until 
+        // we figure out a solution to the round-tripping problem.
+        // 
+        context->AddProperty(
+            _tokens->xformOpTransform,
+            SdfValueTypeNames->Matrix4d,
+            _CopyXform(object));
+
+        VtTokenArray opOrderVec(1);
+        opOrderVec[0] = _tokens->xformOpTransform;
+        context->AddUniformProperty(
+            UsdGeomTokens->xformOpOrder,
+            SdfValueTypeNames->TokenArray,
+            _CopySynthetic(opOrderVec));
+    }
+
+    // Consume properties implicitly handled above.
+    context->Extract(Type::schema_type::info_type::defaultName());
+}
+
+static
+void
+_ReadPolyMesh(_PrimReaderContext* context)
+{
+    typedef IPolyMesh Type;
+
+    // Wrap the object.
+    if (!Type::matches(context->GetObject().getHeader())) {
+        // Not of type Type.
+        return;
+    }
+
+    // Set prim type.
+    context->GetPrim().typeName = UsdAbcPrimTypeNames->Mesh;
+
+    // Add child properties under schema.
+    context->SetSchema(Type::schema_type::info_type::defaultName());
+
+    // Add properties.
+    context->AddProperty(
+        UsdGeomTokens->points,
+        SdfValueTypeNames->Point3fArray,
+        _CopyGeneric<IP3fArrayProperty, GfVec3f>(
+            context->ExtractSchema("P"), kNoMatching));
+    context->AddProperty(
+        UsdGeomTokens->velocities,
+        SdfValueTypeNames->Vector3fArray,
+        _CopyGeneric<IV3fArrayProperty, GfVec3f>(
+            context->ExtractSchema(".velocities")));
+    context->AddProperty(
+        UsdGeomTokens->normals,
+        SdfValueTypeNames->Normal3fArray,
+        _CopyGeneric<IN3fGeomParam, GfVec3f>(
+            context->ExtractSchema("N")));
+    context->AddProperty(
+        UsdGeomTokens->faceVertexIndices,
+        SdfValueTypeNames->IntArray,
+        _CopyGeneric<IInt32ArrayProperty, int>(
+            context->ExtractSchema(".faceIndices")));
+    context->AddProperty(
+        UsdGeomTokens->faceVertexCounts,
+        SdfValueTypeNames->IntArray,
+        _CopyGeneric<IInt32ArrayProperty, int>(
+            context->ExtractSchema(".faceCounts")));
+
+    // Read texture coordinates
+    _ReadProperty<IV2fGeomParam, GfVec2f>(context, "uv", _GetUVPropertyName(), _GetUVTypeName());
+
+    // Custom subdivisionScheme property.  Alembic doesn't have this since
+    // the Alembic schema is PolyMesh.  Usd needs "none" as the scheme.
+    context->AddUniformProperty(
+        UsdGeomTokens->subdivisionScheme,
+        SdfValueTypeNames->Token,
+        _CopySynthetic(UsdGeomTokens->none));
+}
