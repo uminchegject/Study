@@ -502,15 +502,7 @@ _ReadPrim(
         }
     }
 
-    // At this point if instance != nullptr then we're instancing,
-    // path points to the prototype, and instance points to the instance
-    // prim's cache.
-
-    // If the instance source was promoted then we need to copy the
-    // prim's metadata and properties to the instance.  But we don't
-    // need quite everything because the prototype will supply some of it.
-    // For simplicity, we copy all data as usual then discard what we
-    // don't want.
+	//処理部分を
     if (instance && instance->promoted) {
         // Read the metadata.
         _GetPrimMetadata(object.getMetaData(), *instance);

@@ -1,0 +1,188 @@
+static
+std::string
+_ReadPrim(
+    _ReaderContext& context,
+    const IObject& object,
+    const SdfPath& parentPath,
+    std::set<std::string>* usedSiblingNames)
+{
+
+	//読み込みobjectからnameを取得する
+    std::string name = _CleanName(object.getName(), " _", *usedSiblingNames,
+                                  _AlembicFixName(),
+                                  &SdfPath::IsValidIdentifier);
+    usedSiblingNames->insert(name);
+	//書き込むための新しいパスを設定
+    SdfPath path = parentPath.AppendChild(TfToken(name));
+
+	//SchemaNameを取得
+    const std::string schemaName = _ComputeSchemaName(context, object);
+	
+	//インスタンスされたオブジェクトかを確認し、さらにParentが単一の子を持つ場合objectを親と組み合わせます
+    _ReaderContext::Prim* instance = nullptr;
+    if (!context.IsInstance(object)) {
+        // Combine geom with parent if parent is a transform with only a single
+        // child. There are several cases where we want to bail out and, rather
+        // than use a huge if statement or deep if nesting, we'll use do/while
+        // and break to do it.
+        do {
+            if (!TfGetEnvSetting(USD_ABC_XFORM_PRIM_COLLAPSE)) {
+                // Transform collapse is specified as unwanted behavior
+                break;
+            }
+            // Parent has to be a transform.
+            IObject parent = object.getParent();
+            if (!IXform::matches(parent.getHeader())) {
+                break;
+            }
+            ICompoundProperty parentProperties =
+                _GetSchemaProperty<IXform>(parent);
+            if (!parentProperties.valid()) {
+                break;
+            }
+
+            // The parent must not be the root of an instance.
+            if (context.IsInstance(parent)) {
+                break;
+            }
+
+            // The parent must not have more than this one object as a child.
+            if (parent.getNumChildren() > 1u) {
+                break;
+            }
+
+            // This object must be an IGeomBase or ICamera.
+            // XXX: May want to be more selective here.
+            ICompoundProperty objectProperties;
+            if (IGeomBase::matches(object.getMetaData())) {
+                objectProperties = _GetSchemaProperty<IGeomBaseObject>(object);
+            }
+            else if (ICamera::matches(object.getMetaData(),
+                                     kSchemaTitleMatching)) {
+                objectProperties = _GetSchemaProperty<ICamera>(object);
+            }
+            if (!objectProperties.valid()) {
+                break;
+            }
+
+            // We can't merge .arbGeomParams and .userProperties so
+            // bail if either are in both this object and the parent.
+            if (objectProperties.getPropertyHeader(".arbGeomParams") && 
+                parentProperties.getPropertyHeader(".arbGeomParams")) {
+                break;
+            }
+            if (objectProperties.getPropertyHeader(".userProperties") && 
+                parentProperties.getPropertyHeader(".userProperties")) {
+                break;
+            }
+
+            // We can combine!  Cache into our parent's entry.
+            path = parentPath;
+
+            // Don't add this object to the parent's children.
+            name.clear();
+        } while (false);
+    }
+    // If this is an instance then we create a prim at the path and
+    // give it a reference to the prototype.  Then we change the path to
+    // be that of the prototype and continue traversal.  This puts the
+    // entire prototype hierarchy under the new path and puts a simple
+    // prim with nothing but a reference at the old path.
+    else {
+        instance = &context.AddInstance(path, object);
+        if (!instance->prototype.IsEmpty()) {
+            path = instance->prototype;
+        }
+        else {
+            instance = nullptr;
+            const std::string prototypePath =
+                object.isInstanceRoot()
+                    ? IObject(object).instanceSourcePath()
+                    : object.getFullName();
+            TF_CODING_ERROR(
+                "Instance %s has no prototype at %s.",
+                object.getFullName().c_str(),
+                prototypePath.c_str());
+            // Continue and we'll simply expand the instance.
+        }
+    }
+	
+
+	//インスタンス化されている場合にインスタンスにメタデータやプロパティを読み込む
+    if (instance && instance->promoted) {
+        // Read the metadata.
+        _GetPrimMetadata(object.getMetaData(), *instance);
+
+        // Read the properties.  Reconstruct the instance path since we've
+        // changed path to point at the prototype.
+        const SdfPath instancePath = parentPath.AppendChild(TfToken(name));
+        _PrimReaderContext primContext(context, object, instancePath);
+        for (const auto& reader : context.GetSchema().GetPrimReaders(schemaName)) {
+            TRACE_SCOPE("UsdAbc_AlembicDataReader:_ReadPrim");
+            reader(&primContext);
+        }
+
+        // Discard name children ordering since we don't have any name
+        // children (except via the prototype reference).
+        instance->primOrdering = std::nullopt;
+    }
+
+    //Primを追加するため、新しいPrimのパスをcontextに追加する
+    _ReaderContext::Prim& prim = context.AddPrim(path);
+
+    // インスタンスに書き込まれてないか、primのtypeNameが設定されていない場合に書き込み処理を呼び出す
+    if (!instance || prim.typeName.IsEmpty()) {
+        // Add prim metadata.
+        _GetPrimMetadata(object.getMetaData(), prim);
+
+#ifdef USDABC_ALEMBIC_DEBUG
+        fprintf(stdout, "%*s%s%s%s \"%s\" { # %s, %s\n",
+                2 * (int)(path.GetPathElementCount() - 1), "",
+                prim.specifier == SdfSpecifierOver ? "over" : "def",
+                prim.typeName.IsEmpty() ? "" : " ",
+                prim.typeName.GetText(),
+                name.empty() ? "<merge-with-parent>" : name.c_str(),
+                schemaName.c_str(), object.getName().c_str());
+#endif
+
+		//ここで書き込み処理を行う
+        if (path != SdfPath::AbsoluteRootPath()) {
+            // 書き込む情報を管理する_PrimReaderContectを生成する
+            _PrimReaderContext primContext(context, object, path);
+			//_ReaderSchemaを取得し、書き込み処理をそれぞれ呼び出す
+            for (const auto& reader : context.GetSchema().GetPrimReaders(schemaName)) {
+                TRACE_SCOPE("UsdAbc_AlembicDataReader:_ReadPrim");
+                reader(&primContext);
+            }
+        }
+
+        さらに低階層の書き込みを繰り返し行う
+        _ReadPrimChildren(context, object, path, prim);
+
+#ifdef USDABC_ALEMBIC_DEBUG
+        fprintf(stdout, "%*s}\n",
+                2 * (int)(path.GetPathElementCount() - 1), "");
+#endif
+
+        // インスタンスの再処理
+        if (instance && instance->promoted) {
+            // prim is the prototype.
+            prim.properties.clear();
+            prim.propertyOrdering = std::nullopt;
+            prim.metadata.clear();
+            prim.propertiesCache.clear();
+        }
+        if (instance) {
+            prim.specifier = SdfSpecifierOver;
+        }
+    }
+
+    // Modify the metadata for an instance.  We wait until now because we
+    // want to get the prototype's type name.
+    if (instance) {
+        instance->typeName  = prim.typeName;
+        instance->specifier = SdfSpecifierDef;
+    }
+
+    return name;
+}

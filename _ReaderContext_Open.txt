@@ -1,0 +1,206 @@
+bool
+_ReaderContext::Open(const std::string& filePath, std::string* errorLog,
+                     const SdfFileFormat::FileFormatArguments& args)
+{
+    Close();
+
+	//alembicのアーカイブ取得するためにファイルパスの文字列を用意
+    std::vector<std::string> layeredABC;
+    {
+        auto abcLayers = args.find("abcLayers");
+        if (abcLayers != args.end()) {
+            for (auto&& l : TfStringSplit(abcLayers->second, ",")) {
+                layeredABC.emplace_back(std::move(l));
+            }
+        }
+    }
+    layeredABC.emplace_back(filePath);
+
+#if PXR_HDF5_SUPPORT_ENABLED && !H5_HAVE_THREADSAFE
+    // HDF5 may not be thread-safe.
+    using lock_guard = std::lock_guard<std::recursive_mutex>;
+    std::unique_ptr<std::lock_guard<std::recursive_mutex>> hfd5Lock(new lock_guard(*_hdf5));
+#endif
+
+	//Alembicのアーカイブを作成するIFactoryクラスにプロパティを設定します
+    using IFactory = ::Alembic::AbcCoreFactory::IFactory;
+    IFactory factory;
+    IFactory::CoreType abcType;
+    factory.setPolicy(Abc::ErrorHandler::Policy::kQuietNoopPolicy);
+    factory.setOgawaNumStreams(_GetNumOgawaStreams());
+
+#if ALEMBIC_LIBRARY_VERSION >= 10709
+    if (!TfGetEnvSetting(USD_ABC_READ_ARCHIVE_USE_MMAP)) {
+        factory.setOgawaReadStrategy(Alembic::AbcCoreFactory::IFactory::kFileStreams);
+    }
+#endif
+
+	/設定したfactoryからalembicのアーカイブを取得します
+    IArchive archive = factory.getArchive(layeredABC, abcType);
+
+#if PXR_HDF5_SUPPORT_ENABLED && !H5_HAVE_THREADSAFE
+    if (abcType == IFactory::kHDF5 || abcType == IFactory::kLayer) {
+        // An HDF5, or layered which may have an HDF5 layer
+        _mutex = &*_hdf5;
+    } else {
+        // Don't need the HDF5 lock
+        hfd5Lock.reset();
+    }
+#endif
+
+	//alembicのフォーマットを確認
+    std::string format;
+    switch (abcType) {
+        case IFactory::kHDF5: format = "HDF5"; break;
+        case IFactory::kOgawa: format = "Ogawa"; break;
+        case IFactory::kLayer: format = "Layer"; break;
+        default:
+        case IFactory::kUnknown: format = "Unknown"; break;
+    }
+    if (!archive.valid()) {
+        *errorLog = TfStringPrintf("Unsupported format: '%s'", format.c_str());
+        return false;
+    }
+
+	
+    //Alembicのアーカイブの取得
+    uint32_t apiVersion;
+    std::string writer, version, date, comment;
+    double fps = 0.0;
+#if ALEMBIC_LIBRARY_VERSION >= 10712
+    GetArchiveInfo(archive, writer, version, apiVersion, date, comment, fps);
+#else
+    GetArchiveInfo(archive, writer, version, apiVersion, date, comment);
+#endif
+
+    // ログ
+    if (IsFlagSet(UsdAbc_AlembicContextFlagNames->verbose)) {
+        TF_STATUS("Opened %s file written by Alembic %s",
+                  format.c_str(),
+                  UsdAbc_FormatAlembicVersion(apiVersion).c_str());
+    }
+
+    // メンバ変数にalembicアーカイブを設定
+    _archive = std::move(archive);
+
+	//書き込みを行うPrimのRootPathを設定
+    const SdfPath rootPath = SdfPath::AbsoluteRootPath();
+    _pseudoRoot = &_prims[rootPath];
+    _pseudoRoot->metadata[SdfFieldKeys->Documentation] = comment;
+
+	
+	//_archiveの最上位オブジェクトを取得し、後に_ReadPrimChildrenを用いて掘り下げつつusdに書き込んでいく
+    IObject root = _archive.getTop();
+	//ルートプリム名の取得
+    std::set<std::string> usedRootNames;
+    for (size_t i = 0, n = root.getNumChildren(); i != n; ++i) {
+        IObject child(root, root.getChildHeader(i).getName());
+        std::string name = _CleanName(child.getName(), " _", usedRootNames,
+                                      _AlembicFixName(),
+                                      &SdfPath::IsValidIdentifier);
+        usedRootNames.insert(name);
+    }
+
+	//_timescaleの設定
+    if (const PropertyHeader* property =
+            root.getProperties().getPropertyHeader("Usd")) {
+        const MetaData& metadata = property->getMetaData();
+        _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond] = 24.0;
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->TimeCodesPerSecond);
+        _timeScale = _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond].Get<double>();
+    }
+    else if (fps != 0.0) {
+        _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond] = fps;
+        _timeScale = _pseudoRoot->metadata[SdfFieldKeys->TimeCodesPerSecond].Get<double>();
+    }
+
+	//インスタンシングの設定
+    if (!IsFlagSet(UsdAbc_AlembicContextFlagNames->expandInstances)) {
+        // Find the instance sources and their instances.
+        _SourceToInstancesMap instances;
+        _FindInstances(root, &instances);
+
+        // If we're allowing instance promotion find the candidates.
+        _ObjectReaderSet promotable;
+        if (IsFlagSet(UsdAbc_AlembicContextFlagNames->promoteInstances)) {
+            _FindPromotable(instances, &promotable);
+        }
+
+        // Save instancing info to lookup during main traversal, including
+        // choosing paths for the prototypes.
+        _SetupInstancing(instances, promotable, &usedRootNames);
+    }
+	
+    // reRoot設定がされていた場合新しいルートを_pseudoRootに設定する
+    TfToken abcReRoot;
+    {
+        auto reRoot = args.find("abcReRoot");
+        if (reRoot != args.end()) {
+            if (!TfIsValidIdentifier(reRoot->second)) {
+                TF_WARN("[usdAbc] Ignoring re-root because identifer '%s' is"
+                        " not valid (%s).", reRoot->second.c_str(),
+                        filePath.c_str());
+            } else
+                abcReRoot = TfToken(reRoot->second);
+        }
+    }
+
+    // ここで読み込み処理を行う_ReadPrimChildrenを呼び出す
+	// reBoot設定が入っていたばあは新しいルートを引数に_ReadPrimChildrenを呼び出す
+    if (!abcReRoot.IsEmpty()) {
+        SdfPath compPath = rootPath.AppendChild(abcReRoot);
+        auto& xform = _prims[compPath];
+        xform.typeName = UsdAbcPrimTypeNames->Xform;
+        xform.specifier = SdfSpecifierDef;
+        _ReadPrimChildren(*this, root, compPath, xform);
+        _pseudoRoot->children.emplace_back(std::move(abcReRoot));
+    } else
+        _ReadPrimChildren(*this, root, rootPath, *_pseudoRoot);
+		
+
+	//_allTimeSamplesがあった場合に時間周りの設定
+    // Guess the start and end timeCode using the sample times.
+    if (!_allTimeSamples.empty()) {
+        _pseudoRoot->metadata[SdfFieldKeys->StartTimeCode] =
+            *_allTimeSamples.begin();
+        _pseudoRoot->metadata[SdfFieldKeys->EndTimeCode]   =
+            *_allTimeSamples.rbegin();
+    }	
+
+	//座標軸の設定
+    _pseudoRoot->metadata[UsdGeomTokens->upAxis] = UsdGeomTokens->y;
+
+
+	//メタデータの取得
+    if (const PropertyHeader* property =
+            root.getProperties().getPropertyHeader("Usd")) {
+        const MetaData& metadata = property->getMetaData();
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->StartTimeCode);
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->EndTimeCode);
+
+        _GetDoubleMetadata(metadata, _pseudoRoot->metadata,
+                           SdfFieldKeys->FramesPerSecond);
+
+        _GetTokenMetadata(metadata, _pseudoRoot->metadata,
+                          UsdGeomTokens->upAxis);
+
+        // Read the default prim name.
+        _GetTokenMetadata(metadata, _pseudoRoot->metadata,
+                          SdfFieldKeys->DefaultPrim);
+    }
+
+    // DefaultPrimの設定
+    if (!_pseudoRoot->children.empty()) {
+        // Use emplace to leave existing property above untouched and avoid the
+        // VtValue construction if possible (gcc-4.8 requires the fun syntax)
+        _pseudoRoot->metadata.emplace(std::piecewise_construct,
+            std::forward_as_tuple(SdfFieldKeys->DefaultPrim),
+            std::forward_as_tuple(_pseudoRoot->children.front()));
+    }
+//----------------------------------------------------------------------------------
+
+    return true;
+}
