@@ -1,72 +1,20 @@
-■UsdGeomMeshの構成方法
-●最低限必要なMeshの構造
-・int[] faceVertexCounts
-面ごとの頂点数
-{
-    std::vector<int> iList;
-    iList.push_back(4);
+■ドキュメント
+・処理の概要の説明
+・usdGeMeshの説明
 
-    UsdAttribute attr = geomMesh.CreateFaceVertexCountsAttr();
-    VtIntArray ar = VtIntArray(iList.begin(), iList.end());
-    attr.Set(ar);
-}
+●usdGeomMesh
+usdAbcにおいて、まずMeshTypeを定義しその中に必要な情報をattributeに設定していくという形で一連の処理が実装されていました。
+そのため、本fileformatpluginにおいてもmeshを定義し適切なattributeに値を設定していく処理を実装していきます。
+まず、usdGeomMeshの定義においてBBox,頂点座標、頂点法線、UV、面ごとの頂点数、面の頂点インデックス情報を適切なAttributeに設定する
+処理を調査しました。
 
-・int[] faceVertexIndices
-面の頂点インデックス
-{
-    std::vector<int> iList;
-    iList.push_back(0);
-    iList.push_back(1);
-    iList.push_back(2);
-    iList.push_back(3);
+・faceVertexCounts, faceVertexIndicesへの設定方法
+ -//surfaceの管理部分について
 
-    UsdAttribute attr = geomMesh.CreateFaceVertexIndicesAttr();
-    VtIntArray ar = VtIntArray(iList.begin(), iList.end());
-    attr.Set(ar);
-}
+●fileformatplugin
+・objフォーマットをusdに変換するfileformatpluginに変換するsampleがあるため、こちらも参考に実装を進めていきます。
+・fileformatpluginを継承したクラス、内製フォーマットからusdに変換するクラスの2つで構成されているため、本実装でも同じように実装していく予定です。
 
-・point3f[] points
-頂点座標
-{
-    std::vector vList;
-    vList.push_back(GfVec3f(-1, 0, -1));
-    vList.push_back(GfVec3f(-1, 0, 1));
-    vList.push_back(GfVec3f(1, 0, 1));
-    vList.push_back(GfVec3f(1, 0, -1));
-
-    UsdAttribute attr = geomMesh.CreatePointsAttr();
-    VtVec3fArray ar = VtVec3fArray(vList.begin(), vList.end());
-    attr.Set(ar);
-}
-
-・texCoord2f[] primvars:st
-頂点ごとのUV
-{
-    std::vector<GfVec2f> uvList;
-    uvList.push_back(GfVec2f(0, 0));
-    uvList.push_back(GfVec2f(1, 0));
-    uvList.push_back(GfVec2f(1, 1));
-    uvList.push_back(GfVec2f(0, 1));
-
-    UsdGeomPrimvar primV = geomMesh.CreatePrimvar(TfToken("st"), SdfValueTypeNames->TexCoord2fArray, UsdGeomTokens->varying);
-    UsdAttribute attr = primV.GetAttr();
-    VtVec2fArray ar = VtVec2fArray(uvList.begin(), uvList.end());
-    attr.Set(ar);
-}
-
-・normal3f[] normals
-頂点ごとの法線
-{
-    std::vector<GfVec3f> vList;
-    vList.push_back(GfVec3f(0, 1, 0));
-    vList.push_back(GfVec3f(0, 1, 0));
-    vList.push_back(GfVec3f(0, 1, 0));
-    vList.push_back(GfVec3f(0, 1, 0));
-
-    UsdAttribute attr = geomMesh.CreateNormalsAttr();
-    VtVec3fArray ar = VtVec3fArray(vList.begin(), vList.end());
-     attr.Set(ar);
-}
 
 ■usdAbc
 ●usdAbcPluginでReadした際のMeshの構造
