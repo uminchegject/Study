@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\OpenUSD-release\pxr\imaging\pxOsd\module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\OpenUSD-release\pxr\imaging\pxOsd\wrapMeshTopology.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\OpenUSD-release\pxr\imaging\pxOsd\wrapMeshTopologyValidation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\OpenUSD-release\pxr\imaging\pxOsd\wrapSubdivTags.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\OpenUSD-release\pxr\imaging\pxOsd\wrapTokens.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\imaging\pxOsd\pypch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\include\pxr\imaging\_pxOsd\pypch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\CMakeFiles\fca2c71189cc938338240a2ab69407d7\pypch.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\CMakeFiles\077fa99d1322bea51e8885574b9f5d6f\pypch.cpp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\OpenUSD-release\pxr\imaging\pxOsd\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F7F62FFE-FE8A-3BDE-8726-19D6874C4245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8B693FA8-07DE-32C3-8A0D-62ED75492FE9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1FD8D7B3-90F4-3A0A-B207-35543B072762}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

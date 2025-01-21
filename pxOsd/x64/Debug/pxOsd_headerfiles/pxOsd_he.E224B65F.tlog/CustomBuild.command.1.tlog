@@ -1,0 +1,90 @@
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\API.H
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/include/pxr/imaging/pxOsd
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -Dinfile=D:/USD/OpenUSD-release/pxr/imaging/pxOsd/api.h -Doutfile=D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release//include/pxr/imaging/pxOsd/api.h -P D:/USD/OpenUSD-release/cmake/macros/copyHeaderForBuild.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\MESHTOPOLOGY.H
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/include/pxr/imaging/pxOsd
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -Dinfile=D:/USD/OpenUSD-release/pxr/imaging/pxOsd/meshTopology.h -Doutfile=D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release//include/pxr/imaging/pxOsd/meshTopology.h -P D:/USD/OpenUSD-release/cmake/macros/copyHeaderForBuild.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\MESHTOPOLOGYVALIDATION.H
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/include/pxr/imaging/pxOsd
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -Dinfile=D:/USD/OpenUSD-release/pxr/imaging/pxOsd/meshTopologyValidation.h -Doutfile=D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release//include/pxr/imaging/pxOsd/meshTopologyValidation.h -P D:/USD/OpenUSD-release/cmake/macros/copyHeaderForBuild.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\REFINERFACTORY.H
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/include/pxr/imaging/pxOsd
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -Dinfile=D:/USD/OpenUSD-release/pxr/imaging/pxOsd/refinerFactory.h -Doutfile=D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release//include/pxr/imaging/pxOsd/refinerFactory.h -P D:/USD/OpenUSD-release/cmake/macros/copyHeaderForBuild.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\SUBDIVTAGS.H
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/include/pxr/imaging/pxOsd
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -Dinfile=D:/USD/OpenUSD-release/pxr/imaging/pxOsd/subdivTags.h -Doutfile=D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release//include/pxr/imaging/pxOsd/subdivTags.h -P D:/USD/OpenUSD-release/cmake/macros/copyHeaderForBuild.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\TOKENS.H
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/include/pxr/imaging/pxOsd
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -Dinfile=D:/USD/OpenUSD-release/pxr/imaging/pxOsd/tokens.h -Doutfile=D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release//include/pxr/imaging/pxOsd/tokens.h -P D:/USD/OpenUSD-release/cmake/macros/copyHeaderForBuild.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-DEBUGBUILD\BUILD\OPENUSD-RELEASE\CMAKEFILES\5EE0375E1577C505FAF488849989FA57\PXOSD_HEADERFILES.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/USD/OpenUSD-release -BD:/USD/OpenUSD-DebugBuild/build/OpenUSD-release --check-stamp-file D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/pxr/imaging/pxOsd/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

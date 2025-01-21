@@ -1,0 +1,28 @@
+^D:\USD\OPENUSD-DEBUGBUILD\BUILD\OPENUSD-RELEASE\CMAKEFILES\077FA99D1322BEA51E8885574B9F5D6F\__INIT__.PYC.RULE
+setlocal
+C:\Users\yusuke.nakamura\AppData\Local\Programs\Python\Python39\python.exe D:/USD/OpenUSD-release/cmake/macros/compilePython.py D:/USD/OpenUSD-release/pxr/imaging/pxOsd/__init__.py D:/USD/OpenUSD-release/pxr/imaging/pxOsd/__init__.py D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/pxr/imaging/pxOsd/__init__.pyc
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-DEBUGBUILD\BUILD\OPENUSD-RELEASE\CMAKEFILES\5EE0375E1577C505FAF488849989FA57\_PXOSD_PYTHONFILES.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/USD/OpenUSD-release -BD:/USD/OpenUSD-DebugBuild/build/OpenUSD-release --check-stamp-file D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/pxr/imaging/pxOsd/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

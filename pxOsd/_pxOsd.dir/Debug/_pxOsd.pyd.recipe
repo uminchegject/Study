@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\x64\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\imaging\pxOsd\x64\Debug\_pxOsd_pythonfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\arch\x64\Debug\arch_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\arch\Debug\usd_arch.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\external\boost\x64\Debug\boost_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\external\boost\Debug\usd_boost.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\gf\x64\Debug\gf_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\external\boost\python\x64\Debug\python_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\external\boost\python\Debug\usd_python.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\tf\x64\Debug\tf_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\tf\Debug\usd_tf.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\gf\Debug\usd_gf.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\js\x64\Debug\js_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\js\Debug\usd_js.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\imaging\pxOsd\x64\Debug\pxOsd_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\trace\x64\Debug\trace_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\trace\Debug\usd_trace.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\vt\x64\Debug\vt_headerfiles</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\base\vt\Debug\usd_vt.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\imaging\pxOsd\Debug\usd_pxOsd.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\OpenUSD-DebugBuild\build\OpenUSD-release\pxr\imaging\pxOsd\Debug\_pxOsd.pyd</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

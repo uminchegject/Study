@@ -1,0 +1,30 @@
+^D:\USD\OPENUSD-DEBUGBUILD\BUILD\OPENUSD-RELEASE\CMAKEFILES\FCA2C71189CC938338240A2AB69407D7\PYPCH.H.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_if_different D:/USD/OpenUSD-release/pxr/imaging/pxOsd/pch.h D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/include/pxr/imaging/_pxOsd/pypch.h
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-DEBUGBUILD\BUILD\OPENUSD-RELEASE\CMAKEFILES\077FA99D1322BEA51E8885574B9F5D6F\PYPCH.CPP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E touch D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/pxr/imaging/pxOsd/pypch.cpp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^D:\USD\OPENUSD-RELEASE\PXR\IMAGING\PXOSD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/USD/OpenUSD-release -BD:/USD/OpenUSD-DebugBuild/build/OpenUSD-release --check-stamp-file D:/USD/OpenUSD-DebugBuild/build/OpenUSD-release/pxr/imaging/pxOsd/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
