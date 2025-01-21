@@ -2,7 +2,43 @@
 
 ## 新規プラグインの実装
 ### 実装の概要
+○FBSから情報を取得する処理をサンプル実装
+bool UsdGeoFileFormat::Read(
+    SdfLayer* layer,
+    const string& resolvedPath,
+    bool metadataOnly) const
+{
+	//全体データからメッシュデータの取得
+    std::ifstream fin(resolvedPath.c_str());
+    if (!fin.is_open()) {
+        TF_RUNTIME_ERROR("Failed to open file \"%s\"", resolvedPath.c_str());
+        return false;
+    }
 
+    while (std::getline(fin, line)) {
+        if (line.empty())
+            continue;
+
+        lineStream.clear();
+        lineStream.str(line);
+
+		std::string Path;
+        if (key == "\"mesh_data\":") {
+            lineStream >> Path; 
+            break;
+        }
+    }
+
+	//メッシュデータからメッシュバイナリの取得
+	
+	
+    return true;
+}
+
+○FileFormatの読み込み処理を設計
+・Pythonプロジェクトを参考にする
+
+○USDの構築処理を設計
 
 ### CMakeLists
 
@@ -79,11 +115,8 @@ https://fereria.github.io/reincarnation_tech/usd/fileformat_plugin
 * USD/Hydra の最新プロシージャルインタフェース  
 https://qiita.com/takahito-tejima/items/01ab2abe2f4c0d12eeed#hdgp-%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E4%BD%9C%E6%88%90%E5%AE%9F%E8%A3%85
 
-### GEOフォーマットの構成
-
-
 ### USDの構築
-* 
+* Kind と Model と ModelHierarchy
 https://fereria.github.io/reincarnation_tech/usd/model_hierarchy#component
-* 
+* USDのアセット構造の話
 https://fereria.github.io/reincarnation_tech/usd/asset_structure

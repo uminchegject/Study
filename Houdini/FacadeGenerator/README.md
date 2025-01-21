@@ -14,3 +14,6 @@ http://nomoreretake.net/2020/09/07/houdinilabs-building-generator/
 * たのしい建物ジェネレーター
 https://skywheel.booth.pm/items/4014205
 * モデリング
+
+* General  
+https://github.com/wyhinton/AwesomeHoudini?tab=readme-ov-file#hips
