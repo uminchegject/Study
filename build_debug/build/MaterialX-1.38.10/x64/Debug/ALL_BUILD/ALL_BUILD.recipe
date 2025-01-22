@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\x64\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXCore.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXFormat.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenShader.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenGlsl.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenMdl.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenMsl.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenOsl.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRender.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRenderHw.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRenderGlsl.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRenderOsl.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\USD\build_debug\build\MaterialX-1.38.10\x64\Debug\ALL_BUILD</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

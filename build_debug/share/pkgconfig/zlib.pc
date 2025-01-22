@@ -1,0 +1,13 @@
+prefix=D:/USD/build_debug
+exec_prefix=D:/USD/build_debug
+libdir=D:/USD/build_debug/lib
+sharedlibdir=D:/USD/build_debug/lib
+includedir=D:/USD/build_debug/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

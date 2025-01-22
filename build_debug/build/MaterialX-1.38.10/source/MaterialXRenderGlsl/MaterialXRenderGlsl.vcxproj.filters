@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\External\Glad\glad.c">
+      <Filter>Source Files\External\Glad</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLFramebuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLTextureHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\TextureBaker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\External\Glad\glad.h">
+      <Filter>Header Files\External\Glad</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\External\Glad\khrplatform.h">
+      <Filter>Header Files\External\Glad</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLCocoaWrappers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLFramebuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLTextureHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslMaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\TextureBaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{14F032CC-082F-3C2F-B521-51D377D12F13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\External">
+      <UniqueIdentifier>{A451988A-2DB7-3FD3-8DF0-1D3FA0E28946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\External\Glad">
+      <UniqueIdentifier>{19F6E432-2519-37D8-BAD0-FEA54021FE6D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{38B330E9-9511-3F76-AB39-A6D3EE9B1C5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External">
+      <UniqueIdentifier>{D062E96F-6872-36E5-B22C-D2A461F2A54F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External\Glad">
+      <UniqueIdentifier>{4BFC1ADD-B597-3F24-918D-E9F5F0FE482A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

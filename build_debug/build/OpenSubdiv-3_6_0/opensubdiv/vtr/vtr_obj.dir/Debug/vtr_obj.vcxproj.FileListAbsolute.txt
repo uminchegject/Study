@@ -1,0 +1,1 @@
+D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\Debug\vtr_obj.lib

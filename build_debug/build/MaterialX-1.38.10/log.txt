@@ -1,0 +1,570 @@
+2025-01-22 12:41
+cmake -DCMAKE_INSTALL_PREFIX="D:\USD\build_debug" -DCMAKE_PREFIX_PATH="D:\USD\build_debug" -DCMAKE_BUILD_TYPE=Debug  -G "Visual Studio 17 2022" -A x64  -DMATERIALX_BUILD_SHARED_LIBS=ON -DMATERIALX_BUILD_TESTS=OFF "D:\USD\build_debug\src\MaterialX-1.38.10"
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.22631.
+-- The C compiler identification is MSVC 19.36.32546.0
+-- The CXX compiler identification is MSVC 19.36.32546.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Setting namespace to 'MaterialX_v1_38_10'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/USD/build_debug/build/MaterialX-1.38.10
+2025-01-22 12:41
+cmake --build . --config Debug --target install -- /M:12
+MSBuild のバージョン 17.12.12+1cce77968 (.NET Framework)
+
+  Checking Build System
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXCore/CMakeLists.txt
+  Definition.cpp
+  Document.cpp
+  Element.cpp
+  Geom.cpp
+  Interface.cpp
+  Look.cpp
+  Material.cpp
+  Node.cpp
+  Property.cpp
+  Traversal.cpp
+  Types.cpp
+  Unit.cpp
+  Util.cpp
+  Value.cpp
+  Variant.cpp
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXCore.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXCore.exp
+  MaterialXCore.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXCore.dll
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXFormat/CMakeLists.txt
+  Environ.cpp
+  pugixml.cpp
+  File.cpp
+  Util.cpp
+  XmlIo.cpp
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXFormat.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXFormat.exp
+  MaterialXFormat.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXFormat.dll
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenShader/CMakeLists.txt
+  ColorManagementSystem.cpp
+  DefaultColorManagementSystem.cpp
+  GenContext.cpp
+  HwShaderGenerator.cpp
+  BlurNode.cpp
+  ClosureAddNode.cpp
+  ClosureCompoundNode.cpp
+  ClosureLayerNode.cpp
+  ClosureMixNode.cpp
+  ClosureMultiplyNode.cpp
+  ClosureSourceCodeNode.cpp
+  CombineNode.cpp
+  CompoundNode.cpp
+  ConvertNode.cpp
+  ConvolutionNode.cpp
+  HwBitangentNode.cpp
+  HwFrameNode.cpp
+  HwImageNode.cpp
+  HwNormalNode.cpp
+  HwPositionNode.cpp
+  HwTangentNode.cpp
+  HwTexCoordNode.cpp
+  HwTimeNode.cpp
+  HwTransformNode.cpp
+  HwViewDirectionNode.cpp
+  MaterialNode.cpp
+  SourceCodeNode.cpp
+  SwitchNode.cpp
+  SwizzleNode.cpp
+  Shader.cpp
+  ShaderGenerator.cpp
+  ShaderGraph.cpp
+  ShaderNode.cpp
+  ShaderNodeImpl.cpp
+  ShaderStage.cpp
+  ShaderTranslator.cpp
+  Syntax.cpp
+  TypeDesc.cpp
+  UnitSystem.cpp
+  Util.cpp
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenShader.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenShader.exp
+  MaterialXGenShader.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenShader.dll
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeLists.txt
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXRender/CMakeLists.txt
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenMdl/CMakeLists.txt
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenGlsl/CMakeLists.txt
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenOsl/CMakeLists.txt
+  MslResourceBindingContext.cpp
+  BlurNodeOsl.cpp
+  MslShaderGenerator.cpp
+  MslSyntax.cpp
+  BlurNodeMsl.cpp
+  GeomColorNodeMsl.cpp
+  ClosureLayerNodeOsl.cpp
+  MaterialNodeOsl.cpp
+  MdlShaderGenerator.cpp
+  MdlSyntax.cpp
+  EsslShaderGenerator.cpp
+  Camera.cpp
+  EsslSyntax.cpp
+  GlslResourceBindingContext.cpp
+  GlslShaderGenerator.cpp
+  BlurNodeMdl.cpp
+  CgltfLoader.cpp
+  GlslSyntax.cpp
+  BlurNodeGlsl.cpp
+  GeomPropValueNodeMsl.cpp
+  GeomColorNodeGlsl.cpp
+  ClosureCompoundNodeMdl.cpp
+  GeometryHandler.cpp
+  HeightToNormalNodeMsl.cpp
+  SurfaceNodeOsl.cpp
+  ClosureLayerNodeMdl.cpp
+  GeomPropValueNodeGlsl.cpp
+  HeightToNormalNodeGlsl.cpp
+  LightCompoundNodeGlsl.cpp
+  Harmonics.cpp
+  LightCompoundNodeMsl.cpp
+  ClosureSourceCodeNodeMdl.cpp
+  CombineNodeMdl.cpp
+  LightNodeGlsl.cpp
+  LightSamplerNodeGlsl.cpp
+  Image.cpp
+  LightNodeMsl.cpp
+  OslShaderGenerator.cpp
+  CompoundNodeMdl.cpp
+  OslSyntax.cpp
+  ImageHandler.cpp
+  LightSamplerNodeMsl.cpp
+  HeightToNormalNodeMdl.cpp
+  LightHandler.cpp
+  LightShaderNodeMsl.cpp
+  ImageNodeMdl.cpp
+  MaterialNodeMdl.cpp
+  SourceCodeNodeMdl.cpp
+  Mesh.cpp
+  ShaderMaterial.cpp
+  NumLightsNodeMsl.cpp
+  ShaderRenderer.cpp
+  StbImageLoader.cpp
+  Timer.cpp
+  TinyObjLoader.cpp
+  Types.cpp
+  SurfaceNodeMsl.cpp
+  SurfaceShaderNodeMsl.cpp
+  Util.cpp
+  LightShaderNodeGlsl.cpp
+  UnlitSurfaceNodeMsl.cpp
+  SurfaceNodeMdl.cpp
+  NumLightsNodeGlsl.cpp
+  SwizzleNodeMdl.cpp
+  SurfaceNodeGlsl.cpp
+  SurfaceShaderNodeGlsl.cpp
+  UnlitSurfaceNodeGlsl.cpp
+  VkResourceBindingContext.cpp
+  VkShaderGenerator.cpp
+  VkSyntax.cpp
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenOsl.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenOsl.exp
+  MaterialXGenOsl.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenOsl.dll
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRender.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRender.exp
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenMdl.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenMdl.exp
+  MaterialXRender.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRender.dll
+  MaterialXGenMdl.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenMdl.dll
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXRenderOsl/CMakeLists.txt
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXRenderHw/CMakeLists.txt
+  OslRenderer.cpp
+  SimpleWindowIOS.cpp
+  SimpleWindowLinux.cpp
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenMsl.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenMsl.exp
+  SimpleWindowMac.cpp
+  SimpleWindowWindows.cpp
+  WindowWrapper.cpp
+  MaterialXGenMsl.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenMsl.dll
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenGlsl.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenGlsl.exp
+  MaterialXGenGlsl.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXGenGlsl.dll
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRenderHw.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRenderHw.exp
+  MaterialXRenderHw.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRenderHw.dll
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXRenderGlsl/CMakeLists.txt
+  glad.c
+  GLContext.cpp
+  GLFramebuffer.cpp
+  GLTextureHandler.cpp
+  GLUtil.cpp
+  GlslMaterial.cpp
+  GlslProgram.cpp
+  GlslRenderer.cpp
+  TextureBaker.cpp
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRenderOsl.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRenderOsl.exp
+  MaterialXRenderOsl.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRenderOsl.dll
+     Creating library D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRenderGlsl.lib and object D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXRenderGlsl.exp
+  MaterialXRenderGlsl.vcxproj -> D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\MaterialXRenderGlsl.dll
+  Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/CMakeLists.txt
+  -- Install configuration: "Debug"
+  -- Installing: D:/USD/build_debug/lib/MaterialXCore.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXCore.dll
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Generated.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Definition.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Document.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Element.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Exception.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Export.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Geom.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Interface.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Library.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Look.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Material.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Node.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Property.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Traversal.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Types.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Unit.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Util.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Value.h
+  -- Installing: D:/USD/build_debug/include/MaterialXCore/Variant.h
+  -- Installing: D:/USD/build_debug/lib/MaterialXFormat.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXFormat.dll
+  -- Installing: D:/USD/build_debug/lib/MaterialXGenShader.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXGenShader.dll
+  -- Installing: D:/USD/build_debug/lib/MaterialXGenGlsl.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXGenGlsl.dll
+  -- Installing: D:/USD/build_debug/lib/MaterialXGenOsl.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXGenOsl.dll
+  -- Installing: D:/USD/build_debug/lib/MaterialXGenMdl.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXGenMdl.dll
+  -- Installing: D:/USD/build_debug/libraries/mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/core.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/hsv.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/noise.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/pbrlib.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/pbrlib_1_6.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/pbrlib_1_7.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/pbrlib_1_8.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/sampling.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/stdlib.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/stdlib_1_6.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/stdlib_1_7.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/stdlib_1_8.mdl
+  -- Installing: D:/USD/build_debug/libraries/mdl/materialx/swizzle.mdl
+  -- Installing: D:/USD/build_debug/lib/MaterialXGenMsl.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXGenMsl.dll
+  -- Up-to-date: D:/USD/build_debug/libraries
+  -- Installing: D:/USD/build_debug/libraries/bxdf
+  -- Installing: D:/USD/build_debug/libraries/bxdf/disney_brdf_2012.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/disney_brdf_2015.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/gltf_pbr.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_add.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_conductor.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_dielectric.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_diffuse.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_emission.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_layer.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_mix.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_sheen.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_sss.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/lama/lama_translucent.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/standard_surface.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/translation
+  -- Installing: D:/USD/build_debug/libraries/bxdf/translation/standard_surface_to_gltf_pbr.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/translation/standard_surface_to_usd.mtlx
+  -- Installing: D:/USD/build_debug/libraries/bxdf/usd_preview_surface.mtlx
+  -- Installing: D:/USD/build_debug/libraries/cmlib
+  -- Installing: D:/USD/build_debug/libraries/cmlib/cmlib_defs.mtlx
+  -- Installing: D:/USD/build_debug/libraries/cmlib/cmlib_ng.mtlx
+  -- Installing: D:/USD/build_debug/libraries/lights
+  -- Installing: D:/USD/build_debug/libraries/lights/genglsl
+  -- Installing: D:/USD/build_debug/libraries/lights/genglsl/lights_genglsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/lights/genglsl/mx_directional_light.glsl
+  -- Installing: D:/USD/build_debug/libraries/lights/genglsl/mx_point_light.glsl
+  -- Installing: D:/USD/build_debug/libraries/lights/genglsl/mx_spot_light.glsl
+  -- Installing: D:/USD/build_debug/libraries/lights/genmsl
+  -- Installing: D:/USD/build_debug/libraries/lights/genmsl/lights_genmsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/lights/genmsl/mx_directional_light.metal
+  -- Installing: D:/USD/build_debug/libraries/lights/genmsl/mx_point_light.metal
+  -- Installing: D:/USD/build_debug/libraries/lights/genmsl/mx_spot_light.metal
+  -- Installing: D:/USD/build_debug/libraries/lights/lights_defs.mtlx
+  -- Installing: D:/USD/build_debug/libraries/nprlib
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genglsl
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genglsl/nprlib_genglsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genmdl
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genmdl/nprlib_genmdl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genmsl
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genmsl/nprlib_genmsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genosl
+  -- Installing: D:/USD/build_debug/libraries/nprlib/genosl/nprlib_genosl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/nprlib/nprlib_defs.mtlx
+  -- Installing: D:/USD/build_debug/libraries/nprlib/nprlib_ng.mtlx
+  -- Installing: D:/USD/build_debug/libraries/pbrlib
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_environment_fis.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_environment_none.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_environment_prefilter.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_generate_albedo_table.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_generate_prefilter_env.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_microfacet.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_microfacet_diffuse.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_microfacet_sheen.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_microfacet_specular.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_shadow.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_transmission_opacity.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/lib/mx_transmission_refract.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_add_edf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_anisotropic_vdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_artistic_ior.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_blackbody.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_burley_diffuse_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_conductor_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_dielectric_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_displacement_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_displacement_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_generalized_schlick_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_generalized_schlick_edf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_oren_nayar_diffuse_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_roughness_anisotropy.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_roughness_dual.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_sheen_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_subsurface_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_translucent_bsdf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/mx_uniform_edf.glsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genglsl/pbrlib_genglsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genmdl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genmdl/pbrlib_genmdl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genmsl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genmsl/pbrlib_genmsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_anisotropic_vdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_burley_diffuse_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_conductor_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_dielectric_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_generalized_schlick_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_oren_nayar_diffuse_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_sheen_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_subsurface_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_surface.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/legacy/mx_translucent_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/lib
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/lib/mx_microfacet.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/lib/mx_microfacet_sheen.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/lib/mx_microfacet_specular.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_anisotropic_vdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_artistic_ior.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_blackbody.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_dielectric_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_displacement_float.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_displacement_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_generalized_schlick_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_generalized_schlick_edf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_roughness_anisotropy.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_roughness_dual.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_subsurface_bsdf.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/mx_surface.osl
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/pbrlib_defs.mtlx
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/pbrlib_ng.mtlx
+  -- Installing: D:/USD/build_debug/libraries/README.md
+  -- Installing: D:/USD/build_debug/libraries/stdlib
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/lib
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/lib/mx_hsv.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/lib/mx_math.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/lib/mx_noise.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/lib/mx_sampling.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/lib/mx_transform_uv.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/lib/mx_transform_uv_vflip.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_aastep.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_burn_color3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_burn_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_burn_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_cellnoise2d_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_cellnoise3d_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_creatematrix_vector3_matrix33.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_creatematrix_vector3_matrix44.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_creatematrix_vector4_matrix44.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_disjointover_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_dodge_color3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_dodge_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_dodge_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_fractal3d_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_fractal3d_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_fractal3d_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_fractal3d_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_hsvtorgb_color3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_hsvtorgb_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_image_color3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_image_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_image_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_image_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_image_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_image_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_luminance_color3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_luminance_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_mix_surfaceshader.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise2d_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise2d_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise2d_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise2d_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise3d_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise3d_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise3d_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_noise3d_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_normalmap.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_premult_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramplr_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramplr_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramplr_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramplr_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramptb_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramptb_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramptb_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_ramptb_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_rgbtohsv_color3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_rgbtohsv_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_rotate_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_rotate_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_smoothstep_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_smoothstep_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_smoothstep_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_smoothstep_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splitlr_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splitlr_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splitlr_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splitlr_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splittb_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splittb_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splittb_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_splittb_vector4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_transformmatrix_vector2M3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_transformmatrix_vector3M4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_unpremult_color4.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_worleynoise2d_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_worleynoise2d_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_worleynoise2d_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_worleynoise3d_float.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_worleynoise3d_vector2.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/mx_worleynoise3d_vector3.glsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genglsl/stdlib_genglsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmdl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmdl/stdlib_genmdl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/lib
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/lib/mx_math.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/lib/mx_matscalaroperators.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/lib/mx_sampling.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/lib/mx_texture.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_burn_color3.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_burn_color4.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_burn_float.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_dodge_color3.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_dodge_color4.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_dodge_float.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_normalmap.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_smoothstep_float.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_smoothstep_vector2.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_smoothstep_vector3.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/mx_smoothstep_vector4.metal
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genmsl/stdlib_genmsl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/include
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/include/color4.h
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/include/matrix33.h
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/include/mx_funcs.h
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/include/vector2.h
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/include/vector4.h
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/lib
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/lib/mx_sampling.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/lib/mx_transform_uv.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/lib/mx_transform_uv_vflip.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_ambientocclusion_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_burn_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_burn_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_burn_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_cellnoise2d_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_cellnoise3d_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_creatematrix.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_disjointover_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_dodge_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_dodge_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_dodge_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_fractal3d_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_fractal3d_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_fractal3d_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_fractal3d_vector4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_frame_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geomcolor_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geomcolor_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geomcolor_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_boolean.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_integer.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_string.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_geompropvalue_vector4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_heighttonormal_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_hsvtorgb_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_hsvtorgb_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_image_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_image_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_image_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_image_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_image_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_image_vector4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_luminance_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_luminance_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_mix_surfaceshader.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise2d_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise2d_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise2d_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise2d_vector4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise3d_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise3d_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise3d_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_noise3d_vector4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_normalmap.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_premult_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_rgbtohsv_color3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_rgbtohsv_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_rotate_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_rotate_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_surface_unlit.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_time_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_transformmatrix_vector2M3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_unpremult_color4.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_worleynoise2d_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_worleynoise2d_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_worleynoise2d_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_worleynoise3d_float.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_worleynoise3d_vector2.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/mx_worleynoise3d_vector3.osl
+  -- Installing: D:/USD/build_debug/libraries/stdlib/genosl/stdlib_genosl_impl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/stdlib/stdlib_defs.mtlx
+  -- Installing: D:/USD/build_debug/libraries/stdlib/stdlib_ng.mtlx
+  -- Installing: D:/USD/build_debug/libraries/targets
+  -- Installing: D:/USD/build_debug/libraries/targets/essl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/targets/genglsl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/targets/genmdl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/targets/genmsl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/targets/genosl.mtlx
+  -- Installing: D:/USD/build_debug/libraries/pbrlib/genosl/pbrlib_genosl_impl.mtlx
+  -- Installing: D:/USD/build_debug/lib/MaterialXRender.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXRender.dll
+  -- Installing: D:/USD/build_debug/lib/MaterialXRenderHw.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXRenderHw.dll
+  -- Installing: D:/USD/build_debug/lib/MaterialXRenderGlsl.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXRenderGlsl.dll
+  -- Installing: D:/USD/build_debug/lib/MaterialXRenderOsl.lib
+  -- Installing: D:/USD/build_debug/bin/MaterialXRenderOsl.dll
+  -- Installing: D:/USD/build_debug/./LICENSE
+  -- Installing: D:/USD/build_debug/./CHANGELOG.md
+  -- Installing: D:/USD/build_debug/./README.md
+  -- Installing: D:/USD/build_debug/./THIRD-PARTY.md
+  -- Installing: D:/USD/build_debug/lib/cmake/MaterialX/MaterialXTargets.cmake
+  -- Installing: D:/USD/build_debug/lib/cmake/MaterialX/MaterialXTargets-debug.cmake
+  -- Installing: D:/USD/build_debug/lib/cmake/MaterialX/MaterialXConfigVersion.cmake
+  -- Installing: D:/USD/build_debug/lib/cmake/MaterialX/MaterialXConfig.cmake

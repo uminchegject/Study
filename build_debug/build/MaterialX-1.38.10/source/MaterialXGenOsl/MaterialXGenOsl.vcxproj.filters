@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\BlurNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\ClosureLayerNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\MaterialNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\SurfaceNodeOsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslShaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslSyntax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\BlurNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\ClosureLayerNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\MaterialNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\Nodes\SurfaceNodeOsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslShaderGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\OslSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenOsl\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenOsl\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{14F032CC-082F-3C2F-B521-51D377D12F13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{F8884EDF-AF20-36DF-AD85-205647FA95E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{38B330E9-9511-3F76-AB39-A6D3EE9B1C5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{237CE401-4150-3A3A-9A91-D2A99ABB82D2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,208 @@
+2025-01-22 12:42
+cmake -DCMAKE_INSTALL_PREFIX="D:\USD\build_debug" -DCMAKE_PREFIX_PATH="D:\USD\build_debug" -DCMAKE_BUILD_TYPE=Debug  -G "Visual Studio 17 2022" -A x64  -DNO_EXAMPLES=ON -DNO_TUTORIALS=ON -DNO_REGRESSION=ON -DNO_DOC=ON -DNO_OMP=ON -DNO_CUDA=ON -DNO_OPENCL=ON -DNO_DX=ON -DNO_TESTS=ON -DNO_GLEW=ON -DNO_GLFW=ON -DNO_PTEX=ON -DNO_TBB=ON "D:\USD\build_debug\src\OpenSubdiv-3_6_0"
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.22631.
+-- The C compiler identification is MSVC 19.36.32546.0
+-- The CXX compiler identification is MSVC 19.36.32546.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Compiling OpenSubdiv version v3_6_0
+-- Using cmake version 3.25.3
+-- Found OpenGL: opengl32   
+-- Found Python: C:/Users/yusuke.nakamura/AppData/Local/Programs/Python/Python39/python.exe (found version "3.9.13") found components: Interpreter 
+-- Configuring done
+-- Generating done
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_BUILD_TYPE
+
+
+-- Build files have been written to: D:/USD/build_debug/build/OpenSubdiv-3_6_0
+2025-01-22 12:42
+cmake --build . --config Debug --target install -- /M:12
+MSBuild のバージョン 17.12.12+1cce77968 (.NET Framework)
+
+  glLoader.cpp
+  crease.cpp
+  far_utils.cpp
+  Generating patchBasisTypes.gen.h
+  fvarLevel.cpp
+  bilinearPatchBuilder.cpp
+  arg_utils.cpp
+  cpuEvaluator.cpp
+  typeTraits.cpp
+  faceSurface.cpp
+  Generating patchBasis.gen.h
+  glApi.cpp
+  Generating Code...
+  Generating glslPatchCommon.gen.h
+  catmarkPatchBuilder.cpp
+  Generating glslPatchCommonTess.gen.h
+  faceTopology.cpp
+  fvarRefinement.cpp
+  Generating glslPatchBoxSplineTriangle.gen.h
+  Generating glslPatchBSpline.gen.h
+  sdc_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\sdc\sdc_obj.dir\Debug\sdc_obj.lib
+  Generating glslPatchGregory.gen.h
+  cpuKernel.cpp
+  faceVertex.cpp
+  Generating glslPatchGregoryBasis.gen.h
+  shape_utils.cpp
+  Generating glslPatchGregoryTriangle.gen.h
+  level.cpp
+  regression_far_utils_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\regression\common\regression_far_utils_obj.dir\Debug\regression_far_utils_obj.lib
+  error.cpp
+  Generating glslPatchLegacy.gen.h
+  cpuPatchTable.cpp
+  Generating Code...
+  Generating glslXFBKernel.gen.h
+  loopPatchBuilder.cpp
+  Generating glslComputeKernel.gen.h
+  hash.cpp
+  irregularPatchBuilder.cpp
+  cpuGLVertexBuffer.cpp
+  quadRefinement.cpp
+  patchBasis.cpp
+  glLoader_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\glLoader\glLoader_obj.dir\Debug\glLoader_obj.lib
+  Generating Code...
+  glLegacyGregoryPatchTable.cpp
+  cpuVertexBuffer.cpp
+  Generating Code...
+  parameterization.cpp
+  patchBuilder.cpp
+  refinement.cpp
+  regression_common_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\regression\common\regression_common_obj.dir\Debug\regression_common_obj.lib
+  patchTree.cpp
+  osd_cpu_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_cpu_obj.dir\Debug\osd_cpu_obj.lib
+  patchDescriptor.cpp
+  patchTreeBuilder.cpp
+  sparseSelector.cpp
+  patchMap.cpp
+  triRefinement.cpp
+  glPatchTable.cpp
+  refinerSurfaceFactory.cpp
+  Generating Code...
+  patchTable.cpp
+  regularPatchBuilder.cpp
+  surface.cpp
+  vtr_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\Debug\vtr_obj.lib
+  patchTableFactory.cpp
+  glVertexBuffer.cpp
+  surfaceData.cpp
+  glslPatchShaderSource.cpp
+  surfaceFactory.cpp
+  surfaceFactoryCache.cpp
+  ptexIndices.cpp
+  glXFBEvaluator.cpp
+  tessellation.cpp
+  stencilTable.cpp
+  vertexDescriptor.cpp
+  Generating Code...
+  stencilTableFactory.cpp
+  glComputeEvaluator.cpp
+  bfr_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\bfr_obj.lib
+  stencilBuilder.cpp
+  Generating Code...
+  topologyDescriptor.cpp
+  osd_gpu_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_gpu_obj.dir\Debug\osd_gpu_obj.lib
+  topologyRefiner.cpp
+  topologyRefinerFactory.cpp
+  Generating Code...
+  far_obj.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\far_obj.lib
+  version.cpp
+  version.cpp
+  osd_static_gpu.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\lib\Debug\osdGPU.lib
+  osd_static_cpu.vcxproj -> D:\USD\build_debug\build\OpenSubdiv-3_6_0\lib\Debug\osdCPU.lib
+  -- Install configuration: "Debug"
+  -- Installing: D:/USD/build_debug/lib/cmake/OpenSubdiv/OpenSubdivTargets.cmake
+  -- Installing: D:/USD/build_debug/lib/cmake/OpenSubdiv/OpenSubdivTargets-debug.cmake
+  -- Installing: D:/USD/build_debug/lib/cmake/OpenSubdiv/OpenSubdivConfig.cmake
+  -- Installing: D:/USD/build_debug/lib/cmake/OpenSubdiv/OpenSubdivConfigVersion.cmake
+  -- Installing: D:/USD/build_debug/include/opensubdiv/version.h
+  -- Installing: D:/USD/build_debug/lib/osdCPU.lib
+  -- Installing: D:/USD/build_debug/lib/osdGPU.lib
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/allocator.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/bilinear.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/catmark.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/cornerEdit.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/creaseEdit.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/faceEdit.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/face.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/fvarData.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/fvarEdit.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/halfedge.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/hierarchicalEdit.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/holeEdit.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/loop.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/mesh.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/subdivision.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/vertexEdit.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/hbr/vertex.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/sdc/bilinearScheme.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/sdc/catmarkScheme.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/sdc/crease.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/sdc/loopScheme.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/sdc/options.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/sdc/scheme.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/sdc/types.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/array.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/componentInterfaces.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/fvarLevel.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/fvarRefinement.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/level.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/refinement.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/sparseSelector.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/stackBuffer.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/vtr/types.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/error.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/patchDescriptor.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/patchParam.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/patchMap.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/patchTable.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/patchTableFactory.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/primvarRefiner.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/ptexIndices.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/stencilTable.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/stencilTableFactory.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/topologyDescriptor.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/topologyLevel.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/topologyRefiner.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/topologyRefinerFactory.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/far/types.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/irregularPatchType.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/limits.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/parameterization.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/refinerSurfaceFactory.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/surface.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/surfaceData.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/surfaceFactory.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/surfaceFactoryMeshAdapter.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/surfaceFactoryCache.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/tessellation.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/bfr/vertexDescriptor.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/bufferDescriptor.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/cpuEvaluator.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/cpuPatchTable.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/cpuVertexBuffer.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/mesh.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/nonCopyable.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/opengl.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/types.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/patchBasisTypes.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/patchBasis.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/cpuGLVertexBuffer.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/glLegacyGregoryPatchTable.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/glPatchTable.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/glVertexBuffer.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/glMesh.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/glslPatchShaderSource.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/glXFBEvaluator.h
+  -- Installing: D:/USD/build_debug/include/opensubdiv/osd/glComputeEvaluator.h

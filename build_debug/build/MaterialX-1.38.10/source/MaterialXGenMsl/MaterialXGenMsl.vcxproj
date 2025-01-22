@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B2B3687E-FF24-3CBD-981F-CC9E744299F4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>MaterialXGenMsl</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MaterialXGenMsl.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MaterialXGenMsl</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MaterialXGenMsl.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MaterialXGenMsl</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">MaterialXGenMsl.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">MaterialXGenMsl</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">MaterialXGenMsl.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">MaterialXGenMsl</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;MATERIALX_OSL_BINARY_OSLC="";MATERIALX_OSL_BINARY_TESTRENDER="";MATERIALX_OSL_INCLUDE_PATH="";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE="";MATERIALX_MDL_RENDER_EXECUTABLE="";MATERIALX_MDL_RENDER_ARGUMENTS="";MATERIALX_MDL_MODULE_PATHS="";MATERIALX_INSTALL_MDL_MODULE_PATH="libraries";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR="Debug";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;MATERIALX_OSL_BINARY_OSLC=\"\";MATERIALX_OSL_BINARY_TESTRENDER=\"\";MATERIALX_OSL_INCLUDE_PATH=\"\";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_ARGUMENTS=\"\";MATERIALX_MDL_MODULE_PATHS=\"\";MATERIALX_INSTALL_MDL_MODULE_PATH=\"libraries\";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR=\"Debug\";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Debug\MaterialXGenShader.lib;..\..\lib\Debug\MaterialXFormat.lib;..\..\lib\Debug\MaterialXCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/USD/build_debug/build/MaterialX-1.38.10/lib/Debug/MaterialXGenMsl.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/USD/build_debug/build/MaterialX-1.38.10/bin/Debug/MaterialXGenMsl.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;MATERIALX_OSL_BINARY_OSLC="";MATERIALX_OSL_BINARY_TESTRENDER="";MATERIALX_OSL_INCLUDE_PATH="";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE="";MATERIALX_MDL_RENDER_EXECUTABLE="";MATERIALX_MDL_RENDER_ARGUMENTS="";MATERIALX_MDL_MODULE_PATHS="";MATERIALX_INSTALL_MDL_MODULE_PATH="libraries";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR="Release";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;MATERIALX_OSL_BINARY_OSLC=\"\";MATERIALX_OSL_BINARY_TESTRENDER=\"\";MATERIALX_OSL_INCLUDE_PATH=\"\";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_ARGUMENTS=\"\";MATERIALX_MDL_MODULE_PATHS=\"\";MATERIALX_INSTALL_MDL_MODULE_PATH=\"libraries\";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR=\"Release\";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\Release\MaterialXGenShader.lib;..\..\lib\Release\MaterialXFormat.lib;..\..\lib\Release\MaterialXCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/USD/build_debug/build/MaterialX-1.38.10/lib/Release/MaterialXGenMsl.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/USD/build_debug/build/MaterialX-1.38.10/bin/Release/MaterialXGenMsl.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;MATERIALX_OSL_BINARY_OSLC="";MATERIALX_OSL_BINARY_TESTRENDER="";MATERIALX_OSL_INCLUDE_PATH="";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE="";MATERIALX_MDL_RENDER_EXECUTABLE="";MATERIALX_MDL_RENDER_ARGUMENTS="";MATERIALX_MDL_MODULE_PATHS="";MATERIALX_INSTALL_MDL_MODULE_PATH="libraries";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR="MinSizeRel";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;MATERIALX_OSL_BINARY_OSLC=\"\";MATERIALX_OSL_BINARY_TESTRENDER=\"\";MATERIALX_OSL_INCLUDE_PATH=\"\";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_ARGUMENTS=\"\";MATERIALX_MDL_MODULE_PATHS=\"\";MATERIALX_INSTALL_MDL_MODULE_PATH=\"libraries\";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR=\"MinSizeRel\";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\MinSizeRel\MaterialXGenShader.lib;..\..\lib\MinSizeRel\MaterialXFormat.lib;..\..\lib\MinSizeRel\MaterialXCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/USD/build_debug/build/MaterialX-1.38.10/lib/MinSizeRel/MaterialXGenMsl.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/USD/build_debug/build/MaterialX-1.38.10/bin/MinSizeRel/MaterialXGenMsl.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;MATERIALX_OSL_BINARY_OSLC="";MATERIALX_OSL_BINARY_TESTRENDER="";MATERIALX_OSL_INCLUDE_PATH="";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE="";MATERIALX_MDL_RENDER_EXECUTABLE="";MATERIALX_MDL_RENDER_ARGUMENTS="";MATERIALX_MDL_MODULE_PATHS="";MATERIALX_INSTALL_MDL_MODULE_PATH="libraries";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR="RelWithDebInfo";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;MATERIALX_OSL_BINARY_OSLC=\"\";MATERIALX_OSL_BINARY_TESTRENDER=\"\";MATERIALX_OSL_INCLUDE_PATH=\"\";MATERIALX_TEST_RENDER;MATERIALX_MDLC_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_EXECUTABLE=\"\";MATERIALX_MDL_RENDER_ARGUMENTS=\"\";MATERIALX_MDL_MODULE_PATHS=\"\";MATERIALX_INSTALL_MDL_MODULE_PATH=\"libraries\";MATERIALX_BUILD_GEN_GLSL;MATERIALX_BUILD_GEN_OSL;MATERIALX_BUILD_GEN_MDL;MATERIALX_BUILD_GEN_MSL;MATERIALX_GENMSL_EXPORTS;CMAKE_INTDIR=\"RelWithDebInfo\";MaterialXGenMsl_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenShader\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\..;D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\lib\RelWithDebInfo\MaterialXGenShader.lib;..\..\lib\RelWithDebInfo\MaterialXFormat.lib;..\..\lib\RelWithDebInfo\MaterialXCore.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/USD/build_debug/build/MaterialX-1.38.10/lib/RelWithDebInfo/MaterialXGenMsl.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/USD/build_debug/build/MaterialX-1.38.10/bin/RelWithDebInfo/MaterialXGenMsl.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/USD/build_debug/src/MaterialX-1.38.10 -BD:/USD/build_debug/build/MaterialX-1.38.10 --check-stamp-file D:/USD/build_debug/build/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\USD\build_debug\src\MaterialX-1.38.10\cmake\modules\MaterialXVersion.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/USD/build_debug/src/MaterialX-1.38.10 -BD:/USD/build_debug/build/MaterialX-1.38.10 --check-stamp-file D:/USD/build_debug/build/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\USD\build_debug\src\MaterialX-1.38.10\cmake\modules\MaterialXVersion.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/USD/build_debug/src/MaterialX-1.38.10 -BD:/USD/build_debug/build/MaterialX-1.38.10 --check-stamp-file D:/USD/build_debug/build/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\USD\build_debug\src\MaterialX-1.38.10\cmake\modules\MaterialXVersion.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/USD/build_debug/src/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/USD/build_debug/src/MaterialX-1.38.10 -BD:/USD/build_debug/build/MaterialX-1.38.10 --check-stamp-file D:/USD/build_debug/build/MaterialX-1.38.10/source/MaterialXGenMsl/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\USD\build_debug\src\MaterialX-1.38.10\cmake\modules\MaterialXVersion.rc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslResourceBindingContext.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslShaderGenerator.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslSyntax.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\BlurNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomColorNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomPropValueNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\HeightToNormalNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightCompoundNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightSamplerNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightShaderNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\NumLightsNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceShaderNodeMsl.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\UnlitSurfaceNodeMsl.cpp" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Export.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslResourceBindingContext.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslShaderGenerator.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslSyntax.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\BlurNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomColorNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomPropValueNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\HeightToNormalNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightCompoundNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightSamplerNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightShaderNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\NumLightsNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceShaderNodeMsl.h" />
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\UnlitSurfaceNodeMsl.h" />
+    <ResourceCompile Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\USD\build_debug\build\MaterialX-1.38.10\ZERO_CHECK.vcxproj">
+      <Project>{B32C6C8A-A4BD-35C1-B4E7-FB0E3DE9D06A}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXCore\MaterialXCore.vcxproj">
+      <Project>{8C0FD679-1738-3D93-B9B3-052B3A79FAA0}</Project>
+      <Name>MaterialXCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXFormat\MaterialXFormat.vcxproj">
+      <Project>{FDDCC268-E2B7-3B65-A30D-20889B1737E2}</Project>
+      <Name>MaterialXFormat</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenShader\MaterialXGenShader.vcxproj">
+      <Project>{5FACD495-35AF-3E7C-B34F-247C4D84810D}</Project>
+      <Name>MaterialXGenShader</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

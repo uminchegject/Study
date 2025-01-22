@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\EsslShaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\EsslSyntax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\GlslResourceBindingContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\GlslShaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\GlslSyntax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\BlurNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\GeomColorNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\GeomPropValueNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\HeightToNormalNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightCompoundNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightSamplerNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightShaderNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\NumLightsNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\SurfaceNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\SurfaceShaderNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\UnlitSurfaceNodeGlsl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\VkResourceBindingContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\VkShaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\VkSyntax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\EsslShaderGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\EsslSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\GlslResourceBindingContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\GlslShaderGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\GlslSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\BlurNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\GeomColorNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\GeomPropValueNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\HeightToNormalNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightCompoundNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightSamplerNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\LightShaderNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\NumLightsNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\SurfaceNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\SurfaceShaderNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\Nodes\UnlitSurfaceNodeGlsl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\VkResourceBindingContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\VkShaderGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\VkSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenGlsl\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenGlsl\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{14F032CC-082F-3C2F-B521-51D377D12F13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{F8884EDF-AF20-36DF-AD85-205647FA95E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{38B330E9-9511-3F76-AB39-A6D3EE9B1C5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{237CE401-4150-3A3A-9A91-D2A99ABB82D2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

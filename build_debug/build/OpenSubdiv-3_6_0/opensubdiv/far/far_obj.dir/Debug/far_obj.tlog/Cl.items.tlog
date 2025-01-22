@@ -1,0 +1,17 @@
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\bilinearPatchBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\bilinearPatchBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\catmarkPatchBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\catmarkPatchBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\error.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\error.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\loopPatchBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\loopPatchBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\patchBasis.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\patchBasis.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\patchBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\patchBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\patchDescriptor.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\patchDescriptor.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\patchMap.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\patchMap.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\patchTable.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\patchTable.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\patchTableFactory.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\patchTableFactory.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\ptexIndices.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\ptexIndices.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\stencilTable.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\stencilTable.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\stencilTableFactory.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\stencilTableFactory.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\stencilBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\stencilBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\topologyDescriptor.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\topologyDescriptor.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\topologyRefiner.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\topologyRefiner.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\far\topologyRefinerFactory.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\topologyRefinerFactory.obj

@@ -1,0 +1,14 @@
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\MdlShaderGenerator.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\MdlShaderGenerator.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\MdlSyntax.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\MdlSyntax.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\BlurNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\BlurNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureCompoundNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\ClosureCompoundNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureLayerNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\ClosureLayerNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureSourceCodeNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\ClosureSourceCodeNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\CombineNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\CombineNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\CompoundNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\CompoundNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\HeightToNormalNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\HeightToNormalNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ImageNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\ImageNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\MaterialNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\MaterialNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SourceCodeNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\SourceCodeNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SurfaceNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\SurfaceNodeMdl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SwizzleNodeMdl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\MaterialXGenMdl.dir\Debug\SwizzleNodeMdl.obj

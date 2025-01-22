@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F63AE897-E50E-3082-A983-E7A6894E08BC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>bfr_obj</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bfr_obj.dir\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bfr_obj.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bfr_obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bfr_obj.dir\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bfr_obj.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bfr_obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">bfr_obj.dir\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">bfr_obj.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">bfr_obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">bfr_obj.dir\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">bfr_obj.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">bfr_obj</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4005;4350;4548</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;OPENSUBDIV_VERSION_STRING="3.6.0";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;OPENSUBDIV_VERSION_STRING=\"3.6.0\";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4005;4350;4548</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENSUBDIV_VERSION_STRING="3.6.0";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENSUBDIV_VERSION_STRING=\"3.6.0\";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4005;4350;4548</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENSUBDIV_VERSION_STRING="3.6.0";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENSUBDIV_VERSION_STRING=\"3.6.0\";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4005;4350;4548</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENSUBDIV_VERSION_STRING="3.6.0";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENSUBDIV_VERSION_STRING=\"3.6.0\";NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;OPENSUBDIV_HAS_OPENGL;OSD_USES_INTERNAL_GLAPILOADER;OPENSUBDIV_HAS_GLSL_TRANSFORM_FEEDBACK;OPENSUBDIV_HAS_GLSL_COMPUTE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv;D:\USD\build_debug\src\OpenSubdiv-3_6_0\glLoader;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceSurface.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceTopology.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceVertex.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\hash.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\irregularPatchBuilder.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\parameterization.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\patchTree.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\patchTreeBuilder.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\refinerSurfaceFactory.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\regularPatchBuilder.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surface.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceData.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceFactory.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceFactoryCache.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\tessellation.cpp" />
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\vertexDescriptor.cpp" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceSurface.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceTopology.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceVertex.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceVertexSubset.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\hash.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\irregularPatchBuilder.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\patchTree.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\patchTreeBuilder.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\pointOperations.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\regularPatchBuilder.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\vertexTag.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\irregularPatchType.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\limits.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\parameterization.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\refinerSurfaceFactory.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surface.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceData.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceFactory.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceFactoryMeshAdapter.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceFactoryCache.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\tessellation.h" />
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\vertexDescriptor.h" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

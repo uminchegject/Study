@@ -1,0 +1,16 @@
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceSurface.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\faceSurface.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceTopology.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\faceTopology.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\faceVertex.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\faceVertex.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\hash.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\hash.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\irregularPatchBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\irregularPatchBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\parameterization.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\parameterization.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\patchTree.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\patchTree.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\patchTreeBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\patchTreeBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\refinerSurfaceFactory.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\refinerSurfaceFactory.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\regularPatchBuilder.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\regularPatchBuilder.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surface.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\surface.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceData.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\surfaceData.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceFactory.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\surfaceFactory.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\surfaceFactoryCache.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\surfaceFactoryCache.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\tessellation.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\tessellation.obj
+D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\bfr\vertexDescriptor.cpp;D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\vertexDescriptor.obj

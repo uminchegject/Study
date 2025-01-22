@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\cpuGLVertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glLegacyGregoryPatchTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glPatchTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glVertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glXFBEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glComputeEvaluator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\cpuKernel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\bufferDescriptor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\cpuEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\cpuPatchTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\cpuVertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\nonCopyable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\opengl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\patchBasisTypes.h">
+      <Filter>Kernels</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\patchBasis.h">
+      <Filter>Kernels</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\cpuGLVertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glLegacyGregoryPatchTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glPatchTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glVertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchShaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glXFBEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\osd\glComputeEvaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\patchBasisTypes.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\patchBasis.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchCommon.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchCommonTess.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchBoxSplineTriangle.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchBSpline.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchGregory.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchGregoryBasis.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchGregoryTriangle.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslPatchLegacy.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslXFBKernel.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\glslComputeKernel.gen.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\patchBasisTypes.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\patchBasis.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchCommon.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchCommonTess.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchBoxSplineTriangle.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchBSpline.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchGregory.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchGregoryBasis.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchGregoryTriangle.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslPatchLegacy.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslXFBKernel.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\CMakeFiles\ed8b242189efab0a0a7a2507ad9c8f80\glslComputeKernel.gen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2F3E96BC-BECF-3D7E-9C8C-07DB46D613E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{AD9CC5CA-1387-3AC8-9FD2-3FF60E4F1B4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc">
+      <UniqueIdentifier>{829B6AB9-C63A-3F78-9700-BD1A6E8A61BA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Kernels">
+      <UniqueIdentifier>{8EF82C27-842E-38C3-BCAE-486560741339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0A8AA4E3-A166-3A3D-8263-E5BE6FBE8D3C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

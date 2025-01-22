@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\MdlShaderGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\MdlSyntax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\BlurNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureCompoundNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureLayerNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureSourceCodeNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\CombineNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\CompoundNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\HeightToNormalNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ImageNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\MaterialNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SourceCodeNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SurfaceNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SwizzleNodeMdl.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\MdlShaderGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\MdlSyntax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\BlurNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureCompoundNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureLayerNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ClosureSourceCodeNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\CombineNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\CompoundNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\HeightToNormalNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\ImageNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\MaterialNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SourceCodeNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SurfaceNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\Nodes\SwizzleNodeMdl.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMdl\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMdl\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{14F032CC-082F-3C2F-B521-51D377D12F13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{F8884EDF-AF20-36DF-AD85-205647FA95E9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{38B330E9-9511-3F76-AB39-A6D3EE9B1C5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{237CE401-4150-3A3A-9A91-D2A99ABB82D2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

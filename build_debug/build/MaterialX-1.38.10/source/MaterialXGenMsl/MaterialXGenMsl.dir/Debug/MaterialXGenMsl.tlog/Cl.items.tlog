@@ -1,0 +1,15 @@
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslResourceBindingContext.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\MslResourceBindingContext.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslShaderGenerator.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\MslShaderGenerator.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\MslSyntax.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\MslSyntax.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\BlurNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\BlurNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomColorNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\GeomColorNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\GeomPropValueNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\GeomPropValueNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\HeightToNormalNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\HeightToNormalNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightCompoundNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\LightCompoundNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\LightNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightSamplerNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\LightSamplerNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\LightShaderNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\LightShaderNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\NumLightsNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\NumLightsNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\SurfaceNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\SurfaceShaderNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\SurfaceShaderNodeMsl.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXGenMsl\Nodes\UnlitSurfaceNodeMsl.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXGenMsl\MaterialXGenMsl.dir\Debug\UnlitSurfaceNodeMsl.obj

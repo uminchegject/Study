@@ -1,0 +1,7 @@
+D:/USD/build_debug/lib/zlibd.lib
+D:/USD/build_debug/bin/zlibd.dll
+D:/USD/build_debug/lib/zlibstaticd.lib
+D:/USD/build_debug/include/zconf.h
+D:/USD/build_debug/include/zlib.h
+D:/USD/build_debug/share/man/man3/zlib.3
+D:/USD/build_debug/share/pkgconfig/zlib.pc

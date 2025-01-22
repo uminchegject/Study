@@ -1,0 +1,1 @@
+D:\USD\build_debug\build\OpenSubdiv-3_6_0\glLoader\glLoader_obj.dir\Debug\glLoader_obj.lib

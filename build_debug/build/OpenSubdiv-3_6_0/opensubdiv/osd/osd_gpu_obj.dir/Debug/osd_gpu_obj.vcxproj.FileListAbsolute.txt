@@ -1,0 +1,1 @@
+D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_gpu_obj.dir\Debug\osd_gpu_obj.lib

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\Environ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\External\PugiXML\pugixml.cpp">
+      <Filter>Source Files\External\PugiXML</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\XmlIo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\Environ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\Export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\External\PugiXML\pugiconfig.hpp">
+      <Filter>Header Files\External\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\External\PugiXML\pugixml.hpp">
+      <Filter>Header Files\External\PugiXML</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\XmlIo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXFormat\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXFormat\version.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{14F032CC-082F-3C2F-B521-51D377D12F13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\External">
+      <UniqueIdentifier>{A451988A-2DB7-3FD3-8DF0-1D3FA0E28946}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\External\PugiXML">
+      <UniqueIdentifier>{71932E0E-6143-3180-99A5-1DFF5D6CA565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{38B330E9-9511-3F76-AB39-A6D3EE9B1C5D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External">
+      <UniqueIdentifier>{D062E96F-6872-36E5-B22C-D2A461F2A54F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External\PugiXML">
+      <UniqueIdentifier>{F330A8E1-5EE3-3C94-A25F-AADCF7CD3288}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

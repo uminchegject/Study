@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\USD\build_debug\src\OpenSubdiv-3_6_0\opensubdiv\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\sdc\sdc_obj.dir\$(Configuration)\crease.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\sdc\sdc_obj.dir\$(Configuration)\typeTraits.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\$(Configuration)\fvarLevel.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\$(Configuration)\fvarRefinement.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\$(Configuration)\level.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\$(Configuration)\quadRefinement.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\$(Configuration)\refinement.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\$(Configuration)\sparseSelector.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\vtr\vtr_obj.dir\$(Configuration)\triRefinement.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\bilinearPatchBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\catmarkPatchBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\error.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\loopPatchBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\patchBasis.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\patchBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\patchDescriptor.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\patchMap.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\patchTable.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\patchTableFactory.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\ptexIndices.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\stencilTable.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\stencilTableFactory.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\stencilBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\topologyDescriptor.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\topologyRefiner.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\$(Configuration)\topologyRefinerFactory.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\faceSurface.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\faceTopology.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\faceVertex.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\hash.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\irregularPatchBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\parameterization.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\patchTree.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\patchTreeBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\refinerSurfaceFactory.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\regularPatchBuilder.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\surface.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\surfaceData.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\surfaceFactory.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\surfaceFactoryCache.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\tessellation.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\$(Configuration)\vertexDescriptor.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_cpu_obj.dir\$(Configuration)\cpuEvaluator.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_cpu_obj.dir\$(Configuration)\cpuKernel.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_cpu_obj.dir\$(Configuration)\cpuPatchTable.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+    <Object Include="D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\osd\osd_cpu_obj.dir\$(Configuration)\cpuVertexBuffer.obj">
+      <Filter>Object Libraries</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Object Libraries">
+      <UniqueIdentifier>{2F6CB786-CB28-30A9-91D8-491124F2BE64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0A8AA4E3-A166-3A3D-8263-E5BE6FBE8D3C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderHw\SimpleWindowIOS.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderHw\MaterialXRenderHw.dir\Debug\SimpleWindowIOS.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderHw\SimpleWindowLinux.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderHw\MaterialXRenderHw.dir\Debug\SimpleWindowLinux.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderHw\SimpleWindowMac.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderHw\MaterialXRenderHw.dir\Debug\SimpleWindowMac.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderHw\SimpleWindowWindows.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderHw\MaterialXRenderHw.dir\Debug\SimpleWindowWindows.obj
+D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderHw\WindowWrapper.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderHw\MaterialXRenderHw.dir\Debug\WindowWrapper.obj

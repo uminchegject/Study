@@ -1,0 +1,6 @@
+D:/USD/build_debug/build/zlib-1.2.13/CMakeFiles/zlib.dir
+D:/USD/build_debug/build/zlib-1.2.13/CMakeFiles/zlibstatic.dir
+D:/USD/build_debug/build/zlib-1.2.13/CMakeFiles/RUN_TESTS.dir
+D:/USD/build_debug/build/zlib-1.2.13/CMakeFiles/INSTALL.dir
+D:/USD/build_debug/build/zlib-1.2.13/CMakeFiles/ALL_BUILD.dir
+D:/USD/build_debug/build/zlib-1.2.13/CMakeFiles/ZERO_CHECK.dir
