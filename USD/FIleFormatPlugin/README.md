@@ -1,11 +1,27 @@
 # GeoフォーマットにおけるFileFormatPluginの実装
 
+### 検証環境
+* Visual Studio 2022
+* CMake 3.25.3
+* Open_USDのビルドを済ませる
+
+
 ## 新規プラグインの実装
 ### 実装の概要
+新規プラグインの実装においては下記の3つのファイルを用意する必要があります。
+* プラグインのソース  
+* CMakeLists.txt  
+* PluginInfo.json  
+
+これらを用意し、Open_USDのプロジェクトソース内の任意の場所に配置してビルドを行うことでプラグインをビルドすることができます。
 
 ### CMakeLists
+ビルド内容をまとめるCMakeListsです。パッケージの実装においては主に下記の2つを行います。
+* PXR_PACKAGEにパッケージ名を設定する
+* カスタム関数のpxr_pluginで使用するソースの情報をまとめる
 
-``` PluginInfo.json
+
+``` CMakeLists
 set(PXR_PREFIX pxr/usd)
 set(PXR_PACKAGE usdGeo)
 
@@ -33,28 +49,39 @@ pxr_plugin(${PXR_PACKAGE}
 ```
 
 ### PluginInfo　　
-
+プラグインの情報をまとめるJsonです。今回実装するFileFormatPluginを例にすると、  
+* サポートするフォーマット形式に関する情報
+* ビルドした際のプラグイン周りのデータに関する情報
+などをJSONでまとめます。
 
 ``` PluginInfo.json
 {
     "Plugins": [
         {
+            // プラグインの中身に関する情報をまとめます
             "Info": {
                 "Types": {
-                    "UnwritableFormat": {
+                    "UsdGeoFileFormat": {
                         "bases": [
-                            "SdfTextFileFormat"
+                            "SdfFileFormat"
                         ],
-                        "displayName": "Format that does not support writing",
+                        "displayName": "Geo Text File Format Plugin",
                         "extensions": [
-                            "unwritable"
+                            "geo"
                         ],
+                        "formatId": "geo",
+                        "primary": true,
                         "supportsWriting": false,
-                        "formatId": "UnwritableFormat",
-                        "primary": true
+                        "target": "usd"
                     }
                 }
-            }
+            },
+            // プラグインのビルドデータに関する情報をまとめます
+            "LibraryPath": "@PLUG_INFO_LIBRARY_PATH@",
+            "Name": "usdGeo",
+            "ResourcePath": "@PLUG_INFO_RESOURCE_PATH@",
+            "Root": "@PLUG_INFO_ROOT@",
+            "Type": "library"
         }
     ]
 }
