@@ -2,43 +2,6 @@
 
 ## 新規プラグインの実装
 ### 実装の概要
-○FBSから情報を取得する処理をサンプル実装
-bool UsdGeoFileFormat::Read(
-    SdfLayer* layer,
-    const string& resolvedPath,
-    bool metadataOnly) const
-{
-	//全体データからメッシュデータの取得
-    std::ifstream fin(resolvedPath.c_str());
-    if (!fin.is_open()) {
-        TF_RUNTIME_ERROR("Failed to open file \"%s\"", resolvedPath.c_str());
-        return false;
-    }
-
-    while (std::getline(fin, line)) {
-        if (line.empty())
-            continue;
-
-        lineStream.clear();
-        lineStream.str(line);
-
-		std::string Path;
-        if (key == "\"mesh_data\":") {
-            lineStream >> Path; 
-            break;
-        }
-    }
-
-	//メッシュデータからメッシュバイナリの取得
-	
-	
-    return true;
-}
-
-○FileFormatの読み込み処理を設計
-・Pythonプロジェクトを参考にする
-
-○USDの構築処理を設計
 
 ### CMakeLists
 
@@ -70,7 +33,7 @@ pxr_plugin(${PXR_PACKAGE}
 ```
 
 ### PluginInfo　　
-コッペパン
+
 
 ``` PluginInfo.json
 {

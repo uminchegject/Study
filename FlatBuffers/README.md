@@ -1,6 +1,24 @@
 # FlatBuffers
 
+
+
 ## Tutorial
+FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソースがあるためそちらを参考に挙動確認を行います。
+
+### 検証環境
+* Visual Studio 2022
+* CMake 3.25.3
+
+### FlatBuffersのビルド
+GitからFlatBuffersのプロジェクトソースを取得します。
+その後取得したプロジェクトソースのフォルダ内でCMakeを用いてビルドを行います。
+
+### FlatBuffersの挙動確認のためのプロジェクトを用意
+挙動確認において必要なソースは下記の3つになりま
+```必要ソース
+
+```
+
 
 ## Schema
 
