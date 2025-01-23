@@ -1,2 +1,0 @@
-D:/USD/build_debug/build/OpenUSD-release/CMakeFiles/CMakeScratch/TryCompile-783ibq/CMakeFiles/cmTC_b4c3a.dir
-D:/USD/build_debug/build/OpenUSD-release/CMakeFiles/CMakeScratch/TryCompile-783ibq/CMakeFiles/ALL_BUILD.dir

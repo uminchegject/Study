@@ -1,9 +1,0 @@
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\External\Glad\glad.c;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\glad.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLContext.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\GLContext.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLFramebuffer.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\GLFramebuffer.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLTextureHandler.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\GLTextureHandler.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GLUtil.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\GLUtil.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslMaterial.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\GlslMaterial.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslProgram.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\GlslProgram.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\GlslRenderer.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\GlslRenderer.obj
-D:\USD\build_debug\src\MaterialX-1.38.10\source\MaterialXRenderGlsl\TextureBaker.cpp;D:\USD\build_debug\build\MaterialX-1.38.10\source\MaterialXRenderGlsl\MaterialXRenderGlsl.dir\Debug\TextureBaker.obj

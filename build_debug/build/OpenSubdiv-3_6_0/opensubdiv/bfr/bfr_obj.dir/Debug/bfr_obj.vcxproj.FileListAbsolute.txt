@@ -1,1 +1,0 @@
-D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\bfr\bfr_obj.dir\Debug\bfr_obj.lib

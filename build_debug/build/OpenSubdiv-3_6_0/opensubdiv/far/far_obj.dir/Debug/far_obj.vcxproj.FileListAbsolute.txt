@@ -1,1 +1,0 @@
-D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\far\far_obj.dir\Debug\far_obj.lib

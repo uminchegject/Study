@@ -1,1 +1,0 @@
-D:\USD\build_debug\build\OpenSubdiv-3_6_0\opensubdiv\sdc\sdc_obj.dir\Debug\sdc_obj.lib
