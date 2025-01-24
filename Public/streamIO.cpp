@@ -88,9 +88,6 @@ UsdObjReadDataFromStream(std::istream &input,
 
             pointsEnd = int(stream->GetPoints().size());
             stream->AddFace(UsdObjStream::Face(pointsBegin, pointsEnd));
-        } else {
-            // Add arbitrary text (or comment).
-            stream->AppendArbitraryText(line);
         }
     }
 

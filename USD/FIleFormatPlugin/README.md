@@ -91,9 +91,6 @@ pxr_plugin(${PXR_PACKAGE}
 
 ## USDの構築
 
-## Tips
-### pch.h
-
 ## 参考資料
 ### 新規プラグインの実装
 * Creating a File Format Plugin  
