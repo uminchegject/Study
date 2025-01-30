@@ -1,25 +1,15 @@
-○工数追加の連絡
-夜分遅くに失礼いたします。
-先ほどいただいたサンプルソースを参考に実装を進めておりましたが、バッファーからポインタを取得し、static_cast を行う処理において、ポインタのキャストが正しく機能せず、現在原因を調査しております。
+//floatの場合
+for(int i = 0; i < data_byte_list.size(); ++4)
+{
+	float data_float;
+	std::memcpy(&float, data_byte_list[i], sizeof(float));
+	std::count << "data_float :" << float << std::end;
+}
 
-つきましては、調査にお時間をいただきたく、大変恐縮ではございますが、追加で2日間の工数をいただければと存じます。
-度々の工数追加となり誠に申し訳ございませんが、ご理解のほど何卒よろしくお願い申し上げます。
-
-■ToDo
-○バイナリからの情報取得
-・ライブラリのインクルード
-・サンプルソースを参考に情報取得処理を実装
-
-○読み込み挙動確認
-
-○Arrayを使えるようにする
-
-○書き込み挙動確認
-
-■インストール手準
-・libを事前に用意
-・CMakeの修正
- -Includeフォルダの修正
-・ソースフォルダをextrasフォルダに入れる
-・CMakeListに追加
-・ビルド
+//intの場合
+for(int i = 0; i < data_byte_list.size(); ++4)
+{
+	int32_t data_int32_t;
+	std::memcpy(&int, data_byte_list[i], sizeof(int32_t));
+	std::count << "data_int32_t :" << data_int32_t << std::end;
+}
