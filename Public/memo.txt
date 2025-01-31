@@ -5,6 +5,21 @@
 結果としてAuthenticatorを2回インストールすることになるのですが、こちらについてどのように対応すればよろしいでしょうか。
 お手数をおかけしますが、よろしくお願いいたします。
 
+// JSONファイルを読み込む関数
+bool read_json_from_file(const string& json_path, string& json_str) {
+    ifstream fin(json_path);
+    if (!fin.is_open()) {
+        cerr << "Error opening file: " << json_path << endl;
+        return false;
+    }
+
+    stringstream buffer;
+    buffer << fin.rdbuf();
+    json_str = buffer.str();
+    fin.close();
+    return true;
+}
+
 ○Jsonから情報を取得する処理の実装
 ・Key(特定の文字列)を判定して、その括弧内の値を取得する処理を実装する
 string get_value_by_key(const string& json_str, const string& key) {
