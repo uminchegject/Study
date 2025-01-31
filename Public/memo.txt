@@ -1,105 +1,19 @@
-○携帯の確認
-お疲れ様です。
-先日、携帯のディスプレイを割ってしまい、修理に出すことを決めました。
-その際、代替機を使用した後、修理で初期化された携帯に再度Authenticatorをインストールする必要があり、
-結果としてAuthenticatorを2回インストールすることになるのですが、こちらについてどのように対応すればよろしいでしょうか。
-お手数をおかけしますが、よろしくお願いいたします。
+■FileFormatPlugin(Work)
+○インストール手順のドキュメントを作成
 
-// JSONファイルを読み込む関数
-bool read_json_from_file(const string& json_path, string& json_str) {
-    ifstream fin(json_path);
-    if (!fin.is_open()) {
-        cerr << "Error opening file: " << json_path << endl;
-        return false;
-    }
+○バイナリの読み込み処理の整理
 
-    stringstream buffer;
-    buffer << fin.rdbuf();
-    json_str = buffer.str();
-    fin.close();
-    return true;
-}
-
-○Jsonから情報を取得する処理の実装
-・Key(特定の文字列)を判定して、その括弧内の値を取得する処理を実装する
-string get_value_by_key(const string& json_str, const string& key) {
-    size_t key_pos = json_str.find(key);
-    if (key_pos == string::npos) {
-        return "";  // キーが見つからない場合は空文字列を返す
-    }
-
-    size_t value_start = json_str.find(":", key_pos);
-    if (value_start == string::npos) {
-        return "";  // コロンが見つからない場合
-    }
-
-    value_start += 1;  // コロンの後が値の開始位置
-
-    // 値の前後の空白をスキップ
-    while (value_start < json_str.size() && json_str[value_start] == ' ') {
-        value_start++;
-    }
-
-    // 値の終わりを見つける
-    size_t value_end = value_start;
-    if (json_str[value_start] == '"') {  // 値が文字列の場合
-        value_end = json_str.find('"', value_start + 1);
-        if (value_end == string::npos) {
-            return "";  // 終了引用符が見つからない場合
-        }
-    } else if (json_str[value_start] == '{') {  // 値がオブジェクトの場合
-        int brace_count = 1;
-        value_end = value_start + 1;
-        while (brace_count > 0 && value_end < json_str.size()) {
-            if (json_str[value_end] == '{') {
-                brace_count++;
-            } else if (json_str[value_end] == '}') {
-                brace_count--;
-            }
-            value_end++;
-        }
-    } else if (json_str[value_start] == '[') {  // 値が配列の場合
-        int bracket_count = 1;
-        value_end = value_start + 1;
-        while (bracket_count > 0 && value_end < json_str.size()) {
-            if (json_str[value_end] == '[') {
-                bracket_count++;
-            } else if (json_str[value_end] == ']') {
-                bracket_count--;
-            }
-            value_end++;
-        }
-    } else {  // 数値や真偽値の場合
-        value_end = json_str.find_first_of(",}", value_start);
-    }
-
-    return json_str.substr(value_start, value_end - value_start);
-}
-
-○クラス設計
-・ReadCustomFile
- -GetAllJson
- -GetMeshJson
- -GetMeshBinary
- -ReadData(json_path, binary_path)
-  -ReadAabb
-  -ReadMeshBinary
-  -ReadPositionData
-  -ReadNormalsData
-  -ReadUvsData
-  -ReadAabbData
-・WriteToLayer
+○書き込み処理の整理
 
 ○FlatBuffersのソース整理
 ・インクルードディレクトリをまとめる
 
-△UV情報の追加
+○Warningの内容を確認
 
-○ソースの整理
-・warningの解消
-・文字コード
-・最低限の情報
+○最低限の実装
 https://fereria.github.io/reincarnation_tech/usd/model_hierarchy#component
+
+△UV情報の追加
 
 ○デバッグ
 
