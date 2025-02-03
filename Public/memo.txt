@@ -1,26 +1,17 @@
-■FileFormatPlugin(Work)
-○インストール手順のドキュメントを作成
+# プロジェクトのルートディレクトリに移動
+cd /path/to/your/project_root
 
-○バイナリの読み込み処理の整理
+# pluginsディレクトリを作成
+mkdir -p plugins/test
 
-○書き込み処理の整理
+# ルートのCMakeLists.txtにadd_subdirectory(plugins)を追加
+echo "add_subdirectory(plugins)" >> CMakeLists.txt
 
-○FlatBuffersのソース整理
-・インクルードディレクトリをまとめる
+# plugins/CMakeLists.txtにadd_subdirectory(test)を追加
+echo "add_subdirectory(test)" > plugins/CMakeLists.txt
 
-○Warningの内容を確認
+# testのCMakeLists.txtを作成（仮の内容）
+echo "add_library(test_plugin STATIC test.cpp)" > plugins/test/CMakeLists.txt
 
-○最低限の実装
-https://fereria.github.io/reincarnation_tech/usd/model_hierarchy#component
-
-△UV情報の追加
-
-○デバッグ
-
-●インストール手準
-・libを事前に用意
-・CMakeの修正
- -Includeフォルダの修正
-・ソースフォルダをextrasフォルダに入れる
-・CMakeListに追加
-・ビルド
+# test.cppを作成（仮の内容）
+echo "// test plugin source" > plugins/test/test.cpp
