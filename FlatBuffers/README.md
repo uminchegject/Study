@@ -1,5 +1,7 @@
 # FlatBuffers
 
+## FlatBuffersとは
+
 
 
 ## Tutorial
@@ -13,7 +15,6 @@ FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソ�
 
 #### fbsへの情報の設定
 ``` 情報の設定
-  // Build up a serialized buffer algorithmically:
   flatbuffers::FlatBufferBuilder builder;
 
   // First, lets serialize some weapons for the Monster: A 'sword' and an 'axe'.
@@ -42,14 +43,14 @@ FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソ�
   auto inventory = builder.CreateVector(inv_data, 10);
 
   // Shortcut for creating monster with all fields set:
-  auto orc = CreateMonster(builder, &position, 150, 80, name, inventory, Color_Red, weapons, Equipment_Weapon, axe.Union());
+  auto orc = CreateMonster(builder, &position, 150, 80, name, inventory,
+                           Color_Red, weapons, Equipment_Weapon, axe.Union());
 
   builder.Finish(orc);  // Serialize the root of the object.
 ```
 
 #### fbsからの情報の取得
 ``` 情報の取得
-  // Get access to the root:
   auto monster = GetMonster(builder.GetBufferPointer());
 
   // Get and test some scalar types from the FlatBuffer.
@@ -88,52 +89,7 @@ FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソ�
   (void)equipped;
 ```
 
-## バイナリ
-
-### ソース
-
-#### エンコード
-``` エンコード
-    uint8_t* buf = builder.GetBufferPointer();
-    size_t size = builder.GetSize();
-
-    // ファイルに書き込み
-    ofstream fout;
-    fout.open("monster.bin", ios::out | ios::binary | ios::trunc);
-    if (!fout) {
-        return 1;
-    }
-    fout.write((char*)buf, size);
-    fout.close();
-```
-
-#### デコード
-``` デコード
-    ifstream fin("monster.bin", ios::in | ios::binary);
-    if (!fin) {
-        return 1;
-    }
-    auto begin = fin.tellg();
-    fin.seekg(0, fin.end);
-    auto end = fin.tellg();
-    fin.clear();
-    fin.seekg(0, fin.beg);
-    auto len = end - begin;
-    auto buf_decode = new char[len + 1];
-    fin.read(buf_decode, len);
-    fin.close();
-
-    // バッファ設定
-    auto monster_decode = GetMonster((uint8_t*)buf_decode);
-
-    // hp, mana, name
-    printf("hp: %d\n", monster_decode->hp());
-    printf("mana: %d\n", monster_decode->mana());
-    printf("name: %s\n", monster_decode->name()->c_str());
-```
-
-
-## Schema
+## 
 
 ## 参考資料
 ### Tutorial
@@ -143,8 +99,3 @@ https://flatbuffers.dev/tutorial/
 ### バイナリ
 * FlatBuffersのチュートリアルやってみた (C++, Windows)  
 https://zenn.dev/hikarin/articles/3346f9bb2ae2302a1a80
-### Schema
-* Schema  
-https://flatbuffers.dev/schema/
-* Language Guide: C++  
-https://flatbuffers.dev/languages/cpp/

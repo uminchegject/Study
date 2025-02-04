@@ -87,9 +87,25 @@ pxr_plugin(${PXR_PACKAGE}
 }
 ```
 
-## GEOフォーマットの構成
+## HoudiniのGeometryをサポートしたFileFormatPluginの実装
+Geometryファイルはアスキーのため文字列から情報を取得し、usdのレイヤーを構築する
 
-## USDの構築
+### Geometryからの情報取得処理
+
+``` ReadGeometry
+void Geometry::ReadGeometry(const std::string& filePath)
+{
+ 
+}
+```
+
+### Geometryの情報を基にLayerを構築する
+``` CreateLayer
+SdfLayerRefPtr CreateLayer()
+{
+    
+}
+```
 
 ## 参考資料
 ### 新規プラグインの実装
@@ -101,9 +117,3 @@ https://fereria.github.io/reincarnation_tech/usd/python/usdview_plugin_01
 https://fereria.github.io/reincarnation_tech/usd/fileformat_plugin
 * USD/Hydra の最新プロシージャルインタフェース  
 https://qiita.com/takahito-tejima/items/01ab2abe2f4c0d12eeed#hdgp-%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E4%BD%9C%E6%88%90%E5%AE%9F%E8%A3%85
-
-### USDの構築
-* Kind と Model と ModelHierarchy
-https://fereria.github.io/reincarnation_tech/usd/model_hierarchy#component
-* USDのアセット構造の話
-https://fereria.github.io/reincarnation_tech/usd/asset_structure
