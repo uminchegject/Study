@@ -1,54 +1,17 @@
-﻿○USDの構築処理のサンプル処理を実装
-SdfLayerRefPtr UsdObjTranslateObjToUsd(const UsdObjStream &objStream)
-{
-    // Create the layer to populate.
-    SdfLayerRefPtr layer = SdfLayer::CreateAnonymous(".usda");
+# プロジェクトのルートディレクトリに移動
+cd /path/to/your/project_root
 
-    // Create a UsdStage with that root layer.
-    UsdStageRefPtr stage = UsdStage::Open(layer);
+# pluginsディレクトリを作成
+mkdir -p plugins/test
 
-	// Create a mesh for the group.
-	UsdGeomMesh mesh =　UsdGeomMesh::Define(stage, SdfPath("/" + group.name));
+# ルートのCMakeLists.txtにadd_subdirectory(plugins)を追加
+echo "add_subdirectory(plugins)" >> CMakeLists.txt
 
-	// Populate the mesh data from the obj data.  This is not a very smart
-	// importer.  We throw all the verts onto everything for simplicity.  If
-	// this was a proper obj importer, it would reindex verts per-group.
-	mesh.GetPointsAttr().Set(usdPoints);
+# plugins/CMakeLists.txtにadd_subdirectory(test)を追加
+echo "add_subdirectory(test)" > plugins/CMakeLists.txt
 
-	VtArray<int> faceVertexCounts, faceVertexIndices, faceUVIndices;
-	for (const auto& face : group.faces) {
-		faceVertexCounts.push_back(face.size());
-		for (int p = face.pointsBegin; p != face.pointsEnd; ++p) {
-			faceVertexIndices.push_back(objPoints[p].vertIndex);
-			if (objPoints[p].uvIndex >= 0) {
-				faceUVIndices.push_back(objPoints[p].uvIndex);
-			}
-		}
-	}
+# testのCMakeLists.txtを作成（仮の内容）
+echo "add_library(test_plugin STATIC test.cpp)" > plugins/test/CMakeLists.txt
 
-	// Now set the attributes.
-	mesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
-	mesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
-
-	// Create a primvar for the UVs if stored in the obj data. Note that
-	// it's valid in this layer for the UV mapping to not be fully defined
-	// in the obj data. For example, this layer may just provide the texture
-	// coordinates and another layer the indexing, or vice versa.
-	if (!usdUVs.empty() || !faceUVIndices.empty()) {
-		UsdGeomPrimvar uvPrimVar = UsdGeomPrimvarsAPI(mesh).CreatePrimvar(
-		TfToken("uv"), SdfValueTypeNames->TexCoord2fArray,
-		UsdGeomTokens->faceVarying);
-		if (!usdUVs.empty()) {
-			uvPrimVar.GetAttr().Set(usdUVs);
-		}
-		if (!faceUVIndices.empty()) {
-			uvPrimVar.CreateIndicesAttr().Set(faceUVIndices); // indexed
-		}
-	}
-
-	// Set extent.
-	mesh.GetExtentAttr().Set(extentArray);
-    }
-
-    return layer;
-}
+# test.cppを作成（仮の内容）
+echo "// test plugin source" > plugins/test/test.cpp
