@@ -1,8 +1,8 @@
-# Study
+# HAPI
 
-## Studyとは
+## HAPIとは
 
-## Tuotorial
+## Tutorial
 
 ### 開発環境
 * VisualStudio 17.12.3
@@ -13,4 +13,4 @@
 * 公式ドキュメント
 
 ### Tutorial
-* 公式Tutorial 
+* 公式Tutorial

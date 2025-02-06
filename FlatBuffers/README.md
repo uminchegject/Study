@@ -1,19 +1,10 @@
 # FlatBuffers
 
 ## FlatBuffersとは
-
-
-
 ## Tutorial
 FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソースがあるためそちらを参考に挙動確認を行います。
 
-### 検証環境
-* Visual Studio 2022
-* CMake 3.25.3
-
-### Tutorialソース
-
-#### fbsへの情報の設定
+### fbsへの情報の設定
 ``` 情報の設定
   flatbuffers::FlatBufferBuilder builder;
 
@@ -49,7 +40,7 @@ FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソ�
   builder.Finish(orc);  // Serialize the root of the object.
 ```
 
-#### fbsからの情報の取得
+### fbsからの情報の取得
 ``` 情報の取得
   auto monster = GetMonster(builder.GetBufferPointer());
 
@@ -89,7 +80,90 @@ FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソ�
   (void)equipped;
 ```
 
-## 
+## エンコード・デコード
+バイナリへのエンコード、デコードを行うためのソースです
+
+### エンコード
+``` エンコード
+  uint8_t *buf = builder.GetBufferPointer();
+  size_t size = builder.GetSize();
+
+  ofstream fout;
+  fout.open("monster.bin", ios::out | ios::binary | ios::trunc);
+  if (!fout) { return 1; }
+  fout.write((char *)buf, size);
+  fout.close();
+```
+### デコード
+``` デコード
+  ifstream fin("monster.bin", ios::in | ios::binary);
+  if (!fin) { return 1; }
+  auto begin = fin.tellg();
+  fin.seekg(0, fin.end);
+  auto end = fin.tellg();
+  fin.clear();
+  fin.seekg(0, fin.beg);
+  auto len = end - begin;
+  auto buf = new char[len + 1];
+  fin.read(buf, len);
+  fin.close();
+
+  auto monster = GetMonster((uint8_t *)buf);
+```
+## バイト型による管理
+
+### FBSのテーブル
+``` テーブル
+table Byte
+{
+	data:[ubyte] (force_align:4);
+}
+``` 
+
+### エンコード
+``` エンコード
+void EncodeByte(flatbuffers::FlatBufferBuilder& builder) {
+
+  // バイトデータを作成
+  std::vector<uint8_t> data = { 10, 20, 30, 40, 50 };
+
+  // バイト配列をFlatBufferに格納
+  auto data_vector = builder.CreateVector(data);
+
+  // Byteテーブルのオブジェクトを作成
+  ByteBuilder Byte_builder(builder);
+  Byte_builder.add_data(data_vector);  // dataフィールドにバイトデータを設定
+
+  // ByteオブジェクトをFlatBufferに追加
+  auto Byte = Byte_builder.Finish();
+
+  // 完成したFlatBufferをビルド
+  builder.Finish(Byte);
+
+  // バイナリデータを取得
+  uint8_t *buf = builder.GetBufferPointer();
+  int size = builder.GetSize();
+
+  std::cout << "Encoded Byte Data Size: " << size << std::endl;
+
+}
+```
+
+### デコード
+``` エンコード
+void DecodeByte(const uint8_t *buf) {
+  // FlatBufferデータからByteを取得
+  auto Byte = flatbuffers::GetRoot<Byte>(buf);
+
+  // デコードしたデータを表示
+  std::cout << "Decoded Byte Data: ";
+  for (auto byte : *Byte->data()) {
+    std::cout << (int)byte << " ";  // バイトを整数として表示
+  }
+  std::cout << std::endl;
+}
+```
+
 
 ## 参考資料
 ### Tutorial
