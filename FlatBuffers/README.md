@@ -2,66 +2,71 @@
 
 ## FlatBuffersとは
 ## Tutorial
-FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソースがあるためそちらを参考に挙動確認を行います。
+Tutorialのサンプルソースです。
+Monsterのステータスをテーブルで定義しそれぞれの値を設定、取得する流れを実装しています。
+
+### Table
+``` Table
+
+```
 
 ### fbsへの情報の設定
 ``` 情報の設定
+
   flatbuffers::FlatBufferBuilder builder;
 
-  // First, lets serialize some weapons for the Monster: A 'sword' and an 'axe'.
+  //Swordのステータス情報を定義
   auto weapon_one_name = builder.CreateString("Sword");
   short weapon_one_damage = 3;
+  auto sword = CreateWeapon(builder, weapon_one_name, weapon_one_damage);
 
+  //Axeのステータス情報を定義
   auto weapon_two_name = builder.CreateString("Axe");
   short weapon_two_damage = 5;
-
-  // Use the `CreateWeapon` shortcut to create Weapons with all fields set.
-  auto sword = CreateWeapon(builder, weapon_one_name, weapon_one_damage);
   auto axe = CreateWeapon(builder, weapon_two_name, weapon_two_damage);
 
-  // Create a FlatBuffer's `vector` from the `std::vector`.
+  // 定義した武器情報をVectorに保有させる
   std::vector<flatbuffers::Offset<Weapon>> weapons_vector;
   weapons_vector.push_back(sword);
   weapons_vector.push_back(axe);
   auto weapons = builder.CreateVector(weapons_vector);
 
-  // Second, serialize the rest of the objects needed by the Monster.
+  // 座標情報を定義
   auto position = Vec3(1.0f, 2.0f, 3.0f);
 
+  // 名前を定義
   auto name = builder.CreateString("MyMonster");
 
+  // インベントリを定義
   unsigned char inv_data[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
   auto inventory = builder.CreateVector(inv_data, 10);
 
-  // Shortcut for creating monster with all fields set:
+  // 定義した情報をbuilderに設定
   auto orc = CreateMonster(builder, &position, 150, 80, name, inventory,
                            Color_Red, weapons, Equipment_Weapon, axe.Union());
 
-  builder.Finish(orc);  // Serialize the root of the object.
+  builder.Finish(orc);
 ```
 
 ### fbsからの情報の取得
 ``` 情報の取得
+  //エンコードソースにある
   auto monster = GetMonster(builder.GetBufferPointer());
 
-  // Get and test some scalar types from the FlatBuffer.
   assert(monster->hp() == 80);
   assert(monster->mana() == 150);  // default
   assert(monster->name()->str() == "MyMonster");
 
-  // Get and test a field of the FlatBuffer's `struct`.
   auto pos = monster->pos();
   assert(pos);
   assert(pos->z() == 3.0f);
   (void)pos;
 
-  // Get a test an element from the `inventory` FlatBuffer's `vector`.
   auto inv = monster->inventory();
   assert(inv);
   assert(inv->Get(9) == 9);
   (void)inv;
 
-  // Get and test the `weapons` FlatBuffers's `vector`.
   std::string expected_weapon_names[] = { "Sword", "Axe" };
   short expected_weapon_damages[] = { 3, 5 };
   auto weps = monster->weapons();
@@ -111,6 +116,7 @@ FlatBuffersのプロジェクトソースの中にTutorial用のサンプルソ�
   auto monster = GetMonster((uint8_t *)buf);
 ```
 ## バイト型による管理
+情報をバイト型でデコードし、基の型にエンコードするための処理です。
 
 ### FBSのテーブル
 ``` テーブル
