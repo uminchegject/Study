@@ -12,14 +12,16 @@ pxr_plugin(${PXR_PACKAGE}
     INCLUDE_DIRS
         ${Boost_INCLUDE_DIRS}
         ${PYTHON_INCLUDE_DIRS}
+        "C:/Program Files/Side Effects Software/Houdini 20.5.410/toolkit/include/HAPI"
 
-    PUBLIC_HEADERS
-        UsdGeoFileFormat.h
-
-    PUBLIC_CLASSES
-        UsdGeoFileFormat
+    CPPFILES
+        Geometry.cpp
+        UsdGeoFileFormat.cpp
 
     RESOURCE_FILES
         plugInfo.json
 )
 
+target_link_libraries(${PXR_PACKAGE} 
+    "C:/Program Files/Side Effects Software/Houdini 20.5.410/custom/houdini/dsolib/libHAPIL.lib"
+)

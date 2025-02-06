@@ -6,6 +6,7 @@
 //
 #include "pxr/pxr.h"
 #include "UsdGeoFileFormat.h"
+#include "Geometry.h"
 
 #include "pxr/usd/usd/usdaFileFormat.h"
 #include "pxr/usd/sdf/layer.h"
@@ -53,22 +54,8 @@ bool UsdGeoFileFormat::Read(
     const string& resolvedPath,
     bool metadataOnly) const
 {
-    std::ifstream fin(resolvedPath.c_str());
-    if (!fin.is_open()) {
-        TF_RUNTIME_ERROR("Failed to open file \"%s\"", resolvedPath.c_str());
-        return false;
-    }
-
-    std::string line;
-    while (std::getline(fin, line)) {
-        if (line.find("pointattributes") != std::string::npos) {
-            std::cout << "pointattributes data found: " << line << std::endl;
-        }
-        else if (line.find("primitives") != std::string::npos) {
-            std::cout << "primitives data found: " << line << std::endl;
-        }
-    }
-
+    //Geometry geo;
+    //geo.ReadGeometry(resolvedPath);
     return true;
 }
 
