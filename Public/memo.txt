@@ -1,17 +1,10 @@
-# プロジェクトのルートディレクトリに移動
-cd /path/to/your/project_root
+お疲れ様です。
+アスキーから情報を取得する理由につきましては、以下の2つとなります。
+・fbsフォルダに中間フォーマットのデコードファイルがない
 
-# pluginsディレクトリを作成
-mkdir -p plugins/test
+・サンプルファイルでもアスキーから文字列を取得する対応が行われている
 
-# ルートのCMakeLists.txtにadd_subdirectory(plugins)を追加
-echo "add_subdirectory(plugins)" >> CMakeLists.txt
-
-# plugins/CMakeLists.txtにadd_subdirectory(test)を追加
-echo "add_subdirectory(test)" > plugins/CMakeLists.txt
-
-# testのCMakeLists.txtを作成（仮の内容）
-echo "add_library(test_plugin STATIC test.cpp)" > plugins/test/CMakeLists.txt
-
-# test.cppを作成（仮の内容）
-echo "// test plugin source" > plugins/test/test.cpp
+以上を踏まえて文字列から情報を取得する対応にさせて頂きました。
+総合ファイルにおいてもバイナリ形式である""が存在するのでこちらを使用する場合でしたらデコード対応を行う必要です。
+別途こちらの場合も対応した方が良いでしょうか。
+お手数をおかけしますがご確認お願い致します。
