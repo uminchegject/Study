@@ -1,15 +1,24 @@
 # FlatBuffers
 
-## FlatBuffersとは
 ## Tutorial
 Tutorialのサンプルソースです。
-Monsterのステータスをテーブルで定義しそれぞれの値を設定、取得する流れを実装しています。
+Monsterのステータスをテーブルで定義しそれぞれの値を設定、取得する流れを実装されています。
 
 ### Table
 ``` Table
-
+table Monster {
+  pos:Vec3;
+  mana:short = 150;
+  hp:short = 100;
+  name:string;
+  friendly:bool = false (deprecated);
+  inventory:[ubyte];
+  color:Color = Blue;
+  weapons:[Weapon];
+  equipped:Equipment;
+  path:[Vec3];
+}
 ```
-
 ### fbsへの情報の設定
 ``` 情報の設定
 
@@ -47,12 +56,12 @@ Monsterのステータスをテーブルで定義しそれぞれの値を設定�
 
   builder.Finish(orc);
 ```
-
 ### fbsからの情報の取得
 ``` 情報の取得
-  //エンコードソースにある
+  //Monsterのインスタンスを取得
   auto monster = GetMonster(builder.GetBufferPointer());
 
+  //各々の値を取得
   assert(monster->hp() == 80);
   assert(monster->mana() == 150);  // default
   assert(monster->name()->str() == "MyMonster");
@@ -77,7 +86,6 @@ Monsterのステータスをテーブルで定義しそれぞれの値を設定�
   (void)expected_weapon_names;
   (void)expected_weapon_damages;
 
-  // Get and test the `Equipment` union (`equipped` field).
   assert(monster->equipped_type() == Equipment_Weapon);
   auto equipped = static_cast<const Weapon *>(monster->equipped());
   assert(equipped->name()->str() == "Axe");
@@ -87,7 +95,6 @@ Monsterのステータスをテーブルで定義しそれぞれの値を設定�
 
 ## エンコード・デコード
 バイナリへのエンコード、デコードを行うためのソースです
-
 ### エンコード
 ``` エンコード
   uint8_t *buf = builder.GetBufferPointer();
@@ -103,6 +110,7 @@ Monsterのステータスをテーブルで定義しそれぞれの値を設定�
 ``` デコード
   ifstream fin("monster.bin", ios::in | ios::binary);
   if (!fin) { return 1; }
+
   auto begin = fin.tellg();
   fin.seekg(0, fin.end);
   auto end = fin.tellg();
@@ -154,7 +162,6 @@ void EncodeByte(flatbuffers::FlatBufferBuilder& builder) {
 
 }
 ```
-
 ### デコード
 ``` エンコード
 void DecodeByte(const uint8_t *buf) {

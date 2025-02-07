@@ -1,25 +1,19 @@
 # GeoフォーマットにおけるFileFormatPluginの実装
 
-### 検証環境
-* Visual Studio 2022
-* CMake 3.25.3
-* Open_USDのビルドを済ませる
-
-
-## 新規プラグインの実装
-### 実装の概要
+## 実装の概要
 新規プラグインの実装においては下記の3つのファイルを用意する必要があります。
 * プラグインのソース  
 * CMakeLists.txt  
 * PluginInfo.json  
+* FileFormatPlugin.h
+* FileFormatPlugin.cpp
 
 これらを用意し、Open_USDのプロジェクトソース内の任意の場所に配置してビルドを行うことでプラグインをビルドすることができます。
 
-### CMakeLists
+## CMakeLists
 ビルド内容をまとめるCMakeListsです。パッケージの実装においては主に下記の2つを行います。
 * PXR_PACKAGEにパッケージ名を設定する
 * カスタム関数のpxr_pluginで使用するソースの情報をまとめる
-
 
 ``` CMakeLists
 set(PXR_PREFIX pxr/usd)
@@ -87,11 +81,15 @@ pxr_plugin(${PXR_PACKAGE}
 }
 ```
 
-## HoudiniのGeometryをサポートしたFileFormatPluginの実装
+## FileFormatPlugin
 Geometryファイルはアスキーのため文字列から情報を取得し、usdのレイヤーを構築する
+``` 
 
-### Geometryからの情報取得処理
+```
 
+## Geometry
+
+### Geoフォーマットからの情報取得処理
 ``` ReadGeometry
 void Geometry::ReadGeometry(const std::string& filePath)
 {
