@@ -1,5 +1,6 @@
 # USDSkel
 ## 概要
+Usd上でスケルトンとブレンドシェイプをサポートする機能としてUsdSkelがあります。  
 USDSkelにおいて下記の4つの要素が必要になってきます。
 * UsdSkelRoot
 * UsdSkelton
@@ -7,7 +8,7 @@ USDSkelにおいて下記の4つの要素が必要になってきます。
 * BindSkin
 
 ## UsdSkelRoot
-UsdSkelのレイヤー構築の際に管理を定義するためのルートノードです。
+UsdSkelのレイヤー構築の際に管理を定義するためのルートノードです。  
 UsdSkelton、UsdSkelAnimationなどのUsdSkelに関連するPrimitiveのルートノードとなります。
 ``` Python
 #SkelRootを定義
@@ -130,7 +131,8 @@ bindingApi.CreateJointWeightsAttr(jointWeights);
 ## 参考資料
 ### USDSkelとは
 * 公式ドキュメント  
-https://openusd.org/dev/api/_usd_skel__intro.html
+https://openusd.org/dev/api/_usd_skel__intro.html  
+https://openusd.org/dev/api/_usd_skel__schemas.html#UsdSkel_Skeleton
 
 * 日本語解説  
 https://fereria.github.io/reincarnation_tech/usd/python/usdskel
