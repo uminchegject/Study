@@ -54,6 +54,11 @@ bool UsdGeoFileFormat::Read(
     const string& resolvedPath,
     bool metadataOnly) const
 {
+    std::ifstream fin(resolvedPath.c_str());
+    if (!fin.is_open()) {
+        return false;
+    }
+
     //Geometry geo;
     //geo.ReadGeometry(resolvedPath);
     return true;
