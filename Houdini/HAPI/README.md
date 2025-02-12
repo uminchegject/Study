@@ -34,6 +34,8 @@ if (!result == HAPI_RESULT_SUCCESS)
 ```
 
 ## ノードの生成
+セーブ終了後にメモリリークが起こる…
+セーブはうまくできているが…
 ``` Export
 //Boxノードを生成
 HAPI_NodeId box_node_id;
@@ -43,6 +45,28 @@ if (!result == HAPI_RESULT_SUCCESS)
     std::cout << "HAPI_CreateNode :: Failed!" << std::endl;
 }
 ```
+
+## ノード情報の取得
+``` ノード情報の取得
+//box_nodeのノード情報を取得
+HAPI_NodeInfo box_node_info;
+result = HAPI_GetNodeInfo(&Session, box_node_id, &box_node_info);
+if (result != HAPI_RESULT_SUCCESS)
+{
+    std::cout << "HAPI_GetNodeInfo :: Failed!" << std::endl;
+}
+```
+
+## ノード同士のをコネクト
+``` ノード同士のをコネクト
+//BoxノードをCopyノードに接続する接続する
+result = HAPI_ConnectNodeInput(&Session, copy_node_id, 0, box_node_id, 0);
+if (result != HAPI_RESULT_SUCCESS)
+{
+    std::cout << "HAPI_ConnectNodeInput(copy_node to box_node) :: Failed!" << std::endl;
+}
+``` 
+
 
 ## 参考資料
 * HAPI日本語Tutorial
