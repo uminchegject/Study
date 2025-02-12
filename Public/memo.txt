@@ -1,54 +1,33 @@
-○設計の見直し
+#include <pxr/pxr.h>
+#include <pxr/usd/usdGeom/xform.h>
+#include <pxr/usd/usdSkel/rig.h>
 
-○ブロックごとにvector<std::string>を入れてい行く処理を実装
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>
-
-using namespace std;
-
-
-vector<string> json_objects;
-size_t pos = 0;
-size_t brace_depth = 0;
-string current_object;
-
-while (pos < json_str.size()) {
-	char c = json_str[pos];
-	if (c == '{') 
-	{
-		if (brace_depth == 0) 
-		{
-			current_object.clear();
-		}
-		brace_depth++;
-		current_object += c;
-	}
-	else if (c == '}') {
-		brace_depth--;
-		current_object += c;
-
-		if (brace_depth == 0) 
-		{
-			json_objects.push_back(current_object);
-			current_object.clear();
-		}
-	}
-	else 
-	{
-		current_object += c;
-	}
-	pos++;
+pxr::GfMatrix4d CalculateInverseMatrix(const pxr::GfMatrix4d& matrix4x3) {
+    pxr::GfMatrix4d matrix4x4 = matrix4x3;
+    return matrix4x4.GetInverse();
 }
 
-○構造の構築
-・parent_idのインデックスブロックを取得
-・ブロックの名前とparent_idを取得
- -nameを構造に加えていく
-・parent_idが-1になるまで繰り返す
 
-○vertex_bufferからの取得処理
-・node_listのnameを取得しKeyと照らし合わせる
-・照合したらid(インデックス)を取得して、インデックスとして使用する
+#include <pxr/pxr.h>
+#include <pxr/usd/gf/rotation.h>
+#include <pxr/usd/gf/quat.h>
+#include <cmath>
+pxr::GfRotation EulerToGfRotation(float pitch, float yaw, float roll) {
+    // オイラー角（ピッチ、ヨー、ロール）からクォータニオンへ変換
+    float cy = cos(yaw * 0.5);
+    float sy = sin(yaw * 0.5);
+    float cp = cos(pitch * 0.5);
+    float sp = sin(pitch * 0.5);
+    float cr = cos(roll * 0.5);
+    float sr = sin(roll * 0.5);
+
+    // クォータニオン
+    float qw = cr * cp * cy + sr * sp * sy;
+    float qx = sr * cp * cy - cr * sp * sy;
+    float qy = cr * sp * cy + sr * cp * sy;
+    float qz = cr * cp * sy - sr * sp * cy;
+
+    // GfQuatを作成してGfRotationに変換
+    pxr::GfQuatf quat(qx, qy, qz, qw);
+    return pxr::GfRotation(quat);
+}
