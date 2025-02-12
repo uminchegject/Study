@@ -1,10 +1,17 @@
-#include <pxr/pxr.h>
-#include <pxr/usd/usdGeom/xform.h>
-#include <pxr/usd/usdSkel/rig.h>
+// アニメーションのタイムサンプルの時間（例: 1秒ごと）
+std::vector<double> timeSamples = { 0.0, 1.0, 2.0, 3.0 }; // アニメーションの時間サンプル
+std::vector<GfQuatf> rotations; // 回転値を格納するベクター
 
-pxr::GfMatrix4d CalculateInverseMatrix(const pxr::GfMatrix4d& matrix4x3) {
-    pxr::GfMatrix4d matrix4x4 = matrix4x3;
-    return matrix4x4.GetInverse();
+// 回転値の例（任意の回転をセット）
+rotations.push_back(GfQuatf(0.707f, 0.0f, 0.0f, 0.707f)); // 回転クォータニオン
+rotations.push_back(GfQuatf(1.0f, 0.0f, 0.0f, 0.0f)); // 回転クォータニオン
+rotations.push_back(GfQuatf(0.0f, 1.0f, 0.0f, 0.0f)); // 回転クォータニオン
+rotations.push_back(GfQuatf(0.0f, 0.0f, 1.0f, 0.0f)); // 回転クォータニオン
+
+// 各時間サンプルに対して回転を設定
+for (size_t i = 0; i < timeSamples.size(); ++i) {
+	UsdTimeCode timeCode(timeSamples[i]);
+	rotationsAttr.Set(timeCode, rotations[i]);
 }
 
 
