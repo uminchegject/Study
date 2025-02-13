@@ -67,6 +67,25 @@ if (result != HAPI_RESULT_SUCCESS)
 }
 ``` 
 
+## パラメーターの取得(int型)
+``` パラメーターの取得(int型)
+//gridのrowsパラメーターの値を取得
+int rows_parm_value;
+HAPI_GetParmIntValue(&Session, grid_node_id, "rows", 0, &rows_parm_value);
+std::cout << "grid_rows :: " << rows_parm_value << std::endl;
+```
+
+## パラメーターの設定(int型)
+``` パラメーターの設定(int型)
+//gridのrowsパラメーターに値を設定
+rows_parm_value = 5;
+result = HAPI_SetParmIntValue(&Session, grid_node_id, "rows", 0, rows_parm_value);
+if (result != HAPI_RESULT_SUCCESS)
+{
+    std::cout << "HAPI_SetParmIntValue :: Failed!" << std::endl;
+}
+```
+
 
 ## 参考資料
 * HAPI日本語Tutorial
