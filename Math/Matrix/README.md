@@ -63,6 +63,52 @@ public:
                     result.data[i][j] += data[i][k] * other.data[k][j];
         return result;
     }
+
+    //転置行列
+    Matrix4x4 transpose() const {
+        Matrix4x4 result;
+        for (int i = 0; i < 4; ++i)
+            for (int j = 0; j < 4; ++j)
+                result.data[j][i] = data[i][j];
+        return result;
+    }
+
+    //逆行列
+    Matrix4x4 inverse() const {
+        Matrix4x4 result;
+        std::array<std::array<float, 4>, 4> temp = data;
+        std::array<std::array<float, 4>, 4> identity = {{{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}, {0, 0, 0, 1}}};
+        
+        for (int i = 0; i < 4; ++i) {
+            float diag = temp[i][i];
+            if (std::fabs(diag) < 1e-6) {
+                std::cerr << "Matrix is singular and cannot be inverted." << std::endl;
+                return Matrix4x4();
+            }
+            for (int j = 0; j < 4; ++j) {
+                temp[i][j] /= diag;
+                identity[i][j] /= diag;
+            }
+            for (int k = 0; k < 4; ++k) {
+                if (k == i) continue;
+                float factor = temp[k][i];
+                for (int j = 0; j < 4; ++j) {
+                    temp[k][j] -= factor * temp[i][j];
+                    identity[k][j] -= factor * identity[i][j];
+                }
+            }
+        }
+        return Matrix4x4(identity);
+    }
+
+    void print() const {
+        for (const auto& row : data) {
+            for (float value : row)
+                std::cout << value << " ";
+            std::cout << std::endl;
+        }
+    }
+};    
 }
 ```
 
