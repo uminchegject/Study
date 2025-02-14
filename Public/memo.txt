@@ -1,40 +1,12 @@
-// アニメーションのタイムサンプルの時間（例: 1秒ごと）
-std::vector<double> timeSamples = { 0.0, 1.0, 2.0, 3.0 }; // アニメーションの時間サンプル
-std::vector<GfQuatf> rotations; // 回転値を格納するベクター
-
-// 回転値の例（任意の回転をセット）
-rotations.push_back(GfQuatf(0.707f, 0.0f, 0.0f, 0.707f)); // 回転クォータニオン
-rotations.push_back(GfQuatf(1.0f, 0.0f, 0.0f, 0.0f)); // 回転クォータニオン
-rotations.push_back(GfQuatf(0.0f, 1.0f, 0.0f, 0.0f)); // 回転クォータニオン
-rotations.push_back(GfQuatf(0.0f, 0.0f, 1.0f, 0.0f)); // 回転クォータニオン
-
-// 各時間サンプルに対して回転を設定
-for (size_t i = 0; i < timeSamples.size(); ++i) {
-	UsdTimeCode timeCode(timeSamples[i]);
-	rotationsAttr.Set(timeCode, rotations[i]);
-}
-
-
-#include <pxr/pxr.h>
-#include <pxr/usd/gf/rotation.h>
-#include <pxr/usd/gf/quat.h>
-#include <cmath>
-pxr::GfRotation EulerToGfRotation(float pitch, float yaw, float roll) {
-    // オイラー角（ピッチ、ヨー、ロール）からクォータニオンへ変換
-    float cy = cos(yaw * 0.5);
-    float sy = sin(yaw * 0.5);
-    float cp = cos(pitch * 0.5);
-    float sp = sin(pitch * 0.5);
-    float cr = cos(roll * 0.5);
-    float sr = sin(roll * 0.5);
-
-    // クォータニオン
-    float qw = cr * cp * cy + sr * sp * sy;
-    float qx = sr * cp * cy - cr * sp * sy;
-    float qy = cr * sp * cy + sr * cp * sy;
-    float qz = cr * cp * sy - sr * sp * cy;
-
-    // GfQuatを作成してGfRotationに変換
-    pxr::GfQuatf quat(qx, qy, qz, qw);
-    return pxr::GfRotation(quat);
+bool canConvertToFloat(const std::string& str) {
+    try {
+        std::stof(str);  // 文字列を浮動小数点数に変換
+        return true;     // 成功した場合はtrueを返す
+    } catch (const std::invalid_argument& e) {
+        // 文字列が数値に変換できない場合
+        return false;
+    } catch (const std::out_of_range& e) {
+        // 数値が範囲外の場合
+        return false;
+    }
 }
