@@ -1,12 +1,9 @@
-bool canConvertToFloat(const std::string& str) {
-    try {
-        std::stof(str);  // 文字列を浮動小数点数に変換
-        return true;     // 成功した場合はtrueを返す
-    } catch (const std::invalid_argument& e) {
-        // 文字列が数値に変換できない場合
-        return false;
-    } catch (const std::out_of_range& e) {
-        // 数値が範囲外の場合
-        return false;
-    }
-}
+#include <pxr/pxr.h>
+#include <usd/usd/stage.h>
+#include <usd/usd/prim.h>
+#include <usd/usd/relationship.h>
+#include <usd/usd/attribute.h>
+#include <usd/usd/variantSets.h>
+#include <usd/usdGeom/mesh.h>
+#include <usd/usdSkel/skeleton.h>
+#include <usd/usdSkel/animation.h>
