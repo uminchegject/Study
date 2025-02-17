@@ -127,6 +127,8 @@ bindingApi.CreateJointIndicesAttr(jointIndices);
 bindingApi.CreateJointWeightsAttr(jointWeights);
 ```
 
+## TimeSampling
+
 
 ## 参考資料
 ### USDSkelとは
@@ -141,3 +143,7 @@ https://fereria.github.io/reincarnation_tech/usd/python/usdskel
 * 実装例  
 https://fereria.github.io/reincarnation_tech_bk/65_SampleCode/Notebook/USD/UsdSkel/usdskel_02/  
 https://fereria.github.io/reincarnation_tech_bk/65_SampleCode/Notebook/USD/UsdSkel/usdskel_01/
+
+### TimeSampling
+https://fereria.github.io/reincarnation_tech/usd/time_sampling
+https://qiita.com/snowxcrash/items/34f95c5b2367d6ba4a42
