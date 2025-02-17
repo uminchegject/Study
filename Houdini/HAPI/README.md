@@ -86,6 +86,22 @@ if (result != HAPI_RESULT_SUCCESS)
 }
 ```
 
+## クック
+``` クック
+//Cook
+result = HAPI_CookNode(&Session, file_node_id, &CookOptions);
+if (result != HAPI_RESULT_SUCCESS)
+{
+    std::cout << "HAPI_CookNode :: Failed!" << std::endl;
+}
+//ロード完了まで処理を止める
+int cookStatus;
+HAPI_Result cookResult;
+do {
+    cookResult = HAPI_GetStatus(&Session, HAPI_STATUS_COOK_STATE, &cookStatus);
+    std::cout << "Cooking" << std::endl;
+} while (cookStatus > HAPI_STATE_MAX_READY_STATE && cookResult == HAPI_RESULT_SUCCESS);
+```
 
 ## 参考資料
 * HAPI日本語Tutorial

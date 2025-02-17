@@ -128,7 +128,23 @@ bindingApi.CreateJointWeightsAttr(jointWeights);
 ```
 
 ## TimeSampling
+時間軸で値を設定するための機能です。
+値とフレームの辞書型で管理を行います。
+``` TimeSampling
+from pxr import Usd, Sdf
 
+stage = Usd.Stage.CreateNew('TimeSample.usda')
+stage.SetTimeCodesPerSecond(30)
+stage.SetStartTimeCode(1)
+stage.SetEndTimeCode(30)
+
+prim = stage.DefinePrim("/samplePrim")
+attr = prim.CreateAttribute('sampleValue',Sdf.ValueTypeNames.Float)
+attr.Set(1,1)
+attr.Set(10,10)
+
+stage.GetRootLayer().Save()
+``` 
 
 ## 参考資料
 ### USDSkelとは
