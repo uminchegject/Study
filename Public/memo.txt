@@ -7,3 +7,29 @@
 #include <usd/usdGeom/mesh.h>
 #include <usd/usdSkel/skeleton.h>
 #include <usd/usdSkel/animation.h>
+
+int main() {
+    // Stage作成
+    pxr::UsdStageRefPtr stage = pxr::UsdStage::CreateNew("your_scene.usd");
+
+    // スケルトンの作成
+    pxr::SdfPath skelPath("/root/skeleton");
+    pxr::UsdSkelSkeleton skel = pxr::UsdSkelSkeleton::Define(stage, skelPath);
+
+    // アニメーションの作成
+    pxr::SdfPath animPath("/root/animation");
+    pxr::UsdSkelAnimation anim = pxr::UsdSkelAnimation::Define(stage, animPath);
+
+    // UsdSkelRootの定義
+    pxr::SdfPath skelRootPath("/root/skelRoot");
+    pxr::UsdSkelRoot skelRoot = pxr::UsdSkelRoot::Define(stage, skelRootPath);
+
+    // スケルトンとアニメーションの関連付け
+    skelRoot.CreateSkeletonRel().AddTarget(skel.GetPath());  // スケルトンを関連付け
+    skelRoot.CreateAnimationRel().AddTarget(anim.GetPath()); // アニメーションを関連付け
+
+    // USDファイルへの保存
+    stage->GetRootLayer()->Save();
+
+    return 0;
+}
