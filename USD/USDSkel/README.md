@@ -80,6 +80,8 @@ anim.CreateScaleAttr().Set()
 //SkeltonAnimationを定義
 UsdSkelAnimation anim = UsdSkelAnimation::Define(stage, SdfPath("/SkelRoot/Skeleton/Animation"));
 
+//ToDo SdfPathとなるJoints（関節）属性の値を取得
+VtArray<UsdSkelJoint> joints;
 //ToDo 各フレームのrotationリストを設定
 VtArray<GfRotation> rotations;
 //ToDo 各フレームのtranslationリストを設定
@@ -87,7 +89,9 @@ VtArray<GfVec3d> translations;
 //ToDo 各フレームのscaleリストを設定
 VtArray<GfVec3f> scales;
 
+
 //それぞれの値をSkeltonAnimationのAttrに設定
+anim.CreateJointsAttr().Set(joints);
 anim.CreateRotationAttr().Set(rotations);
 anim.CreateTranslationAttr().Set(translations);
 anim.CreateScaleAttr().Set(scales);
@@ -145,6 +149,48 @@ attr.Set(10,10)
 
 stage.GetRootLayer().Save()
 ``` 
+
+## ジョイント構築
+Jointに必要な情報をクラス化
+* ローカル座標
+* ワールド座標
+* ローカル回転値
+* 親ジョイント
+```
+struct Joint 
+{
+    GfVec3f localPosition;
+    GfVec3f worldPosition;
+    GfQuatf localRotation;
+    Joint* parent;
+
+    // ワールド座標を計算する
+    GfVec3f GetParentJointTransform() {
+        if (parent) {
+            worldPosition = parent->worldPosition + parent->localRotation * localPosition;
+        } else {
+            worldPosition = localPosition;
+        }
+    }
+};
+```
+
+ジョイントを構築する処理
+```
+//ルートジョイント
+Joint root;
+root.localPosition = GfVec3f(0, 0, 0);
+root.localRotation = pxr::GfQuatf::Identity();
+root.parent = nullptr;
+root.computeWorldTransform();
+
+// 子ジョイント
+Joint child;
+child.localPosition = GfVec3f(0, 1, 0); 
+child.localRotation = pxr::GfQuatf rotation(pxr::GfRotationf(pxr::GfVec3f(0, 0, 1), M_PI / 4));
+child.parent = &root;
+child.computeWorldTransform();
+```
 
 ## 参考資料
 ### USDSkelとは
