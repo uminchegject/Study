@@ -2,8 +2,8 @@
 
 
 ■UsdMaterial
-●シェーダーの実装
-シェーダーを生成し、必要な設定を行う
+## シェーダーの実装
+```
 shader = UsdShade.Shader.Define(stage, path)
 //シェーダータイプを設定する
 shader.CreateIdAttr('UsdPreviewSurface')
@@ -12,73 +12,14 @@ shader.CreateInput('metallic', Sdf.ValueTypeNames.Float).Set(0.0)
 shader.CreateInput('roughness', Sdf.ValueTypeNames.Float).Set(0.4)
 shader.CreateInput('diffuseColor', Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(1, 0, 1))
 shader.CreateInput('opacity', Sdf.ValueTypeNames.Float).Set(1)
+```
 
-●マテリアルの実装
+## マテリアルの実装
+```
 material = UsdShade.Material.Define(stage, path)
 //マテリアルのサーフェス出力を作成
 material.CreateSurfaceOutput()
 //シェーダーをマテリアルに接続
 material.GetSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), 'surface')
+```
 
-
-■HAPI
-●デジタルアセットの読み込み
-// ロード
-HAPI_AssetLibraryId assetLibId = -1;
-HAPI_Result result = HAPI_LoadAssetLibraryFromFile(
-    &Session, "C:/Users/jyour/Documents/houdini17.0/otls/testAsset.hdalc",
-    false, &assetLibId );
-
-//ノードの生成
-HAPI_NodeId hda_node_id = -1;
-result = HAPI_CreateNode(
-    &Session, -1, "Sop/testAssetName",
-    nullptr, true, &hda_node_id );
-
-//デジタルアセットのパラメーター設定
-HAPI_SetParmFloatValue(&Session,hda_node_id,"height",0,5.0f);
-HAPI_SetParmFloatValue(&Session,hda_node_id,"elementsize",0,1.5f);
-
-■クォータニオン
-
-●クォータニオン構造体
-#include <iostream>
-#include <cmath>
-
-struct Quaternion {
-    double w, x, y, z;
-
-    // 共役を求める
-    Quaternion conjugate() const {
-        return {w, -x, -y, -z};
-    }
-
-    // クォータニオンの乗算
-    Quaternion operator*(const Quaternion& q) const {
-        return {
-            w * q.w - x * q.x - y * q.y - z * q.z,
-            w * q.x + x * q.w + y * q.z - z * q.y,
-            w * q.y - x * q.z + y * q.w + z * q.x,
-            w * q.z + x * q.y - y * q.x + z * q.w
-        };
-    }
-
-    // ベクトルをクォータニオンとして回転させる
-    std::array<double, 3> rotateVector(const std::array<double, 3>& v) const {
-        Quaternion vec = {0, v[0], v[1], v[2]};
-        //クォータニオンを用いた回転: v' = q * v * q⁻¹
-        Quaternion result = (*this) * vec * this->conjugate();
-        return {result.x, result.y, result.z};
-    }
-};
-
-●ベクトルの回転処理
-// 回転軸 (0,1,0) の周りに 90 度回転させるクォータニオンを作成
-double angle = M_PI / 2;
-Quaternion q = {std::cos(angle / 2), 0, std::sin(angle / 2), 0};
-
-// 回転させるベクトル
-std::array<double, 3> vec = {1, 0, 0};
-
-// 回転処理
-std::array<double, 3> rotatedVec = q.rotateVector(vec);

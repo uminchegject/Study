@@ -157,6 +157,25 @@ HAPI_SetFaceCounts(&Session, newNode, 0, face_counts, 0, 6);
 HAPI_CommitGeo(&Session, newNode);
 ```
 
+## デジタルアセットの読み込み
+```
+// ロード
+HAPI_AssetLibraryId assetLibId = -1;
+HAPI_Result result = HAPI_LoadAssetLibraryFromFile(
+    &Session, "C:/Users/jyour/Documents/houdini17.0/otls/testAsset.hdalc",
+    false, &assetLibId );
+
+//ノードの生成
+HAPI_NodeId hda_node_id = -1;
+result = HAPI_CreateNode(
+    &Session, -1, "Sop/testAssetName",
+    nullptr, true, &hda_node_id );
+
+//デジタルアセットのパラメーター設定
+HAPI_SetParmFloatValue(&Session,hda_node_id,"height",0,5.0f);
+HAPI_SetParmFloatValue(&Session,hda_node_id,"elementsize",0,1.5f);
+```
+
 ## 参考資料
 * HAPI日本語Tutorial
 https://qiita.com/jyouryuusui/items/3d86ab8e69652d5f951c
