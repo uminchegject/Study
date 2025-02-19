@@ -159,19 +159,29 @@ Jointに必要な情報をクラス化
 ```
 struct Joint 
 {
-    GfVec3f localPosition;
-    GfVec3f worldPosition;
-    GfQuatf localRotation;
-    Joint* parent;
+    GfVec3f m_local_position;
+    GfQuatf m_local_rotation;
+    Joint* m_parent;
 
-    // ワールド座標を計算する
-    GfVec3f GetParentJointTransform() {
-        if (parent) {
-            worldPosition = parent->worldPosition + parent->localRotation * localPosition;
-        } else {
-            worldPosition = localPosition;
-        }
-    }
+	// ワールド座標とワールド回転を求める関数
+	void calculateWorldTransform(GfVec3f& world_position, GfQuatf& world_rotation) {
+		if (joint == nullptr) return;
+
+		// ルートジョイントの場合、ワールド座標とワールド回転はローカルの値と同じ
+		if (m_parent == nullptr) {
+			world_position = m_local_position;
+			world_rotation = m_local_rotation;
+		} else {
+			// 親ジョイントのワールド座標と回転を取得
+			GfVec3f m_parentworld_position;
+			GfQuatf m_parentworld_rotation;
+			calculateWorldTransform(m_parent, m_parentworld_position, m_parentworld_rotation);
+
+			// 親ジョイントのワールド座標と回転を使って現在のワールド座標を計算
+			world_position = m_parentworld_position + m_parentworld_rotation * m_local_position;
+			world_rotation = m_parentworld_rotation * m_local_rotation;
+		}
+	}
 };
 ```
 
