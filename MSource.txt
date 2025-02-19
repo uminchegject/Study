@@ -23,32 +23,21 @@ material.GetSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), 'surface')
 
 ■HAPI
 ●デジタルアセットの読み込み
-// Load the library from file.
-   HAPI_AssetLibraryId assetLibId = -1;
-   HAPI_Result result = HAPI_LoadAssetLibraryFromFile(
-	   &Session, "C:/Users/jyour/Documents/houdini17.0/otls/testAsset.hdalc",
-	   false, &assetLibId );
+// ロード
+HAPI_AssetLibraryId assetLibId = -1;
+HAPI_Result result = HAPI_LoadAssetLibraryFromFile(
+    &Session, "C:/Users/jyour/Documents/houdini17.0/otls/testAsset.hdalc",
+    false, &assetLibId );
 
-   HAPI_NodeId hda_node_id = -1;
-   result = HAPI_CreateNode(
-	   &Session, -1, "Sop/testAssetName",
-	   nullptr, true, &hda_node_id );
+//ノードの生成
+HAPI_NodeId hda_node_id = -1;
+result = HAPI_CreateNode(
+    &Session, -1, "Sop/testAssetName",
+    nullptr, true, &hda_node_id );
 
-HAPI_ConnectNodeInput(&Session, hda_node_id, 0, newNode,0 );
-
-●デジタルアセットのパラメーター設定
+//デジタルアセットのパラメーター設定
 HAPI_SetParmFloatValue(&Session,hda_node_id,"height",0,5.0f);
 HAPI_SetParmFloatValue(&Session,hda_node_id,"elementsize",0,1.5f);
-
-HAPI_CookNode ( &Session, hda_node_id, &CookOptions );
-
-int cookStatus2;
-HAPI_Result cookResult2;
-do
-{
-cookResult2 = HAPI_GetStatus( &Session, HAPI_STATUS_COOK_STATE, &cookStatus2 );
-}
-while (cookStatus2 > HAPI_STATE_MAX_READY_STATE && cookResult2 == HAPI_RESULT_SUCCESS);
 
 ■クォータニオン
 
@@ -77,6 +66,7 @@ struct Quaternion {
     // ベクトルをクォータニオンとして回転させる
     std::array<double, 3> rotateVector(const std::array<double, 3>& v) const {
         Quaternion vec = {0, v[0], v[1], v[2]};
+        //クォータニオンを用いた回転: v' = q * v * q⁻¹
         Quaternion result = (*this) * vec * this->conjugate();
         return {result.x, result.y, result.z};
     }
@@ -84,11 +74,11 @@ struct Quaternion {
 
 ●ベクトルの回転処理
 // 回転軸 (0,1,0) の周りに 90 度回転させるクォータニオンを作成
-double angle = M_PI / 2; // 90度をラジアンに変換
+double angle = M_PI / 2;
 Quaternion q = {std::cos(angle / 2), 0, std::sin(angle / 2), 0};
 
 // 回転させるベクトル
 std::array<double, 3> vec = {1, 0, 0};
 
-// 回転後のベクトル
+// 回転処理
 std::array<double, 3> rotatedVec = q.rotateVector(vec);
