@@ -1,11 +1,56 @@
 ■Volume
 
-■FileFormatPlugin
-
 ■UsdSkel
+●レイヤーの構築処理
+・関数化
+・必要な情報
+ -SkelRoot
+ -Mesh
+ -Skelton
+ -SkelAnimation
+
+
+■FileFormatPlugin
+## Translator
+```
+// レイヤーの構築
+SdfLayerRefPtr layer = SdfLayer::CreateAnonymous(".usda");
+
+// ステージの構築
+UsdStageRefPtr stage = UsdStage::Open(layer);
+
+// Meshの定義
+UsdGeomMesh mesh = UsdGeomMesh::Define(stage, SdfPath("/" + group.name));
+
+//pointsの座標をAttrに設定
+VtVec3fArray usdPoints
+mesh.GetPointsAttr().Set(usdPoints);
+
+//各面の構成頂点数をAttributeに設定
+VtArray<int> faceVertexCounts
+mesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
+
+//各面の構成頂点のインデックス値をAttributeに設定
+VtArray<int> faceVertexCounts
+mesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+
+//UV情報設定の設定
+UsdGeomPrimvar uvPrimVar = UsdGeomPrimvarsAPI(mesh).CreatePrimvar(
+	TfToken("uv"), 
+	SdfValueTypeNames->TexCoord2fArray,
+	UsdGeomTokens->faceVarying
+);
+uvPrimVar.GetAttr().Set(usdUVs);
+uvPrimVar.CreateIndicesAttr().Set(faceUVIndices);
+
+//Extent値をAttributeに設定
+VtVec3fArray extentArray(2);
+mesh.GetExtentAttr().Set(extentArray);
+```
+
 
 ■UsdTutorial
-## メッシュの実装
+## メッシュの構築
 ```
 mesh = UsdGeom.Mesh.Define(stage, path)
 
@@ -47,7 +92,7 @@ primvar.GetAttr().Set(vList)
 mesh.CreateDoubleSidedAttr(False)
 ```
 
-## シェーダーの実装
+## シェーダーの構築
 ```
 shader = UsdShade.Shader.Define(stage, path)
 //シェーダータイプを設定する
@@ -59,7 +104,7 @@ shader.CreateInput('diffuseColor', Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(1, 0
 shader.CreateInput('opacity', Sdf.ValueTypeNames.Float).Set(1)
 ```
 
-## マテリアルの実装
+## マテリアルの設定
 ```
 material = UsdShade.Material.Define(stage, path)
 //マテリアルのサーフェス出力を作成
