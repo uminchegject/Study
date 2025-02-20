@@ -1,5 +1,9 @@
 # HAPI
 
+## 概要
+HoudiniのプラグインおよびAPIの一部で、Houdiniの機能を他のアプリケーションやソフトウェアと統合するためのものです。  
+UE4やMayaなどのHoudiniEngineにおいてHAPIを用いることでHoudiniの機能を別フォーマットに組み込むことを行っています。
+
 ## Initialize
 ``` Initialize
 // Cookによって使用されるグローバルCookオプションの生成

@@ -1,7 +1,49 @@
 ■Volume
 
 
-■UsdMaterial
+■UsdTutorial
+## メッシュの実装
+```
+mesh = UsdGeom.Mesh.Define(stage, path)
+
+# Points
+vList = []
+vList.append((-1, 0, 0))
+vList.append(( 0, 0, 0))
+vList.append(( 1, 0, 0))
+vList.append((-1, 1, 0))
+vList.append(( 0, 1, 0))
+vList.append(( 1, 1, 0))
+mesh.CreatePointsAttr(vList)
+
+# FaceVertexCounts
+fList = [] 
+fList.append(4)
+fList.append(4)
+mesh.CreateFaceVertexCountsAttr(fList)
+
+# FaceVertexIndices
+fList = []
+fList.extend((0, 1, 4, 3))
+fList.extend((1, 2, 5, 4))
+mesh.CreateFaceVertexIndicesAttr(fList)
+
+# DisplayColor
+vList = []
+vList.append((1, 0, 0))  # Red
+vList.append((0, 1, 0))  # Green
+vList.append((0, 0, 1))  # Blue
+vList.append((1, 1, 0))  # Yellow
+vList.append((1, 1, 1))  # White
+vList.append((1, 0, 1))  # Magenta
+primvar_api = UsdGeom.PrimvarsAPI(mesh)
+primvar = primvar_api.CreatePrimvar('displayColor', Sdf.ValueTypeNames.Color3f, interpolation=UsdGeom.Tokens.varying)
+primvar.GetAttr().Set(vList)
+
+# DoubleSided
+mesh.CreateDoubleSidedAttr(False)
+```
+
 ## シェーダーの実装
 ```
 shader = UsdShade.Shader.Define(stage, path)
@@ -22,4 +64,3 @@ material.CreateSurfaceOutput()
 //シェーダーをマテリアルに接続
 material.GetSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), 'surface')
 ```
-

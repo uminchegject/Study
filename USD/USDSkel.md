@@ -185,23 +185,6 @@ struct Joint
 };
 ```
 
-ジョイントを構築する処理
-```
-//ルートジョイント
-Joint root;
-root.localPosition = GfVec3f(0, 0, 0);
-root.localRotation = pxr::GfQuatf::Identity();
-root.parent = nullptr;
-root.computeWorldTransform();
-
-// 子ジョイント
-Joint child;
-child.localPosition = GfVec3f(0, 1, 0); 
-child.localRotation = pxr::GfQuatf rotation(pxr::GfRotationf(pxr::GfVec3f(0, 0, 1), M_PI / 4));
-child.parent = &root;
-child.computeWorldTransform();
-```
-
 ## 参考資料
 ### USDSkelとは
 * 公式ドキュメント  

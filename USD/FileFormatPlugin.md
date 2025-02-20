@@ -1,12 +1,13 @@
 # FileFormatPlugin
 ## 概要
-新規プラグインの実装においては下記の3つのファイルを用意する必要があります。
+新規プラグインの実装においては下記のファイルを用意する必要があります。
 * CMakeLists.txt  
 * PluginInfo.json  
 * Class SdfFileFormat
 * その他のソース 
 
 これらを用意し、Open_USDのプロジェクトソース内の任意の場所に配置してビルドを行うことでプラグインをビルドすることができます。
+公式のTutorialにあるObjフォーマットをサポートしたFileFormatPluginのプロジェクトを参考に説明します
 
 ## CMakeLists
 ビルド内容をまとめるCMakeListsです。パッケージの実装においては主に下記の2つを行います。
@@ -40,34 +41,6 @@ pxr_plugin(${PXR_PACKAGE}
 )
 ```
 
-## SdfFileFormatクラス
-### SdfFileFormatクラスの下記の2つの処理をOverrideして読み込み処理を実装します
-```
-virtual bool Read(
-    SdfLayer* layer,
-    const std::string &	resolvedPath,
-    bool metadataOnly 
-)const
-
-virtual bool ReadFromString(
-    SdfLayer* layer, 
-    const std::string& str
-) const
-```
-### SdfFileFormatクラスの下記の2つの処理をOverrideして書き込み処理を実装します
-```
-virtual bool WriteToString(
-    const SdfLayer& layer,
-    std::string* str,
-    const std::string& comment=std::string()
-)const
-
-virtual bool WriteToStream(
-    const SdfSpecHandle &spec,
-    std::ostream& out,
-    size_t indent
-)const
-```
 
 ## PluginInfo　　
 プラグインの情報をまとめるJsonです。
@@ -107,6 +80,43 @@ virtual bool WriteToStream(
     ]
 }
 ```
+## SdfFileFormatクラス
+### SdfFileFormatクラスの下記の2つの処理をOverrideして読み込み処理を実装します
+```
+virtual bool Read(
+    SdfLayer* layer,
+    const std::string &	resolvedPath,
+    bool metadataOnly 
+)const
+
+virtual bool ReadFromString(
+    SdfLayer* layer, 
+    const std::string& str
+) const
+```
+### SdfFileFormatクラスの下記の2つの処理をOverrideして書き込み処理を実装します
+```
+virtual bool WriteToString(
+    const SdfLayer& layer,
+    std::string* str,
+    const std::string& comment=std::string()
+)const
+
+virtual bool WriteToStream(
+    const SdfSpecHandle &spec,
+    std::ostream& out,
+    size_t indent
+)const
+```
+
+## その他のソース
+Objフォーマットから情報を取得し、Usd上でレイヤーを構築する処理するためのソースが下記のような形であります。
+* translator.cpp
+* stream.cpp
+* streamIO.cpp
+
+その中でもUsd上でレイヤーを構築するtranslator.cppが重要になってきます。
+
 
 ## 参考資料
 ### 新規プラグインの実装
