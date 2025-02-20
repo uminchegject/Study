@@ -1,12 +1,10 @@
-# GeoフォーマットにおけるFileFormatPluginの実装
-
-## 実装の概要
+# FileFormatPlugin
+## 概要
 新規プラグインの実装においては下記の3つのファイルを用意する必要があります。
-* プラグインのソース  
 * CMakeLists.txt  
 * PluginInfo.json  
-* FileFormatPlugin.h
-* FileFormatPlugin.cpp
+* Class SdfFileFormat
+* その他のソース 
 
 これらを用意し、Open_USDのプロジェクトソース内の任意の場所に配置してビルドを行うことでプラグインをビルドすることができます。
 
@@ -14,10 +12,9 @@
 ビルド内容をまとめるCMakeListsです。パッケージの実装においては主に下記の2つを行います。
 * PXR_PACKAGEにパッケージ名を設定する
 * カスタム関数のpxr_pluginで使用するソースの情報をまとめる
-
-``` CMakeLists
+``` 
 set(PXR_PREFIX pxr/usd)
-set(PXR_PACKAGE usdGeo)
+set(PXR_PACKAGE usdObj)
 
 pxr_plugin(${PXR_PACKAGE}
     LIBRARIES
@@ -31,19 +28,49 @@ pxr_plugin(${PXR_PACKAGE}
         ${Boost_INCLUDE_DIRS}
         ${PYTHON_INCLUDE_DIRS}
 
-    PUBLIC_HEADERS
-        UsdGeoFileFormat.h
-
-    PUBLIC_CLASSES
-        UsdGeoFileFormat
+    CPPFILES
+        fileFormat.cpp #SdfFileFormatクラスをオーバーライドしたクラス
+        #その他追加で実装したソース
+        stream.cpp
+        streamIO.cpp
+        translator.cpp
 
     RESOURCE_FILES
         plugInfo.json
 )
 ```
 
-### PluginInfo　　
-プラグインの情報をまとめるJsonです。今回実装するFileFormatPluginを例にすると、  
+## SdfFileFormatクラス
+### SdfFileFormatクラスの下記の2つの処理をOverrideして読み込み処理を実装します
+```
+virtual bool Read(
+    SdfLayer* layer,
+    const std::string &	resolvedPath,
+    bool metadataOnly 
+)const
+
+virtual bool ReadFromString(
+    SdfLayer* layer, 
+    const std::string& str
+) const
+```
+### SdfFileFormatクラスの下記の2つの処理をOverrideして書き込み処理を実装します
+```
+virtual bool WriteToString(
+    const SdfLayer& layer,
+    std::string* str,
+    const std::string& comment=std::string()
+)const
+
+virtual bool WriteToStream(
+    const SdfSpecHandle &spec,
+    std::ostream& out,
+    size_t indent
+)const
+```
+
+## PluginInfo　　
+プラグインの情報をまとめるJsonです。
 * サポートするフォーマット形式に関する情報
 * ビルドした際のプラグイン周りのデータに関する情報
 などをJSONでまとめます。
@@ -55,15 +82,15 @@ pxr_plugin(${PXR_PACKAGE}
             // プラグインの中身に関する情報をまとめます
             "Info": {
                 "Types": {
-                    "UsdGeoFileFormat": {
+                    "UsdObjFileFormat": {
                         "bases": [
                             "SdfFileFormat"
                         ],
-                        "displayName": "Geo Text File Format Plugin",
+                        "displayName": "USD Tutorial Rudimentary OBJ",
                         "extensions": [
-                            "geo"
+                            "obj"
                         ],
-                        "formatId": "geo",
+                        "formatId": "obj",
                         "primary": true,
                         "supportsWriting": false,
                         "target": "usd"
@@ -72,36 +99,12 @@ pxr_plugin(${PXR_PACKAGE}
             },
             // プラグインのビルドデータに関する情報をまとめます
             "LibraryPath": "@PLUG_INFO_LIBRARY_PATH@",
-            "Name": "usdGeo",
+            "Name": "usdObj",
             "ResourcePath": "@PLUG_INFO_RESOURCE_PATH@",
             "Root": "@PLUG_INFO_ROOT@",
             "Type": "library"
         }
     ]
-}
-```
-
-## FileFormatPlugin
-Geometryファイルはアスキーのため文字列から情報を取得し、usdのレイヤーを構築する
-``` 
-
-```
-
-## Geometry
-
-### Geoフォーマットからの情報取得処理
-``` ReadGeometry
-void Geometry::ReadGeometry(const std::string& filePath)
-{
- 
-}
-```
-
-### Geometryの情報を基にLayerを構築する
-``` CreateLayer
-SdfLayerRefPtr CreateLayer()
-{
-    
 }
 ```
 

@@ -44,6 +44,19 @@ std::array<double, 3> vec = {1, 0, 0};
 std::array<double, 3> rotatedVec = q.rotateVector(vec);
 ```
 
+## VexでupとNからorientを取得する
+```
+vector up = {0,1,0};
+vector N = normalize(@N);
+// X軸を計算
+vector x_axis = normalize(cross(up, N));
+// Y軸を計算
+vector y_axis = normalize(cross(N, x_axis));
+//行列を通してクォータニオンに変換
+matrix3 m = set(x_axis, y_axis, N);
+@orient = quaternion(m);
+```
+
 ## 参考資料
 * ゲームを動かす技術と発想 R  
 https://www.borndigital.co.jp/book/16550/

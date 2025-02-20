@@ -1,24 +1,44 @@
-○実装
-・レイヤーの構築処理を修正
- -jointIndicesをJoint2に設定して検証してみる
+#include "pxr/pxr.h"
+#include "usd/usd/prim.h"
+#include "usd/usd/relationship.h"
+#include "usd/usd/attribute.h"
+#include "usd/usdGeom/pointBased.h"
+#include "usd/usdSkel/skeleton.h"
+#include "usd/usdSkel/animation.h"
+#include "usd/usdSkel/primvar.h"
 
-// ** メッシュの作成 **
-SdfPath meshPath("/World/Root/Geom/pCube1");
-UsdGeomMesh mesh = UsdGeomMesh::Define(stage, meshPath);
+PXR_NAMESPACE_USING_DIRECTIVE
 
-// ** UsdSkelBindingAPI を使用してスケルトンをバインド **
-UsdSkelBindingAPI bindingAPI = UsdSkelBindingAPI::Apply(mesh.GetPrim());
-bindingAPI.CreateSkeletonRel().AddTarget(skeleton.GetPath());
+void AddSkeletonDataToMesh(UsdStageRefPtr stage, const SdfPath& meshPath) {
+    // メッシュのプリムを取得
+    UsdPrim meshPrim = stage->GetPrimAtPath(meshPath);
+    
+    // スケルトンのリレーションを追加
+    SdfPath skeletonPath("/Model/Skel");
+    UsdRelationship skeletonRel = meshPrim.CreateRelationship("skel:skeleton", true);
+    skeletonRel.AddTarget(skeletonPath);
 
-// ** ジョイントインデックスとウェイト情報を設定 **
-// 各頂点に対して影響を与えるジョイントのインデックス（ここではすべて "Root" に紐づけ）
-VtArray<int> jointIndices = {0, 0, 0, 0, 0, 0, 0, 0}; // メッシュの各頂点のジョイントインデックス
+    // jointIndices プリムバリアントの作成
+    UsdAttribute jointIndicesAttr = meshPrim.CreateAttribute(
+        TfToken("primvars:skel:jointIndices"), SdfValueTypeNames->IntArray);
+    jointIndicesAttr.Set<std::vector<int>>({
+        2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1
+    });
+    jointIndicesAttr.SetMetadata("interpolation", VtValue("vertex"));
+    jointIndicesAttr.SetMetadata("elementSize", VtValue(1));
 
-// 各頂点のウェイト（ここでは "Root" の影響100%）
-VtArray<float> jointWeights = {1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
+    // jointWeights プリムバリアントの作成
+    UsdAttribute jointWeightsAttr = meshPrim.CreateAttribute(
+        TfToken("primvars:skel:jointWeights"), SdfValueTypeNames->FloatArray);
+    jointWeightsAttr.Set<std::vector<float>>({
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    });
+    jointWeightsAttr.SetMetadata("interpolation", VtValue("vertex"));
+    jointWeightsAttr.SetMetadata("elementSize", VtValue(1));
 
-// ジョイントインデックスのPrimvarを作成
-bindingAPI.CreateJointIndicesPrimvar(false, jointIndices.size()).Set(jointIndices);
+    // geomBindTransform (変換行列)の作成
+    UsdAttribute geomBindTransformAttr = meshPrim.CreateAttribute(
+        TfToken("primvars:skel:geomBindTransform"), SdfValueTypeNames->Matrix4d);
+    geomBindTransformAttr.Set(GfMatrix4d(1.0)); // 単位行列を設定
+}
 
-// ジョイントウェイトのPrimvarを作成
-bindingAPI.CreateJointWeightsPrimvar(false, jointWeights.size()).Set(jointWeights);
