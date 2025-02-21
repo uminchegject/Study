@@ -1,46 +1,8 @@
 # USDTutorial
 
 ## snowxcrashさんのTutorial
-
-### Translator
-```
-// レイヤーの構築
-SdfLayerRefPtr layer = SdfLayer::CreateAnonymous(".usda");
-
-// ステージの構築
-UsdStageRefPtr stage = UsdStage::Open(layer);
-
-// Meshの定義
-UsdGeomMesh mesh = UsdGeomMesh::Define(stage, SdfPath("/" + group.name));
-
-//pointsの座標をAttrに設定
-VtVec3fArray usdPoints
-mesh.GetPointsAttr().Set(usdPoints);
-
-//各面の構成頂点数をAttributeに設定
-VtArray<int> faceVertexCounts
-mesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
-
-//各面の構成頂点のインデックス値をAttributeに設定
-VtArray<int> faceVertexCounts
-mesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
-
-//UV情報設定の設定
-UsdGeomPrimvar uvPrimVar = UsdGeomPrimvarsAPI(mesh).CreatePrimvar(
-	TfToken("uv"), 
-	SdfValueTypeNames->TexCoord2fArray,
-	UsdGeomTokens->faceVarying
-);
-uvPrimVar.GetAttr().Set(usdUVs);
-uvPrimVar.CreateIndicesAttr().Set(faceUVIndices);
-
-//Extent値をAttributeに設定
-VtVec3fArray extentArray(2);
-mesh.GetExtentAttr().Set(extentArray);
-```
-
 ### メッシュの構築
-```
+``` Python
 mesh = UsdGeom.Mesh.Define(stage, path)
 
 # Points
@@ -82,11 +44,11 @@ mesh.CreateDoubleSidedAttr(False)
 ```
 
 ### シェーダーの構築
-```
+``` Python
 shader = UsdShade.Shader.Define(stage, path)
-//シェーダータイプを設定する
+# シェーダータイプを設定する
 shader.CreateIdAttr('UsdPreviewSurface')
-//各々の値を設定する
+# 各々の値を設定する
 shader.CreateInput('metallic', Sdf.ValueTypeNames.Float).Set(0.0)
 shader.CreateInput('roughness', Sdf.ValueTypeNames.Float).Set(0.4)
 shader.CreateInput('diffuseColor', Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(1, 0, 1))
@@ -94,11 +56,11 @@ shader.CreateInput('opacity', Sdf.ValueTypeNames.Float).Set(1)
 ```
 
 ### マテリアルの設定
-```
+``` Python
 material = UsdShade.Material.Define(stage, path)
-//マテリアルのサーフェス出力を作成
+# マテリアルのサーフェス出力を作成
 material.CreateSurfaceOutput()
-//シェーダーをマテリアルに接続
+# シェーダーをマテリアルに接続
 material.GetSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), 'surface')
 ```
 

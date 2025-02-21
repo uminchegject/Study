@@ -1,16 +1,5 @@
 ■Volume
 
 ■UsdSkel
-●レイヤーの構築処理
-・関数化
-・必要な情報
- -SkelRoot
- -Mesh
- -Skelton
- -SkelAnimation
-
-
-■FileFormatPlugin
-
 
 ■UsdTutorial

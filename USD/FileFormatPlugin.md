@@ -48,7 +48,7 @@ pxr_plugin(${PXR_PACKAGE}
 * ビルドした際のプラグイン周りのデータに関する情報
 などをJSONでまとめます。
 
-``` PluginInfo.json
+```
 {
     "Plugins": [
         {
@@ -82,7 +82,7 @@ pxr_plugin(${PXR_PACKAGE}
 ```
 ## SdfFileFormatクラス
 ### SdfFileFormatクラスの下記の2つの処理をOverrideして読み込み処理を実装します
-```
+``` c++
 virtual bool Read(
     SdfLayer* layer,
     const std::string &	resolvedPath,
@@ -95,7 +95,7 @@ virtual bool ReadFromString(
 ) const
 ```
 ### SdfFileFormatクラスの下記の2つの処理をOverrideして書き込み処理を実装します
-```
+``` c++
 virtual bool WriteToString(
     const SdfLayer& layer,
     std::string* str,
@@ -113,10 +113,54 @@ virtual bool WriteToStream(
 Objフォーマットから情報を取得し、Usd上でレイヤーを構築する処理するためのソースが下記のような形であります。
 * translator.cpp
 * stream.cpp
-* streamIO.cpp
+* streamIO.cpp  
 
 その中でもUsd上でレイヤーを構築するtranslator.cppが重要になってきます。
 
+#### UsdGeomPrimvarsAPI
+USDにおいてジオメトリのプライム変数(primvars)を管理するためのAPIです。
+ジオメトリプリム(UsdGeomGprimなど)に対してプライム変数を簡単に追加・取得・操作できます。
+
+#### TfToken
+TfToken はUSDにおける軽量な文字列管理クラスです。
+USD の文字列処理を高速化しメモリ使用量を削減するために設計されておりC++のstd::string よりも軽量です。
+
+### Translator.cpp
+``` c++
+// レイヤーの構築
+SdfLayerRefPtr layer = SdfLayer::CreateAnonymous(".usda");
+
+// ステージの構築
+UsdStageRefPtr stage = UsdStage::Open(layer);
+
+// Meshの定義
+UsdGeomMesh mesh = UsdGeomMesh::Define(stage, SdfPath("/" + group.name));
+
+//pointsの座標をAttrに設定
+VtVec3fArray usdPoints
+mesh.GetPointsAttr().Set(usdPoints);
+
+//各面の構成頂点数をAttributeに設定
+VtArray<int> faceVertexCounts
+mesh.GetFaceVertexCountsAttr().Set(faceVertexCounts);
+
+//各面の構成頂点のインデックス値をAttributeに設定
+VtArray<int> faceVertexCounts
+mesh.GetFaceVertexIndicesAttr().Set(faceVertexIndices);
+
+//UV情報設定の設定
+UsdGeomPrimvar uvPrimVar = UsdGeomPrimvarsAPI(mesh).CreatePrimvar(
+	TfToken("uv"), 
+	SdfValueTypeNames->TexCoord2fArray,
+	UsdGeomTokens->faceVarying
+);
+uvPrimVar.GetAttr().Set(usdUVs);
+uvPrimVar.CreateIndicesAttr().Set(faceUVIndices);
+
+//Extent値をAttributeに設定
+VtVec3fArray extentArray(2);
+mesh.GetExtentAttr().Set(extentArray);
+```
 
 ## 参考資料
 ### 新規プラグインの実装
