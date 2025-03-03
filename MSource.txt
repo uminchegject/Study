@@ -1,5 +1,33 @@
 ■Volume
 
-■UsdSkel
+■UsdReference
 
-■UsdTutorial
+#ステージの定義
+stage = Usd.Stage.Open('HelloWorld.usda')
+stage.Export('HelloWorld.usda')
+hello = stage.GetPrimAtPath('/hello')
+stage.SetDefaultPrim(hello)
+UsdGeom.XformCommonAPI(hello).SetTranslate((4, 5, 6))
+stage.GetRootLayer().Save()
+
+# Create an over on which to create our reference.
+refStage = Usd.Stage.CreateNew('RefExample.usda')
+refSphere = refStage.OverridePrim('/refSphere')
+
+# Reference in the layer.
+refSphere.GetReferences().AddReference('./HelloWorld.usda')
+refStage.GetRootLayer().Save()
+
+# Clear out any authored transformation over the reference.
+refXform = UsdGeom.Xformable(refSphere)
+refXform.SetXformOpOrder([])
+
+# Reference in the layer again, on another over.
+refSphere2 = refStage.OverridePrim('/refSphere2')
+refSphere2.GetReferences().AddReference('./HelloWorld.usda')
+refStage.GetRootLayer().Save()
+
+# Author displayColor on a namespace descendant of the referenced prim.
+overSphere = UsdGeom.Sphere.Get(refStage, '/refSphere2/world' )
+overSphere.GetDisplayColorAttr().Set( [(1, 0, 0)] )
+refStage.GetRootLayer().Save()
