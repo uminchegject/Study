@@ -1,5 +1,57 @@
 # USDTutorial
 
+## Referencing Layers
+### リファレンスを用いた球体の生成
+下記のusdデータをリファレンスして球体を生成する
+```
+def Xform "hello"
+{
+    double3 xformOp:translate = (4, 5, 6)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Sphere "world"
+    {
+        float3[] extent = [(-2, -2, -2), (2, 2, 2)]
+        color3f[] primvars:displayColor = [(0, 0, 1)]
+        double radius = 2
+    }
+}
+```
+
+``` Python
+#既存のステージを開く
+stage = Usd.Stage.Open('HelloWorld.usda')
+stage.Export('HelloWorld.usda')
+#ステージ内のPrimを取得し、DefaultPrimに設定
+hello = stage.GetPrimAtPath('/hello')
+stage.SetDefaultPrim(hello)
+#XformCommonAPIを使用してprimの位置を設定する
+UsdGeom.XformCommonAPI(hello).SetTranslate((4, 5, 6))
+stage.GetRootLayer().Save()
+
+# 参照Stageと球体Primを定義
+refStage = Usd.Stage.CreateNew('RefExample.usda')
+refSphere = refStage.OverridePrim('/refSphere')
+
+# 用意した球体PrimにHelloWorld.usdaを参照させる
+refSphere.GetReferences().AddReference('./HelloWorld.usda')
+refStage.GetRootLayer().Save()
+
+# 位置をリセットする
+refXform = UsdGeom.Xformable(refSphere)
+refXform.SetXformOpOrder([])
+
+# もう一つ球体Primを定義
+refSphere2 = refStage.OverridePrim('/refSphere2')
+refSphere2.GetReferences().AddReference('./HelloWorld.usda')
+refStage.GetRootLayer().Save()
+
+# HelloWorld.usda内のworld(球体Prim)を取得して色情報を持たせる
+overSphere = UsdGeom.Sphere.Get(refStage, '/refSphere2/world' )
+overSphere.GetDisplayColorAttr().Set( [(1, 0, 0)] )
+refStage.GetRootLayer().Save()
+```
+
 ## Simple Shading in USD
 ### メッシュの構築
 ``` Python
