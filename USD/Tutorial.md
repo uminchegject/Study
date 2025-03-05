@@ -52,6 +52,48 @@ overSphere.GetDisplayColorAttr().Set( [(1, 0, 0)] )
 refStage.GetRootLayer().Save()
 ```
 
+## Traversing a Stage
+### ステージからPrimをTraverseする処理
+``` Python
+# stage内のPrimを全て照らし合わせる
+stage = Usd.Stage.Open("RefExample.usda")
+assert([x for x in stage.Traverse()] == [stage.GetPrimAtPath("/refSphere"), 
+    stage.GetPrimAtPath("/refSphere/world"), stage.GetPrimAtPath("/refSphere2"), 
+    stage.GetPrimAtPath("/refSphere2/world")])
+
+# stage内のPrimの中で、sphere型のジオメトリを照らし合わせる
+assert([x for x in stage.Traverse() if UsdGeom.Sphere(x)] == 
+        [stage.GetPrimAtPath("/refSphere/world"), 
+         stage.GetPrimAtPath("/refSphere2/world")])
+
+# Primパスのイテレーターを取得
+treeIter = iter(Usd.PrimRange.PreAndPostVisit(stage.GetPseudoRoot()))
+# リストを用意
+treeIterExpectedResults = [(stage.GetPrimAtPath("/"), False),
+        (stage.GetPrimAtPath("/refSphere"), False),
+        (stage.GetPrimAtPath("/refSphere/world"), False),
+        (stage.GetPrimAtPath("/refSphere/world"), True),
+        (stage.GetPrimAtPath("/refSphere"), True),
+        (stage.GetPrimAtPath("/refSphere2"), False),
+        (stage.GetPrimAtPath("/refSphere2/world"), False),
+        (stage.GetPrimAtPath("/refSphere2/world"), True),
+        (stage.GetPrimAtPath("/refSphere2"), True),
+        (stage.GetPrimAtPath("/"), True)]
+# イテレーターとリストをそれぞれ照らし合わせる
+treeIterActualResults = [(x, treeIter.IsPostVisit()) for x in treeIter]
+assert treeIterExpectedResults == treeIterActualResults
+
+# 特定Primを非アクティブにして照らし合わせる
+ref2Prim = stage.GetPrimAtPath('/refSphere2')
+# stageのSessionLayerを編集ターゲットに設定
+stage.SetEditTarget(stage.GetSessionLayer())
+# ref2Primを非アクティブにする
+Usd.Prim.SetActive(ref2Prim, False)
+# アクティブなPrimのみを照らし合わせる
+assert ([x for x in stage.Traverse()] == [stage.GetPrimAtPath("/refSphere"), 
+stage.GetPrimAtPath("/refSphere/world")])
+```
+
 ## Simple Shading in USD
 ### メッシュの構築
 ``` Python
@@ -74,6 +116,24 @@ texCoords = UsdGeom.PrimvarsAPI(billboard).CreatePrimvar("st",
                                     UsdGeom.Tokens.varying)
 texCoords.Set([(0, 0), (1, 0), (1,1), (0, 1)])
 ```
+
+## Authoring Variants
+### 元データ
+```plaintext
+def Xform "hello"
+{
+    custom double3 xformOp:translate = (4, 5, 6)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Sphere "world"
+    {
+        float3[] extent = [(-2, -2, -2), (2, 2, 2)]
+        color3f[] primvars:displayColor = [(0, 0, 1)]
+        double radius = 2
+    }
+}
+```
+
 
 ### マテリアルの構築
 ``` Python
