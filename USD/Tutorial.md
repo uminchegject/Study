@@ -94,6 +94,102 @@ assert ([x for x in stage.Traverse()] == [stage.GetPrimAtPath("/refSphere"),
 stage.GetPrimAtPath("/refSphere/world")])
 ```
 
+## Authoring Variants
+バリアントを設定することで切り替えを簡単に行えるようにする
+### 元データ
+```plaintext
+def Xform "hello"
+{
+    custom double3 xformOp:translate = (4, 5, 6)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Sphere "world"
+    {
+        float3[] extent = [(-2, -2, -2), (2, 2, 2)]
+        color3f[] primvars:displayColor = [(0, 0, 1)]
+        double radius = 2
+    }
+}
+```
+### ソース
+``` Python
+stage = Usd.Stage.Open('HelloWorld.usda')
+
+# カラー値をリセット
+colorAttr = UsdGeom.Gprim.Get(stage, '/hello/world').GetDisplayColorAttr()
+colorAttr.Clear()
+
+# Variantを定義
+rootPrim = stage.GetPrimAtPath('/hello')
+vset = rootPrim.GetVariantSets().AddVariantSet('shadingVariant')
+
+# 定義したVariantに種類を設定
+vset.AddVariant('red')
+vset.AddVariant('blue')
+vset.AddVariant('green')
+
+# それぞれの種類に値を設定
+vset.SetVariantSelection('red')
+with vset.GetVariantEditContext():
+    colorAttr.Set([(1,0,0)])
+vset.SetVariantSelection('blue')
+with vset.GetVariantEditContext():
+    colorAttr.Set([(0,0,1)])
+vset.SetVariantSelection('green')
+with vset.GetVariantEditContext():
+    colorAttr.Set([(0,1,0)])
+
+stage.GetRootLayer().Export('HelloWorldWithVariants.usda')
+```
+### 実行結果
+```plaintext
+def Xform "hello" (
+    # variantの初期値
+    variants = {
+        string shadingVariant = "green"
+    }
+    # 定義したVariant
+    prepend variantSets = "shadingVariant"
+)
+{
+    custom double3 xformOp:translate = (4, 5, 6)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Sphere "world"
+    {
+        float3[] extent = [(-2, -2, -2), (2, 2, 2)]
+        # カラー値をリセット
+        color3f[] primvars:displayColor
+        double radius = 2
+    }
+
+    #各Variantの種類ごとに値が設定されている
+    variantSet "shadingVariant" = {
+        "blue" {
+            over "world"
+            {
+                color3f[] primvars:displayColor = [(0, 0, 1)]
+            }
+
+        }
+        "green" {
+            over "world"
+            {
+                color3f[] primvars:displayColor = [(0, 1, 0)]
+            }
+
+        }
+        "red" {
+            over "world"
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+            }
+
+        }
+    }
+}
+```
+
 ## Simple Shading in USD
 ### メッシュの構築
 ``` Python
@@ -116,25 +212,6 @@ texCoords = UsdGeom.PrimvarsAPI(billboard).CreatePrimvar("st",
                                     UsdGeom.Tokens.varying)
 texCoords.Set([(0, 0), (1, 0), (1,1), (0, 1)])
 ```
-
-## Authoring Variants
-### 元データ
-```plaintext
-def Xform "hello"
-{
-    custom double3 xformOp:translate = (4, 5, 6)
-    uniform token[] xformOpOrder = ["xformOp:translate"]
-
-    def Sphere "world"
-    {
-        float3[] extent = [(-2, -2, -2), (2, 2, 2)]
-        color3f[] primvars:displayColor = [(0, 0, 1)]
-        double radius = 2
-    }
-}
-```
-
-
 ### マテリアルの構築
 ``` Python
 # マテリアルの定義
