@@ -12,6 +12,11 @@ Content-Type: text/plain
 ```
 
 ### --HOUDINIMIMEBOUNDARY
+各情報の境界を表します。
+**管理しているデータの範囲をここで確認します**
+```
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+```
 
 ### Content-Disposition
 このパートの内容が添付ファイルであることを示します。
