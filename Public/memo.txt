@@ -1,44 +1,33 @@
-#include "pxr/pxr.h"
-#include "usd/usd/prim.h"
-#include "usd/usd/relationship.h"
-#include "usd/usd/attribute.h"
-#include "usd/usdGeom/pointBased.h"
-#include "usd/usdSkel/skeleton.h"
-#include "usd/usdSkel/animation.h"
-#include "usd/usdSkel/primvar.h"
+■何をしなくても変更される情報
+●.variables
+・ファイルに関する基本情報
+・SAVETIMEなど何もしなくても情報が更新されてしまい、差分が出てしまう
 
-PXR_NAMESPACE_USING_DIRECTIVE
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename=".variables"
+Content-Type: text/plain
 
-void AddSkeletonDataToMesh(UsdStageRefPtr stage, const SdfPath& meshPath) {
-    // メッシュのプリムを取得
-    UsdPrim meshPrim = stage->GetPrimAtPath(meshPath);
-    
-    // スケルトンのリレーションを追加
-    SdfPath skeletonPath("/Model/Skel");
-    UsdRelationship skeletonRel = meshPrim.CreateRelationship("skel:skeleton", true);
-    skeletonRel.AddTarget(skeletonPath);
+set -g ACTIVETAKE = 'Main'
+set -g E = '2.7182818284590452354'
+set -g EYE = 'stereo'
+set -g HIP = 'C:/Users/yusuke.nakamura/Desktop/Hip'
+set -g HIPFILE = 'C:/Users/yusuke.nakamura/Desktop/Hip/Box.hip'
+set -g HIPNAME = 'Box'
+set -g JOB = 'C:/Users/yusuke.nakamura'
+set -g PI = '3.1415926535897932384'
+set -g POSE = 'C:/Users/yusuke.nakamura/Documents/houdini20.5/poselib'
+set -g _HIP_SAVEPLATFORM = 'windows-x86_64-cl19.35'
+set -g _HIP_SAVETIME = 'Fri Mar  7 12:25:08 2025'
+set -g _HIP_SAVEVERSION = '20.5.487'
+set -g status = '0'
 
-    // jointIndices プリムバリアントの作成
-    UsdAttribute jointIndicesAttr = meshPrim.CreateAttribute(
-        TfToken("primvars:skel:jointIndices"), SdfValueTypeNames->IntArray);
-    jointIndicesAttr.Set<std::vector<int>>({
-        2, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1
-    });
-    jointIndicesAttr.SetMetadata("interpolation", VtValue("vertex"));
-    jointIndicesAttr.SetMetadata("elementSize", VtValue(1));
+●.OPdummydefs
+・MIMEのbase64というデータの変換方法でエンコードしている情報
+・Content-Typeもアスキーでなくバイナリで管理していることを示している。
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename=".OPdummydefs"
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
 
-    // jointWeights プリムバリアントの作成
-    UsdAttribute jointWeightsAttr = meshPrim.CreateAttribute(
-        TfToken("primvars:skel:jointWeights"), SdfValueTypeNames->FloatArray);
-    jointWeightsAttr.Set<std::vector<float>>({
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    });
-    jointWeightsAttr.SetMetadata("interpolation", VtValue("vertex"));
-    jointWeightsAttr.SetMetadata("elementSize", VtValue(1));
-
-    // geomBindTransform (変換行列)の作成
-    UsdAttribute geomBindTransformAttr = meshPrim.CreateAttribute(
-        TfToken("primvars:skel:geomBindTransform"), SdfValueTypeNames->Matrix4d);
-    geomBindTransformAttr.Set(GfMatrix4d(1.0)); // 単位行列を設定
-}
-
+●modify 9999999999
+・更新日時をUnixタイムスタンプ方式を表している
