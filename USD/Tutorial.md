@@ -251,6 +251,176 @@ billboard.GetPrim().ApplyAPI(UsdShade.MaterialBindingAPI)
 UsdShade.MaterialBindingAPI(billboard).Bind(material)
 ```
 
+## Transformations, Time-sampled Animation, and Layer Offsets
+
+### Python
+```python
+
+from pxr import Usd, UsdGeom, Gf, Sdf
+
+#ステージの定義
+def MakeInitialStage(path):
+    stage = Usd.Stage.CreateNew(path)
+    UsdGeom.SetStageUpAxis(stage, UsdGeom.Tokens.z)
+    #スタート時のタイムコードを設定
+    stage.SetStartTimeCode(0)
+    #エンド時のタイムコードを設定
+    stage.SetEndTimeCode(192)
+    return stage
+
+#ジオメトリへの参照を追加
+def AddReferenceToGeometry(stage, path):
+    geom = UsdGeom.Xform.Define(stage, path)
+    #top.geom.usdを参照
+    geom.GetPrim().GetReferences().AddReference('./top.geom.usd')
+    return geom
+
+#スピンを追加
+def AddSpin(top):
+    spin = top.AddRotateZOp(opSuffix='spin')
+    #スピンのTimeCodeと値を設定
+    spin.Set(time=0, value=0)
+    spin.Set(time=192, value=1440)
+
+#傾きを追加
+def AddTilt(top):
+    tilt = top.AddRotateXOp(opSuffix='tilt')
+    tilt.Set(value=12)
+
+#オフセットを追加
+def AddOffset(top):
+    top.AddTranslateOp(opSuffix='offset').Set(value=(0, 0.1, 0))
+
+#回転運動を追加
+def AddPrecession(top):
+    precess = top.AddRotateZOp(opSuffix='precess')
+    precess.Set(time=0, value=0)
+    precess.Set(time=192, value=360)
+
+#コマ単体のアニメーション情報レイヤーを作成
+def CreateBaseAnimationData():
+    stage = MakeInitialStage('BaseAnimation.usda')
+    stage.SetMetadata('comment', 'BaseAnimation: Adding precession and offset')
+    top = AddReferenceToGeometry(stage, '/Top')
+    AddPrecession(top)
+    AddOffset(top)
+    AddTilt(top)
+    AddSpin(top)
+    stage.Save()
+
+if __name__ == '__main__':
+    # Use animated layer from BaseAnimation
+    CreateBaseAnimationData()
+    anim_layer_path = './BaseAnimation.usda'
+
+    stage = MakeInitialStage('AnimatedTop.usda')
+    stage.SetMetadata('comment', 'AnimatedTop: Layer offsets and animation')
+
+    #コマをそのまま配置
+    left = UsdGeom.Xform.Define(stage, '/Left')
+    left_top = UsdGeom.Xform.Define(stage, '/Left/Top')
+    left_top.GetPrim().GetReferences().AddReference(
+        assetPath = anim_layer_path,
+        primPath = '/Top')
+
+    #位置をズラし、フレームを96ズラしたコマを配置
+    middle = UsdGeom.Xform.Define(stage, '/Middle')
+    middle.AddTranslateOp().Set(value=(2, 0, 0))
+    middle_top = UsdGeom.Xform.Define(stage, '/Middle/Top')
+    middle_top.GetPrim().GetReferences().AddReference(
+        assetPath = anim_layer_path,
+        primPath = '/Top',
+        layerOffset = Sdf.LayerOffset(offset=96))
+
+    #位置をズラし、FPSを4倍にしたコマを配置
+    right = UsdGeom.Xform.Define(stage, '/Right')
+    right.AddTranslateOp().Set(value=(4, 0, 0))
+    right_top = UsdGeom.Xform.Define(stage, '/Right/Top')
+    right_top.GetPrim().GetReferences().AddReference(
+        assetPath = anim_layer_path,
+        primPath = '/Top',
+        layerOffset = Sdf.LayerOffset(scale=0.25))
+
+    stage.Save()
+```
+
+### usda
+BaseAnimation
+``` python
+#usda 1.0
+(
+    endTimeCode = 192
+    startTimeCode = 0
+    upAxis = "Z"
+)
+
+def Xform "Top" (
+    #メッシュ情報をリファレンスする
+    prepend references = @./top.geom.usd@
+)
+{
+    #傾き角度
+    float xformOp:rotateX:tilt = 12
+    #コマが傾きながら回転する際の運動情報
+    float xformOp:rotateZ:precess.timeSamples = {
+        0: 0,
+        192: 360,
+    }
+    #コマ自体の回転運動情報
+    float xformOp:rotateZ:spin.timeSamples = {
+        0: 0,
+        192: 1440,
+    }
+    double3 xformOp:translate:offset = (0, 0.1, 0)
+    #配列内の順序で変換を行う
+    uniform token[] xformOpOrder = ["xformOp:rotateZ:precess", "xformOp:translate:offset", "xformOp:rotateX:tilt", "xformOp:rotateZ:spin"]
+}
+```
+AnimatedTop
+```plaintext
+#usda 1.0
+(
+    endTimeCode = 192
+    startTimeCode = 0
+    upAxis = "Z"
+)
+そのままリファレンスしたコマ
+def Xform "Left"
+{
+    def Xform "Top" (
+        prepend references = @./BaseAnimation.usda@</Top>
+    )
+    {
+    }
+}
+
+#位置をズラし、フレームを96ズラしたコマ
+def Xform "Middle"
+{
+    double3 xformOp:translate = (2, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Xform "Top" (
+        prepend references = @./BaseAnimation.usda@</Top> (offset = 96)
+    )
+    {
+    }
+}
+
+#位置をズラし、FPSを4倍にしたコマ
+def Xform "Right"
+{
+    double3 xformOp:translate = (4, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Xform "Top" (
+        prepend references = @./BaseAnimation.usda@</Top> (scale = 0.25)
+    )
+    {
+    }
+}
+```
+
 ## snowxcrashさんのTutorial
 ### メッシュの構築
 ``` Python
