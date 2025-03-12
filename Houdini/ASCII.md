@@ -1,6 +1,6 @@
 # ASCII
 
-## 情報を管理する構造体
+## ASCIIHIPにおけるデータ構造
 下記にあるソースのようにMIME形式に基づいたデータフォーマットで、複数のデータをアスキー形式で管理しています。  
 これらの情報を基にマージ作業を行うべき箇所を調べていきます。
 ```
@@ -44,43 +44,74 @@ Content-Type: text/plain
 
 という流れでマージ対応を行って行きます。
 
+
+## ASCIIHIP内のノードデータ構造
+ASCIIにおけるノード情報は下記の4つで構成されています
+
+### .init
+ノードタイプ情報を管理しています。  
+ノードを新しく作成するなど以外では、基本的に差分は発生しないです。
+
+### .def
+ノードに関連する設定などの情報を管理しています。  
+ノードの位置や、色、ワイヤーの接続などの差分はここで発生します。  
+**レイアウトやノードネットワークに関するマージやコンフリクト対応作業は基本的にこの中の差分を修正します**  
+
+### .parm
+ノードにあるパラメーター情報を管理しています。  
+パラメーターだけでなく、VEXやPythonのスクリプトについても管理しているため、  
+スクリプトの差分はここで発生します。  
+**処理の変更に際するマージやコンフリクト対応作業は基本的にこの中の差分を修正します**  
+
+### .userdata
+開発環境に関連する情報を管理しています。  
+Houdiniのバージョンや、などの差分はここで発生します。  
+作業環境に変化がなければ、基本的に差分は発生しないです。
+
+以上を踏まえて
+* レイアウトやノードネットワークに関する対応は.def
+* ノード処理の変更に関する対応は.parm   
+* その他の情報は.init .def
+
+という流れでノード情報の確認を行います。
+
+
 ## ノードのマージ
 Boxノードが存在するHipにSphereノードが存在するHipをマージする対応を行います。
 大まかな流れとしては
 * 差分が出ている情報の内容をfilenameで確認
 * 対応すべき情報の範囲を--HOUDINIMIMEBOUNDARYで特定
-* 対応範囲をマージ
+* 対応範囲をマージ   
+
 という流れとなります。
 
 ### 差分が出ている箇所をfilenameで確認
 まず、Sphereノードが存在するHipにおいてSphereに関するアスキーの情報を探します。
-SphereノードのNetworkパスはobj/box_geo2/sphere1のためパスで検索をかけます。
+SphereノードのNetworkパスはobj/geo/sphereのためパスで検索をかけます。
 すると下記の4つの項目を確認することができます。
-
 ```
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.init"
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.def"
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.parm"
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.userdata"
+Content-Disposition: attachment; filename="obj/geo/sphere.init"
+Content-Disposition: attachment; filename="obj/geo/sphere.def"
+Content-Disposition: attachment; filename="obj/geo/sphere.parm"
+Content-Disposition: attachment; filename="obj/geo/sphere.userdata"
 ```
-
 
 ### 対応すべき情報の範囲を--HOUDINIMIMEBOUNDARYで特定
 次に上記4項目が示す情報の範囲を--HOUDINIMIMEBOUNDARYで確認します。
 すると下記の4を特定することができます。
-
+#### sphere.init
 ```
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.init"
+Content-Disposition: attachment; filename="obj/geo/sphere.init"
 Content-Type: text/plain
 
 type = sphere
 matchesdef = 1
 ```
-
+#### sphere.def
 ```
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.def"
+Content-Disposition: attachment; filename="obj/geo/sphere.def"
 Content-Type: text/plain
 
 sopflags sopflags = 
@@ -109,10 +140,10 @@ delscript ""
 exprlanguage hscript
 end
 ```
-
+#### sphere.parm
 ```
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.parm"
+Content-Disposition: attachment; filename="obj/geo/sphere.parm"
 Content-Type: text/plain
 
 {
@@ -135,10 +166,10 @@ accurate	[ 0	locks=0 ]	(	"on"	)
 triangularpoles	[ 0	locks=0 ]	(	"on"	)
 }
 ```
-
+#### sphere.userdata
 ```
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
-Content-Disposition: attachment; filename="obj/box_geo2/sphere1.userdata"
+Content-Disposition: attachment; filename="obj/geo/sphere.userdata"
 Content-Type: text/plain
 
 {
@@ -151,17 +182,15 @@ Content-Type: text/plain
 
 ### 対応範囲をマージ
 上記の4つのアスキー情報を別Hipにコピーを行えばマージ完了です。  
-コンフリクト対応においても、コンフリクトしている箇所のfilenameから対象のノードを確認し、
-差分を確認した上で対応を行う流れで大丈夫かと思われます。
+コンフリクト対応においても、コンフリクトしている箇所のfilenameから対象のノードを確認し、差分を確認した上で対応を行います。
 
 
-## マージ対応において不必要な情報
-差分確認の際に作業内容とは関係ない差分が出てしまうことがありました。
-その際に確認した情報をまとめています。
+## マージ対応における注意点
+マージ作業において、注意すべき情報をまとめています。
 
 ### .variables
 ファイルに関する基本情報です。  
-SAVETIMEなど何もしなくても情報が更新されてしまい、差分が出てしまうためマージは不要です。
+SAVETIMEなど何もしなくても情報が更新されてしまい、差分が出てしまうためマージ対応は不要です。
 
 ```
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
@@ -185,7 +214,7 @@ set -g status = '0'
 
 ### .OPdummydefs
 MIMEのbase64というデータの変換方法でエンコードしている情報です。  
-Content-Typeもアスキーでなくバイナリで管理していることを示しており、スクリプトとしてのマージ対応が行えません。
+Content-Typeもアスキーでなくバイナリで管理していることを示しており、アスキーとしてのマージ対応が行えません。
 ここの差分に変更があった場合は元のデータを優先する対応を行います。
 ```
 --HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
@@ -199,8 +228,7 @@ Content-Transfer-Encoding: base64
 
 ### stat
 各ノードに関する作成・更新情報を管理しています。  
-ノードの中身に変更がなくてもここだけ更新されてしまい、差分が出てしまうことがあるため、  
-そのような場合は基本的にここの差分は更新しなくても大丈夫です。
+ノードの中身に変更がなくてもここだけ更新されてしまい差分が出てしまうことがあるため、その場合はマージ対応は不要です。
 ```
 stat
 {
@@ -209,6 +237,41 @@ stat
   author yusuke.nakamura@CR-DD063.candrgroup.net
   access 0777
 }
+```
+
+### .application
+HIPデータ内のシーン情報などを管理しています。  
+シーンの画角や保存した際に選択していたノードに違いがあった場合などで差分が発生してしまうことがあるため、  
+その場合はマージ対応は不要です。
+```
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename=".application"
+Content-Type: text/plain
+
+panepath -d Build2 -f -p panetab14 /obj/geo/merge1
+panepath -d Build2 -f -p panetab5 /obj/geo/merge1
+panepath -d Build2 -f -p panetab1 /obj/geo/merge1
+panepath -d Build2 -f -p panetab7 /obj/geo/merge1
+panepath -d Build2 -f -p panetab2 /obj/geo/merge1
+panepath -d Build2 -f -p panetab3 /obj/geo/merge1
+```
+
+### geo.order
+ジオメトリノード内に存在するノードを管理しています。  
+ジオメトリノード内で新しいノードを追加するなどの変更があった際に、ノードの総数、追加したノード名を追加する必要があります。
+```
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="obj/geo.order"
+Content-Type: text/plain
+
+7
+testgeometry_pighead1
+testgeometry_squab1
+copytopoints1
+python1
+copytopoints2
+merge1
+attribwrangle1
 ```
 
 
