@@ -1,5 +1,5 @@
-■HDA
+■ASCIIの構造
 
-■viewer_state
+■ASCIIHIPの構造
 
-■継承(USD)
+■ASCIIHDAの構造

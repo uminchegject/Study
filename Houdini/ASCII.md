@@ -1,6 +1,6 @@
 # ASCII
 
-## ASCIIHIPにおけるデータ構造
+## ASCIIにおけるデータ構造
 MIME形式に基づいたデータフォーマットで管理しているため、下記にあるソースを各情報に紐づけて複数のデータを管理しています。  
 これらの情報を基にマージ作業を行うべき箇所を調べていきます。
 ```
@@ -74,6 +74,23 @@ Houdiniのバージョンや、などの差分はここで発生します。
 * その他の情報は.init .def
 
 という流れでノード情報の確認を行います。
+
+## ASCIIHDA内のデータ構造
+HDAにおけるASCIIは複数ファイルで構成されています。
+その中でHDA内の処理に関する情報はContents.dir内部で管理しており、Contents.dirの中でもさらに複数ファイルで構成されています。
+
+### Contents.mime
+HDA内の処理に関する情報を管理しています。
+**処理の変更に際するマージやコンフリクト対応作業は基本的にこの中の差分を修正します**
+
+### Contents.createtimes
+HDA内のノードの生成時間情報を管理しています。
+
+### Contents.modtimes
+HDA内のノードの編集時間情報を管理しています。
+
+### Contents.houdini_versions
+HDA内の各ノードのHoudiniバージョンを管理しています。
 
 
 ## ノードのマージ
@@ -190,3 +207,5 @@ https://www.sidefx.com/ja/docs/houdini/assets/textfiles.html
 https://www.sidefx.com/docs/houdini/assets/textfiles.html
 * hip ascii and diff(サルにもわかるHoudini)  
 https://ikatnek.blogspot.com/2018/02/hip-ascii-and-diff.html
+* HDA Expanded structure
+https://sebastienmarsais.com/houdini-for-td-hda-operators.html#advanced-hda-functionality
