@@ -82,16 +82,67 @@ HDAにおけるASCIIは複数ファイルで構成されています。
 ### Contents.mime
 HDA内の処理に関する情報を管理しています。
 **処理の変更に際するマージやコンフリクト対応作業は基本的にこの中の差分を修正します**
+```
+--HOUDINIMIMEBOUNDARY0xD3ADD339-0x00000F49-0x56B122C9-0x00000001HOUDINIMIMEBOUNDARY
+Content-Disposition: attachment; filename="hdaroot.init"
+Content-Type: text/plain
+
+type = yusuke.nakamura::HDA_Test::1.0
+matchesdef = 0
+```
 
 ### Contents.createtimes
 HDA内のノードの生成時間情報を管理しています。
+```
+{
+	"hdaroot/merge1.def":1741744138,
+	"hdaroot/copytopoints1.def":1741742013,
+	"hdaroot/copytopoints2.def":1741742075,
+	"hdaroot/python1.def":1741742056,
+	"hdaroot/output0.def":1742866703,
+	"hdaroot/attribwrangle1.def":1741745161,
+	"hdaroot.def":1742866724,
+	"hdaroot/testgeometry_pighead1.def":1741742050,
+	"hdaroot/testgeometry_squab1.def":1741744796
+}
+```
+
 
 ### Contents.modtimes
 HDA内のノードの編集時間情報を管理しています。
+```
+{
+	"hdaroot/merge1.def":1742866703,
+	"hdaroot/copytopoints1.def":1742866703,
+	"hdaroot/copytopoints2.def":1742866703,
+	"hdaroot/python1.def":1742866703,
+	"hdaroot/output0.def":1742866712,
+	"hdaroot/attribwrangle1.def":1742866725,
+	"hdaroot.def":1742866737,
+	"hdaroot/testgeometry_pighead1.def":1742866703,
+	"hdaroot/testgeometry_squab1.def":1742866703
+}
+```
+
 
 ### Contents.houdini_versions
 HDA内の各ノードのHoudiniバージョンを管理しています。
+```
+{
+	"values":["20.5.445"
+	],
+	"indexes":{
+		"hdaroot/python1.userdata":0,
+		"hdaroot/merge1.userdata":0,
+		"hdaroot/copytopoints1.userdata":0,
+		"hdaroot/copytopoints2.userdata":0,
+		"hdaroot/output0.userdata":0
+	}
+}
+```
 
+以上を踏まえて「Contents.mime」にてHDA内の処理情報を管理しているので、
+という流れでノード情報の確認を行います。
 
 ## ノードのマージ
 Boxノードが存在するHipにSphereノードが存在するHipをマージする対応を行います。  
