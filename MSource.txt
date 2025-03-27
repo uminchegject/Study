@@ -1,5 +1,30 @@
-■ASCIIの構造
+■Houdiniバージョン管理
+○差分の調査
+コンフリクトの洗い出し
 
-■ASCIIHIPの構造
+○ドキュメント整理
+・ASCIIのデータ構造
+・ASCIIのノードデータ構造
+・ASCIIHIPのデータ構造
+・ASCIIHDAのデータ構造
 
-■ASCIIHDAの構造
+
+■hip ascii and diff
+○Compare機能の検証
+・File -> Show Change... を実行し、Compareパネルを表示
+・Compare項目のFileから比較したいファイルを指定する
+・Compareボタンを押して差分を比較
+
+・あくまでもテキストの差分確認のみを行っている
+
+○HDAの差分表示
+・Asset -> Asset Manager を実行し、Asset Managerパネルを表示
+
+
+■USD
+○Tutorialを用いた実践
+
+
+■SOLARIS
+○サンプルプロジェクトの調査
+
