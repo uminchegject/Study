@@ -1,19 +1,11 @@
-﻿// 指定されたジョイントパス
-string joint_path = "/joint1/joint2/joint3";
+﻿# シーン上のすべてのオブジェクトを取得
+all_objects = cmds.ls()
 
-// ジョイントパスをスラッシュで分割
-string joints[] = split(joint_path, "/");
+# 'test'を含むオブジェクト名をフィルタリング
+test_objects = [obj for obj in all_objects if 'test' in obj]
 
-// 分割したジョイント名から親ジョイント名を取得（最後のジョイント名の1つ前）
-int num_joints = len(joints);
+# 'test'を抜いた名前のリストを作成
+modified_names = [obj.replace('test', '') for obj in test_objects]
 
-// 親ジョイントが存在する場合（ジョイント数が1以上の場合）
-if (num_joints > 1)
-{
-    string parent_joint = joints[num_joints - 2];  // 最後から2番目のジョイントが親ジョイント
-    printf("親ジョイント名: %s\n", parent_joint);
-}
-else
-{
-    printf("親ジョイントは存在しません。\n");
-}
+# 結果を表示
+print(modified_names)
