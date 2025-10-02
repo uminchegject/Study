@@ -23,3 +23,17 @@ matrix3 transform_matrix = ident();
 transform_matrix *= rot_matrix;
 transform_matrix *= scale_matrix;
 transform_matrix *= pos_matrix;
+
+
+import re
+
+text = "i00_s02_d93_ホゲ_b02_府が_"
+
+# 1. 日本語を削除
+text = re.sub(r'[ぁ-んァ-ン一-龯]+', '', text)
+
+# 2. アンダースコアが2つ以上続く場合、1つに置換
+text = re.sub(r'_+', '_', text)
+
+print(text)
+# 出力: i00_s02_d93_b02_
