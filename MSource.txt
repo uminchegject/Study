@@ -1,48 +1,99 @@
-# --- Step2: Houdini UI の一部を隠す検証コード ---
+■GUIの表示
+●PySide2によるGUIの構築
+PySide2を使用してカスタムGUIを構築する処理を実装します。
+処理の概要は、主に以下の2点です。
+*EditorのGUIを非表示にする
+*必要なビューをFloatingPaneとして表示する
+
+●EditorのWidgetを隠す
+hou.qt.mainWindowから子Widgetを取得し、それらを非表示にします。
+あわせて、メインWidgetのウィンドウサイズを小さく設定します。
 
 import hou
 from PySide2 import QtWidgets
 
-def list_ui_objects():
-    """デバッグ用：Houdini メインウィンドウの子 Widgets を一覧表示"""
-    mw = hou.qt.mainWindow()
-    for child in mw.findChildren(QtWidgets.QWidget):
-        print(child.objectName(), " : ", type(child))
+def hide_editor_ui_elements():
+    """メインのGUIを隠す"""
 
-def hide_ui_elements():
-    """判明している UI の一部を隠す"""
-    mw = hou.qt.mainWindow()
+    # メインWidgetを取得
+    main_widget = hou.qt.mainWindow()
 
-    for child in mw.findChildren(QtWidgets.QWidget):
-        child.hide()
+    # 子Widgetを全て隠す
+    for child_widget in main_widget.findChildren(QtWidgets.QWidget):
+        child_widget.hide()
 
-    mw.resize(200, 200)
+    # 子Widgetを全て隠し、何も表示されていないメインWidgetを小さく設定
+    main_widget.resize(200, 200)
+    
+    # メインWidgetをHide
+    # main_widget.hide()
+    
+    # メインWidgetを最小化
+    # main_widget.showMinimized()
 
-def open_scene_and_parameters():
-    """シーンとパラメーターを表示"""
+●必要なビューをFloatingPaneとして表示する
+必要なビューをフローティングペインとして表示します。
+今回はテストとして、シーンタブとパラメータタブをフローティングペインで表示する構成とします。
+
+import hou
+
+def create_custom_ui():
+    """カスタムUIを表示"""
+    
     # 現在のデスクトップを取得
     desktop = hou.ui.curDesktop()
     
-    # Scene Viewer フローティングタブを作成
+    # SceneViewerフローティングタブを作成
     scene_tab = desktop.createFloatingPaneTab(
         hou.paneTabType.SceneViewer,
-        position=(100, 100),  # 任意の位置
-        size=(800, 600),      # 任意のサイズ
+        position=(100, 100),
+        size=(800, 600),
         python_panel_interface=None,
         immediate=True
     )
     
-    # Parameters フローティングタブを作成
+    # Parametersフローティングタブを作成
     parm_tab = desktop.createFloatingPaneTab(
         hou.paneTabType.Parm,
-        position=(950, 100),  # Scene Viewer の右側に配置
-        size=(300, 600),      # 任意のサイズ
+        position=(950, 100),
+        size=(300, 600),
         python_panel_interface=None,
         immediate=True
     )
 
+●コマンドラインによる起動
+GUI構築処理をHoudiniの起動時に実行したいため、コマンドラインからHoudiniを起動し、起動後にPythonスクリプトを呼び出す方式とします。
+具体的には、コマンドラインオプションwaitforuiを使用し、HoudiniのGUIが利用可能になったタイミングでGUI構築処理を実行します。
 
-#### m a i n #####################################
-hide_ui_elements()
+・ドキュメント
+houdini -foreground myscript.cmd waitforui setupshelf.py my.hip
+この例では、Houdiniは、即座にmyscript.cmdを読み込みますが、GUIが利用できる状態になるまでは、setupshelf.pyとmy.hipが読み込まれません。
+これは、特定のUI要素(例:デスクトップ、シェルフ、ペインなど)を必要とするスクリプトを動作させるのに役に立ちます。
 
-open_scene_and_parameters()
+以上を踏まえ、以下のようにコマンドラインからHoudiniを起動することで、起動時にカスタム状態のGUIが表示されるようにします。
+houdini waitforui setup_gui.py
+
+
+■操作制限
+・不要なショートカットキーの無効化
+
+
+
+■参考資料
+●GUI
+・HOMクックブック Qt
+https://www.sidefx.com/ja/docs/houdini/hom/cb/qt.html
+・hou.qt package
+https://www.sidefx.com/ja/docs/houdini/hom/hou/qt/index.html
+・デスクトップとペイン
+https://www.sidefx.com/ja/docs/houdini/basics/panes.html
+・コマンドラインからHoudiniを起動
+https://www.sidefx.com/ja/docs/houdini/ref/commandline.html
+
+●操作制限
+・Pythonステート ユーザインターフェースイベント
+https://www.sidefx.com/ja/docs/houdini/hom/state_events.html
+・Pythonで独自のViewer Stateを記述する方法
+https://www.sidefx.com/ja/docs/houdini/hom/python_states.html
+・Pythonハンドル イベント
+https://www.sidefx.com/ja/docs/houdini/hom/handle_events.html
