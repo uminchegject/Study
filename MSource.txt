@@ -75,7 +75,23 @@ houdini waitforui setup_gui.py
 
 
 ■操作制限
-・不要なショートカットキーの無効化
+○QTの操作管理
+HDAのパラメーターやカスタムGUIの操作管理は、QT周りの処理から管理を行う必要がありそうです。
+hou.qt packageに入力に関する処理が複数確認できたのでそれらの中から必要な処理を使用し管理するように実装する予定です。
+・Houdiniで始めるGUIツール作成【PySide2】
+https://qiita.com/70_cg_art/items/2cf6a4b82b23a0f303ad
+
+○Viewer Stateの操作管理
+ビュワーの操作周りについてはpython viewer stateで操作周りの管理を行うことができそうです。
+viewer stateの管理方法については現在調査中です。
+・Pythonステート ユーザインターフェースイベント
+https://www.sidefx.com/ja/docs/houdini/hom/state_events.html
+・Pythonで独自のViewer Stateを記述する方法
+https://www.sidefx.com/ja/docs/houdini/hom/python_states.html
+・Houdini Python Viewer State イベントハンドラーの基本とマウスイベントを扱う手順
+https://houdinifx.jp/blog/houdini-python-viewer-state-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%83%BC%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%A4%E3%83%99%E3%83%B3/
+・Viewer Stateのマウスの入力イベント
+https://technical-notes.com/houdini/2024/09/10/viewer-state-mouse-event/
 
 
 
