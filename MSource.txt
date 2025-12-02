@@ -1,30 +1,48 @@
-■Houdiniバージョン管理
-○差分の調査
-コンフリクトの洗い出し
+# --- Step2: Houdini UI の一部を隠す検証コード ---
 
-○ドキュメント整理
-・ASCIIのデータ構造
-・ASCIIのノードデータ構造
-・ASCIIHIPのデータ構造
-・ASCIIHDAのデータ構造
+import hou
+from PySide2 import QtWidgets
+
+def list_ui_objects():
+    """デバッグ用：Houdini メインウィンドウの子 Widgets を一覧表示"""
+    mw = hou.qt.mainWindow()
+    for child in mw.findChildren(QtWidgets.QWidget):
+        print(child.objectName(), " : ", type(child))
+
+def hide_ui_elements():
+    """判明している UI の一部を隠す"""
+    mw = hou.qt.mainWindow()
+
+    for child in mw.findChildren(QtWidgets.QWidget):
+        child.hide()
+
+    mw.resize(200, 200)
+
+def open_scene_and_parameters():
+    """シーンとパラメーターを表示"""
+    # 現在のデスクトップを取得
+    desktop = hou.ui.curDesktop()
+    
+    # Scene Viewer フローティングタブを作成
+    scene_tab = desktop.createFloatingPaneTab(
+        hou.paneTabType.SceneViewer,
+        position=(100, 100),  # 任意の位置
+        size=(800, 600),      # 任意のサイズ
+        python_panel_interface=None,
+        immediate=True
+    )
+    
+    # Parameters フローティングタブを作成
+    parm_tab = desktop.createFloatingPaneTab(
+        hou.paneTabType.Parm,
+        position=(950, 100),  # Scene Viewer の右側に配置
+        size=(300, 600),      # 任意のサイズ
+        python_panel_interface=None,
+        immediate=True
+    )
 
 
-■hip ascii and diff
-○Compare機能の検証
-・File -> Show Change... を実行し、Compareパネルを表示
-・Compare項目のFileから比較したいファイルを指定する
-・Compareボタンを押して差分を比較
+#### m a i n #####################################
+hide_ui_elements()
 
-・あくまでもテキストの差分確認のみを行っている
-
-○HDAの差分表示
-・Asset -> Asset Manager を実行し、Asset Managerパネルを表示
-
-
-■USD
-○Tutorialを用いた実践
-
-
-■SOLARIS
-○サンプルプロジェクトの調査
-
+open_scene_and_parameters()
