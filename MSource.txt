@@ -1,115 +1,64 @@
-■GUIの表示
-●PySide2によるGUIの構築
-PySide2を使用してカスタムGUIを構築する処理を実装します。
-処理の概要は、主に以下の2点です。
-*EditorのGUIを非表示にする
-*必要なビューをFloatingPaneとして表示する
+■Bat
+@ECHO OFF
+REM ==============================================
+REM houdiniのパス、hipファイルのパス、Pythonソースのパスを最初に設定してください
+SET HOUDINI_ROOT=C:\Program Files\Side Effects Software\Houdini 20.5.487
+SET HIP_FILE=C:\Users\yusuke.nakamura\Desktop\test.hip
+SET PYTHON_SCRIPT=C:\Users\yusuke.nakamura\Desktop\test.py
+REM ==============================================
 
-●EditorのWidgetを隠す
-hou.qt.mainWindowから子Widgetを取得し、それらを非表示にします。
-あわせて、メインWidgetのウィンドウサイズを小さく設定します。
+REM パスに Houdini の bin ディレクトリを追加
+SET PATH=%PATH%;%HOUDINI_ROOT%\bin
 
+REM Houdini を起動してプロジェクトとスクリプトを実行
+houdini.exe -s build %HIP_FILE% waitforui %PYTHON_SCRIPT%
+
+
+■Python
 import hou
 from PySide2 import QtWidgets
 
-def hide_editor_ui_elements():
-    """メインのGUIを隠す"""
+# 選択するノード
+select_node_path = "/obj/box1/box1"
+select_node = hou.node(select_node_path)
 
-    # メインWidgetを取得
-    main_widget = hou.qt.mainWindow()
+# 既存の選択をクリアしてノードを選択
+hou.clearAllSelected() 
+select_node.setSelected(True, clear_all_selected=False)
 
-    # 子Widgetを全て隠す
-    for child_widget in main_widget.findChildren(QtWidgets.QWidget):
-        child_widget.hide()
+# 表示ノードを切り替え
+display_node_path = "/obj/box1/box1"
+display_node = hou.node(display_node_path)
+display_node.setDisplayFlag(True)
 
-    # 子Widgetを全て隠し、何も表示されていないメインWidgetを小さく設定
-    main_widget.resize(200, 200)
-    
-    # メインWidgetをHide
-    # main_widget.hide()
-    
-    # メインWidgetを最小化
-    # main_widget.showMinimized()
+# 全てのペインでタブを非表示
+for pane in hou.ui.panes():
+    pane.setShowPaneTabs(False)
 
-●必要なビューをFloatingPaneとして表示する
-必要なビューをフローティングペインとして表示します。
-今回はテストとして、シーンタブとパラメータタブをフローティングペインで表示する構成とします。
+# ペインタブごとの表示設定
+for tab in hou.ui.paneTabs():
+    if tab.type() != hou.paneTabType.NetworkEditor:
+        tab.setShowNetworkControls(False)
 
-import hou
+    if tab.type() == hou.paneTabType.Parm:
+        tab.setShowNetworkControls(False)
+    elif tab.type() == hou.paneTabType.SceneViewer:
+        tab.showDisplayOptionsBar(False)
+        tab.showOperationBar(False)
+        tab.showSelectionBar(False)
+        if tab.includeColorCorrectionBar():
+            tab.showColorCorrectionBar(False)
+        if tab.includeMemoryBar():
+            tab.showMemoryBar(False)
+    else:
+        # その他のタブは閉じる
+        tab.close()
 
-def create_custom_ui():
-    """カスタムUIを表示"""
-    
-    # 現在のデスクトップを取得
-    desktop = hou.ui.curDesktop()
-    
-    # SceneViewerフローティングタブを作成
-    scene_tab = desktop.createFloatingPaneTab(
-        hou.paneTabType.SceneViewer,
-        position=(100, 100),
-        size=(800, 600),
-        python_panel_interface=None,
-        immediate=True
-    )
-    
-    # Parametersフローティングタブを作成
-    parm_tab = desktop.createFloatingPaneTab(
-        hou.paneTabType.Parm,
-        position=(950, 100),
-        size=(300, 600),
-        python_panel_interface=None,
-        immediate=True
-    )
+# ShelfDockを非表示
+hou.ui.curDesktop().shelfDock().show(False)
 
-●コマンドラインによる起動
-GUI構築処理をHoudiniの起動時に実行したいため、コマンドラインからHoudiniを起動し、起動後にPythonスクリプトを呼び出す方式とします。
-具体的には、コマンドラインオプションwaitforuiを使用し、HoudiniのGUIが利用可能になったタイミングでGUI構築処理を実行します。
+# MenuBarを非表示
+hou.setPreference('showmenu.val', ['0','1'][False])
 
-・ドキュメント
-houdini -foreground myscript.cmd waitforui setupshelf.py my.hip
-この例では、Houdiniは、即座にmyscript.cmdを読み込みますが、GUIが利用できる状態になるまでは、setupshelf.pyとmy.hipが読み込まれません。
-これは、特定のUI要素(例:デスクトップ、シェルフ、ペインなど)を必要とするスクリプトを動作させるのに役に立ちます。
-
-以上を踏まえ、以下のようにコマンドラインからHoudiniを起動することで、起動時にカスタム状態のGUIが表示されるようにします。
-houdini waitforui setup_gui.py
-
-
-■操作制限
-○QTの操作管理
-HDAのパラメーターやカスタムGUIの操作管理は、QT周りの処理から管理を行う必要がありそうです。
-hou.qt packageに入力に関する処理が複数確認できたのでそれらの中から必要な処理を使用し管理するように実装する予定です。
-・Houdiniで始めるGUIツール作成【PySide2】
-https://qiita.com/70_cg_art/items/2cf6a4b82b23a0f303ad
-
-○Viewer Stateの操作管理
-ビュワーの操作周りについてはpython viewer stateで操作周りの管理を行うことができそうです。
-viewer stateの管理方法については現在調査中です。
-・Pythonステート ユーザインターフェースイベント
-https://www.sidefx.com/ja/docs/houdini/hom/state_events.html
-・Pythonで独自のViewer Stateを記述する方法
-https://www.sidefx.com/ja/docs/houdini/hom/python_states.html
-・Houdini Python Viewer State イベントハンドラーの基本とマウスイベントを扱う手順
-https://houdinifx.jp/blog/houdini-python-viewer-state-%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A9%E3%83%BC%E3%81%AE%E5%9F%BA%E6%9C%AC%E3%81%A8%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%A4%E3%83%99%E3%83%B3/
-・Viewer Stateのマウスの入力イベント
-https://technical-notes.com/houdini/2024/09/10/viewer-state-mouse-event/
-
-
-
-■参考資料
-●GUI
-・HOMクックブック Qt
-https://www.sidefx.com/ja/docs/houdini/hom/cb/qt.html
-・hou.qt package
-https://www.sidefx.com/ja/docs/houdini/hom/hou/qt/index.html
-・デスクトップとペイン
-https://www.sidefx.com/ja/docs/houdini/basics/panes.html
-・コマンドラインからHoudiniを起動
-https://www.sidefx.com/ja/docs/houdini/ref/commandline.html
-
-●操作制限
-・Pythonステート ユーザインターフェースイベント
-https://www.sidefx.com/ja/docs/houdini/hom/state_events.html
-・Pythonで独自のViewer Stateを記述する方法
-https://www.sidefx.com/ja/docs/houdini/hom/python_states.html
-・Pythonハンドル イベント
-https://www.sidefx.com/ja/docs/houdini/hom/handle_events.html
+# Stowbarsを非表示
+hou.ui.setHideAllMinimizedStowbars(True)
