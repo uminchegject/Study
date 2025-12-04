@@ -1,64 +1,72 @@
-■Bat
-@ECHO OFF
-REM ==============================================
-REM houdiniのパス、hipファイルのパス、Pythonソースのパスを最初に設定してください
-SET HOUDINI_ROOT=C:\Program Files\Side Effects Software\Houdini 20.5.487
-SET HIP_FILE=C:\Users\yusuke.nakamura\Desktop\test.hip
-SET PYTHON_SCRIPT=C:\Users\yusuke.nakamura\Desktop\test.py
-REM ==============================================
+■hou.qtの管理
+●key_resolve_info_callback・unregisterKeyResolveInfoCallback
+QWidgetにHotKeyをインストール及びアンインストールする処理です。
+実装の際は、contextsを用意してシーンビュータブとパラメータータブに用意したコンテクストを設定します。
 
-REM パスに Houdini の bin ディレクトリを追加
-SET PATH=%PATH%;%HOUDINI_ROOT%\bin
+# 設定したいコンテキストを渡す
+def key_resolve_info_callback(q_widget, **kwargs):
+	return {'contexts':['h.my.widget.context']}
+# hotkeyにコンテキストをインストール
+hou.qt.registerKeyResolveInfoCallback(q_widget, self.key_resolve_info_callback)
 
-REM Houdini を起動してプロジェクトとスクリプトを実行
-houdini.exe -s build %HIP_FILE% waitforui %PYTHON_SCRIPT%
+# hotkeyに設定されているコンテキストをアンインストール
+hou.qt.unregisterKeyResolveInfoCallback(q_widget)
 
 
-■Python
-import hou
-from PySide2 import QtWidgets
+●keyPressEvent
+QWidgetにキーの入力があった際に呼び出される処理。
+インストールしているHotKeyのイベントをが引数として取得できるため任意のイベントを無効化することができる。
+実装の際はシーンビューペイン、パラメーターペインのKeyPressEventをオーバーライドして、特定のイベントだけ無効化する対応をします。
+ただ、各Paneごとにqtが独立して存在しているため不透明なため、こちらの対応は厳しい可能性。
 
-# 選択するノード
-select_node_path = "/obj/box1/box1"
-select_node = hou.node(select_node_path)
+def keyPressEvent(self, event):
+	# 適応されるhotkeyの入力イベントからショートカットのシンボルを取得
+	symbol = hou.qt.resolveKeyEvent(event)
+	
+	# 特定のシンボルに処理を入れたい場合は照らし合わせを行い処理を追加する
+	if symbol == "h.my.widget.category.action":
+		# 追加処理
+		# ...
+		event.accept()
 
-# 既存の選択をクリアしてノードを選択
-hou.clearAllSelected() 
-select_node.setSelected(True, clear_all_selected=False)
 
-# 表示ノードを切り替え
-display_node_path = "/obj/box1/box1"
-display_node = hou.node(display_node_path)
-display_node.setDisplayFlag(True)
+■hou.hotkeysの管理
+●installDefinitions
+hotkeysを定義し、設定を行う対応方法です。
+シーンビューのcontextsとパラメーターのcontextsに編集を加える対応をとります。
+実際にcontextsデータに変更が入るのはまずいのでエディター上でのみバインドされた状態にした上で特定のhotkeyを無効化します。
 
-# 全てのペインでタブを非表示
-for pane in hou.ui.panes():
-    pane.setShowPaneTabs(False)
 
-# ペインタブごとの表示設定
-for tab in hou.ui.paneTabs():
-    if tab.type() != hou.paneTabType.NetworkEditor:
-        tab.setShowNetworkControls(False)
+# demoPythonステートにコマンドカテゴリを追加
+definitions = hou.PluginHotkeyDefinitions()
+demo_category = "h.pane.gview.state.sop.demo"
+definitions.addCommandCategory(demo_category, "demo Operation", "These actions apply to the demo operation")
 
-    if tab.type() == hou.paneTabType.Parm:
-        tab.setShowNetworkControls(False)
-    elif tab.type() == hou.paneTabType.SceneViewer:
-        tab.showDisplayOptionsBar(False)
-        tab.showOperationBar(False)
-        tab.showSelectionBar(False)
-        if tab.includeColorCorrectionBar():
-            tab.showColorCorrectionBar(False)
-        if tab.includeMemoryBar():
-            tab.showMemoryBar(False)
-    else:
-        # その他のタブは閉じる
-        tab.close()
+# demoPythonステートのコマンドカテゴリ下にコマンドを追加
+delete_symbol = demo_category + ".delete"
+definitions.addCommand(
+    delete_symbol,
+    "Delete Selected",
+    "Delete the selected geometry"
+)
+commit_symbol = demo_category + ".commit"
+definitions.addCommand(
+    commit_symbol,
+    "Commit Changes",
+    "Save changes to parameters and start a new cache"
+)
+cancel_symbol = demo_category + ".cancel"
+definitions.addCommand(
+    cancel_symbol,
+    "Cancel Changes",
+    "Discard any  changes and return to an empty cache"
+)
 
-# ShelfDockを非表示
-hou.ui.curDesktop().shelfDock().show(False)
+# demoPythonステートが自身のステートのキーバインドを保持するコンテキストを追加します。
+demo_context = "h.pane.gview.state.sop.demo"
+definitions.addContext(demo_context, "demo Operation", "These keys apply to the demo operation")
 
-# MenuBarを非表示
-hou.setPreference('showmenu.val', ['0','1'][False])
-
-# Stowbarsを非表示
-hou.ui.setHideAllMinimizedStowbars(True)
+# コマンドのデフォルトのキーバインドをそのコンテキストに追加します。
+definitions.addDefaultBinding(demo_context, delete_symbol, ("Del",))
+definitions.addDefaultBinding(demo_context, commit_symbol, ())
+definitions.addDefaultBinding(demo_context, cancel_symbol, ())
