@@ -1,72 +1,139 @@
-■hou.qtの管理
-●key_resolve_info_callback・unregisterKeyResolveInfoCallback
-QWidgetにHotKeyをインストール及びアンインストールする処理です。
-実装の際は、contextsを用意してシーンビュータブとパラメータータブに用意したコンテクストを設定します。
+■ドキュメント
+●HotKeysファイル
+HOUDINI_UI_PATH内のhoudini/config/HotkeysフォルダにHotKeyに関するデータが収納されています。
 
-# 設定したいコンテキストを渡す
-def key_resolve_info_callback(q_widget, **kwargs):
-	return {'contexts':['h.my.widget.context']}
-# hotkeyにコンテキストをインストール
-hou.qt.registerKeyResolveInfoCallback(q_widget, self.key_resolve_info_callback)
+・HotkeyActions.json
+ -各ホットキー情報を管理しているjsonデータ
+・HotkeyContexts.json
+ -各コンテキスト情報を管理しているjsonデータ
+・HotkeyDefaultBindings.json
+ -「デフォルトのキーバインド」を、コンテキストに対して割り当てるjsonデータ
+・hotkeysファイル
+ コンテキスト・アクション・キーバインドを行単位のテキスト形式で定義されているアスキーデータ。
+ 各コンテキストごとにデータが分かれており、Hotkeyの定義・割り当てがそれぞれ記述されている。
 
-# hotkeyに設定されているコンテキストをアンインストール
-hou.qt.unregisterKeyResolveInfoCallback(q_widget)
+以上を踏まえて、無効化したいhotkeysファイルから無効化したいホットキーデータを取得し、無効化する処理を実装します。
 
+●HotKeyの無効化処理
+Hotkeysファイルからコンテキストとアクション情報を取得し、下記処理で無効化を行います。
+clearAssignments(context, hotkey_symbol) → bool
+指定したコンテキスト内のホットキーシンボルに割り当てられているキーを削除します。
+ou.hotkeys.clearAssignments("h.pane.gview.state.sop.demo", "h.pane.gview.state.sop.demo.delete")
 
-●keyPressEvent
-QWidgetにキーの入力があった際に呼び出される処理。
-インストールしているHotKeyのイベントをが引数として取得できるため任意のイベントを無効化することができる。
-実装の際はシーンビューペイン、パラメーターペインのKeyPressEventをオーバーライドして、特定のイベントだけ無効化する対応をします。
-ただ、各Paneごとにqtが独立して存在しているため不透明なため、こちらの対応は厳しい可能性。
-
-def keyPressEvent(self, event):
-	# 適応されるhotkeyの入力イベントからショートカットのシンボルを取得
-	symbol = hou.qt.resolveKeyEvent(event)
-	
-	# 特定のシンボルに処理を入れたい場合は照らし合わせを行い処理を追加する
-	if symbol == "h.my.widget.category.action":
-		# 追加処理
-		# ...
-		event.accept()
+以上を踏まえ実装した無効化した処理が下記の通りにないます。
 
 
-■hou.hotkeysの管理
-●installDefinitions
-hotkeysを定義し、設定を行う対応方法です。
-シーンビューのcontextsとパラメーターのcontextsに編集を加える対応をとります。
-実際にcontextsデータに変更が入るのはまずいのでエディター上でのみバインドされた状態にした上で特定のhotkeyを無効化します。
+■ソース
+import hou
+import os
+import re
+from PySide2 import QtWidgets
+
+def select_node(node_path):
+    """
+    指定したノードを選択する関数
+    """
+    node = hou.node(node_path)
+    if node is None:
+        raise ValueError(f"指定されたノードパスが存在しません: {node_path}")
+
+    hou.clearAllSelected()
+    node.setSelected(True, clear_all_selected=False)
 
 
-# demoPythonステートにコマンドカテゴリを追加
-definitions = hou.PluginHotkeyDefinitions()
-demo_category = "h.pane.gview.state.sop.demo"
-definitions.addCommandCategory(demo_category, "demo Operation", "These actions apply to the demo operation")
+def display_node(node_path):
+    """
+    指定したノードを表示フラグを立てる関数
+    """
+    node = hou.node(node_path)
+    if node is None:
+        raise ValueError(f"指定されたノードパスが存在しません: {node_path}")
 
-# demoPythonステートのコマンドカテゴリ下にコマンドを追加
-delete_symbol = demo_category + ".delete"
-definitions.addCommand(
-    delete_symbol,
-    "Delete Selected",
-    "Delete the selected geometry"
-)
-commit_symbol = demo_category + ".commit"
-definitions.addCommand(
-    commit_symbol,
-    "Commit Changes",
-    "Save changes to parameters and start a new cache"
-)
-cancel_symbol = demo_category + ".cancel"
-definitions.addCommand(
-    cancel_symbol,
-    "Cancel Changes",
-    "Discard any  changes and return to an empty cache"
-)
+    node.setDisplayFlag(True)
 
-# demoPythonステートが自身のステートのキーバインドを保持するコンテキストを追加します。
-demo_context = "h.pane.gview.state.sop.demo"
-definitions.addContext(demo_context, "demo Operation", "These keys apply to the demo operation")
 
-# コマンドのデフォルトのキーバインドをそのコンテキストに追加します。
-definitions.addDefaultBinding(demo_context, delete_symbol, ("Del",))
-definitions.addDefaultBinding(demo_context, commit_symbol, ())
-definitions.addDefaultBinding(demo_context, cancel_symbol, ())
+def setup_gui():
+    """
+    不要なペインやバーを非表示にし、GUIをキオスクモードに構築する処理
+    """    
+    # ペインごとの表示設定
+    for pane in hou.ui.panes():
+        pane.setShowPaneTabs(False)
+        # シーンビュアーをペインに生成
+        if pane.tabOfType(hou.paneTabType.NetworkEditor, 0):
+            pane.createTab(hou.paneTabType.SceneViewer)
+
+    # ペインタブごとの表示設定
+    for tab in hou.ui.paneTabs():
+        # パラメーターペインタブの表示設定
+        if tab.type() == hou.paneTabType.Parm:
+            tab.setShowNetworkControls(False)
+        # シーンビュアーペインタブの表示設定
+        elif tab.type() == hou.paneTabType.SceneViewer:
+            tab.setShowNetworkControls(False)
+            tab.showDisplayOptionsBar(False)
+            tab.showOperationBar(False)
+            tab.showSelectionBar(False)
+            if tab.includeColorCorrectionBar():
+                tab.showColorCorrectionBar(False)
+            if tab.includeMemoryBar():
+                tab.showMemoryBar(False)
+        # その他のタブは閉じる
+        else:
+            tab.close()
+
+    # ShelfDockを非表示
+    hou.ui.curDesktop().shelfDock().show(False)
+
+    # MenuBarを非表示
+    hou.setPreference('showmenu.val', ['0','1'][False])
+
+    # Stowbarsを非表示
+    hou.ui.setHideAllMinimizedStowbars(True)
+
+
+def uninstall_hotkey():
+    """
+    不要なホットキーを無効化する
+    """ 
+    # ホットキーフォルダのファイルパス
+    file_path = r"C:\Program Files\Side Effects Software\Houdini 20.5.487\houdini\config\Hotkeys"
+    # 無効化したいhotkeyのコンテキスト情報をまとめる
+    hotkey_file_list = [
+        {"file_name": "h", "pattern": r'\bh\.\w+\b', "exclusion_hotkey": ["h", "h.undo", "h.redo", "h.copy", "h.paste"]},	
+        {"file_name": "h.pane", "pattern": r"h\.pane\S*", "exclusion_hotkey": ["h.pane"]},
+        {"file_name": "h.pane.parms", "pattern": r"h\.pane\.parms\S*", "exclusion_hotkey": ["h.pane.parms"]},
+        {"file_name": "h.pane.wsheet", "pattern": r"h\.pane\.wsheet\S*", "exclusion_hotkey": ["h.pane.wsheet"]},
+        {"file_name": "h.pane.gview", "pattern": r"h\.pane\.gview\S*", "exclusion_hotkey": ["h.pane.gview"]},
+        {"file_name": "h.pane.gview.state", "pattern": r"h\.pane\.gview\.state\S*", "exclusion_hotkey": ["h.pane.gview.state", "h.pane.gview.state.view.volatile_nav.forward", "h.pane.gview.state.view.volatile_nav.backward"]},
+        {"file_name": "h.pane.chlist", "pattern": r"h\.pane\.gview\.chlist\S*", "exclusion_hotkey": ["h.pane.chlist"]}
+    ]
+    
+    # 各コンテキストデータごとに無効化処理を行う
+    for hotkey_flie in hotkey_file_list:
+        pattern = hotkey_flie["pattern"]
+        file_name = hotkey_flie["file_name"]
+        exclusion_hotkey = hotkey_flie["exclusion_hotkey"]
+
+        # コンテキストデータのパスからアスキー情報を取得
+        full_path = os.path.join(file_path, file_name)        
+        with open(full_path, "r", encoding="utf-8") as f:            
+            hotkey_data = f.read()           
+            # シンボル情報をアスキーから抽出
+            symbol_list = re.findall(pattern, hotkey_data)            
+            for symbol in symbol_list:
+                # 無効化したくないキーを除外
+                if symbol in exclusion_hotkey:
+                    continue
+                # ホットキーを無効化
+                contexts = ".".join(symbol.split(".")[:-1])
+                hou.hotkeys.clearAssignments(contexts, symbol)
+
+
+## m a i n ###################################################
+select_node("/obj/box1/box1")
+display_node("/obj/box1/box1")
+
+setup_gui()
+
+uninstall_hotkey()
