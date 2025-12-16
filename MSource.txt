@@ -1,12 +1,157 @@
-mkdir build-maya2026
-cd build-maya2026
+
+■資料
+●GPT
+https://github.com/sideeffects/HoudiniEngineForMaya
+このサイトを参考にして、Houdini 20.5.487とMaya2025.3のビルドをしたい
+
+●コマンド
+mkdir build-maya2025
+cd build-maya2025
 
 cmake ^
-  -DHoudiniEngine_ROOT="C:/Program Files/Side Effects Software/Houdini 21.0.512" ^
-  -DMaya_ROOT="C:/Program Files/Autodesk/Maya2026" ^
-  -DMAYA_VERSION=2026 ^
-  -DCMAKE_INSTALL_PREFIX="../install-maya2026" ^
-  ..
+ -DHoudiniEngine_ROOT="C:/Program Files/Side Effects Software/Houdini 20.5.487" ^
+ -DMaya_ROOT="C:/Program Files/Autodesk/Maya2025" ^
+ -DMAYA_VERSION=2025 ^
+ -DCMAKE_INSTALL_PREFIX=../install_maya2025 ^
+ ..
 
-cmake --build . --config Release
-cmake --install .
+cmake --build . --config Release --target INSTALL
+
+
+●ソース修正
+・FindMaya.cmake
+if(NOT TARGET ${lib})
+	add_library( ${lib} SHARED IMPORTED )
+endif()
+・EngineCommand.C
+・plugin.C
+・util.C
+
+#include <HAPI/HAPI_Version.h>
+
+
+
+
+■ドキュメント
+●概要
+ReadMeのCompiling with CMakeの手順を参考に、visual studioのdeveloper command promptにてビルドを行う
+
+●コマンド
+cd ~/HoudiniEngineForMaya
+mkdir build-maya2018
+cd build-maya2018
+cmake \
+          -DHoudiniEngine_ROOT=/opt/hfs16.0.633 \
+          -DMaya_ROOT=/usr/autodesk/maya2018 \
+          -DCMAKE_INSTALL_PREFIX=../install-maya2018 \
+          -DMAYA_VERSION=2018 \
+          ..
+make && make install
+
+
+
+●環境
+・Houdini
+・Maya
+・VisualStudio
+・CMake
+CMakeLists.txtにcmake_minimum_required( VERSION 3.1 )と定義されているので3.1以上であれば問題ない
+
+
+
+●ソースの修正
+自分の環境でビルド検証を行った際、Git のソースではいくつか修正を行わないとビルドが通りませんでした。
+そのため、ビルドを行う際に 修正が必要な箇所をまとめました。
+これらを修正した上で、ビルド検証を行ってください。
+
+
+
+●説明
+すでに同じ名前のCMakeターゲットが定義されている状態で、add_library()により同名ターゲットを再度作成しようとしたためにエラーが発生しました。
+add_library()を実行する前に、対象のターゲットがすでに存在するかを確認し、存在しない場合のみ作成するように修正します。
+
+●エラー文
+CMake Error at cmake/Modules/FindMaya.cmake:108 (add_library): 
+	add_library cannot create imported target "Foundation" because another target with the same name already exists.
+Call Stack (most recent call first): CMakeLists.txt:32 (find_package)
+
+
+
+●説明
+CMakeLists.txt で以下の処理を行った際に、正常に呼び出せない可能性がある旨の警告が出ることがあります。
+CMake のポリシー CMP0074 が未設定であることが原因です。警告文に従い、以下を CMakeLists.txt に追加してポリシーを設定することで解決します。
+
+●エラー文
+CMake Warning (dev) at CMakeLists.txt:32 (find_package): Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables. 
+Run "cmake --help-policy CMP0074" for policy details. 
+Use the cmake_policy command to set the policy and suppress this warning. 
+CMake variable Maya_ROOT is set to: C:/Program Files/Autodesk/Maya2025 For compatibility, CMake is ignoring the variable. 
+This warning is for project developers. Use -Wno-dev to suppress it. 
+ 
+CMake Warning (dev) at CMakeLists.txt:34 (find_package): Policy CMP0074 is not set: find_package uses <PackageName>_ROOT variables. 
+Run "cmake --help-policy CMP0074" for policy details. 
+Use the cmake_policy command to set the policy and suppress this warning. 
+CMake variable HoudiniEngine_ROOT is set to: C:/Program Files/Side Effects Software/Houdini 20.5.487 For compatibility, CMake is ignoring the variable. 
+This warning is for project developers. Use -Wno-dev to suppress it.
+
+
+
+●説明
+未定義のマクロを使用しているため、コンパイルエラーが発生しています。
+これらのマクロは名前の通り HAPI_Version.h に定義されていますが、該当ファイルをインクルードしていないためエラーとなっています。
+対応として、該当ファイルをインクルードします。
+
+●エラー箇所
+EngineCommand.C
+plugin.C
+util.C
+
+●エラー文
+error C2065: 'HAPI_VERSION_HOUDINI_MAJOR': undeclared identifier
+error C2065: 'HAPI_VERSION_HOUDINI_MINOR': undeclared identifier
+error C2065: 'HAPI_VERSION_HOUDINI_BUILD': undeclared identifier
+error C2065: 'HAPI_VERSION_HOUDINI_ENGINE_MAJOR': undeclared identifier
+error C2065: 'HAPI_VERSION_HOUDINI_ENGINE_MINOR': undeclared identifier
+error C2065: 'HAPI_VERSION_HOUDINI_ENGINE_API': undeclared identifier
+
+
+
+●説明
+複数のソースで Platform.h をインクルードしているにも関わらず、比較的新しい Houdini バージョン（20 以降）の環境にはこのヘッダが存在しません。
+意図的に除外されたのかは不明ですが、ビルドには必須のため、Houdini 19.5 のバージョンのヘッダを取得してプロジェクトのインクルードフォルダに配置することで、ビルドが通ることを確認しました。
+Platform.h が抜けている原因は特定できなかったため、暫定対応として古いバージョンのヘッダを使用しています。
+
+●エラー箇所
+HoudiniApi.C
+Platform.C
+plugin.C
+
+●エラー文
+fatal  error C1083: Cannot open include file: 'Platform.h': No such file or directory
+
+
+
+●手順
+上記の準備（必要なヘッダやポリシー設定、CMakeLists 修正など）が完了したら、
+Developer Command Prompt for Visual Studio を開き、以下の手順でビルドを行います。
+
+//ソースフォルダに移動
+cd ~/HoudiniEngineForMaya
+
+//ビルド用フォルダを作成
+mkdir build-maya2026
+
+//ビルド用フォルダに移動
+cd build-maya2026
+
+//CMake でコンフィグレーションを構築
+cmake ^
+ -DHoudiniEngine_ROOT="C:/Program Files/Side Effects Software/Houdini ※バージョン" ^
+ -DMaya_ROOT="C:/Program Files/Autodesk/Maya2026" ^
+ -DMAYA_VERSION=2026 ^
+ -DCMAKE_INSTALL_PREFIX=../install_maya2026 ^
+ ..
+
+//ビルドおよびインストール
+cmake --build . --config Release --target INSTALL
+
