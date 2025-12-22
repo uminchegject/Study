@@ -1,13 +1,38 @@
-不具合調査にお時間頂いてしまい申し訳ございません。
-上記不具合の原因についてですが、
-モジュール定義ファイルに問題があり、具体的には環境変数を定義している2行目において、モジュールフォルダとHoudiniのbinフォルダを定義するソースに問題がありました。
+不具合調査にお時間を頂戴してしまい、申し訳ございません。
 
-自分の手元で挙動確認した際はCドライブ上でビルド作業を行ったため、下記の定義になっていますが、
-Dドライブ上だと下記の通りになります。
+上記不具合の原因についてですが、モジュール定義ファイルに問題があることを確認しました。
+具体的には、環境変数を定義している2行目において、モジュールフォルダおよび Houdini の bin フォルダを定義している記述に不備がありました。
 
-この、2つのパスが羅列してしまっている事象が原因でモジュールの読み込みができていないことを確認しました。
+私の手元で挙動確認を行った際は、Cドライブ上でビルド作業を行っていたため、定義は下記の内容となっていました。
++ houdiniEngine 1.0 C:/Users/yusuke.nakamura/Desktop/HoudiniEngineForMaya-Houdini20.5/install_maya2025/maya2025
+PATH += C:/Users/yusuke.nakamura/Desktop/HoudiniEngineForMaya-Houdini20.5/install_maya2025/maya2025/../../../../../../Program Files/Side Effects Software/Houdini 20.5.487/bin
+HOUDINI_DSO_EXCLUDE_PATTERN={CHOP_Mouse3D,COP2_GPULighting,COP2_GPUFog,COP2_GPUEnvironment,COP2_GPUZComposite,COP2_EnableGPU,SHOP_OGL,SOP_VDBUI,VEX_OpRender,USD_Ops}*
 
-以上を踏まえて2つの環境変数を下記の通り別々に設定することで読み込みができることを確認しました。
+一方、Dドライブ上に配置した場合は、以下のような定義となっていました。
++ houdiniEngine 1.0 D:/HoudiniEngineForMaya-Houdini20.5/install_maya2025/maya2025
+PATH += D:/HoudiniEngineForMaya-Houdini20.5/install_maya2025/maya2025/C:/Program Files/Side Effects Software/Houdini 20.5.487/bin
+HOUDINI_DSO_EXCLUDE_PATTERN={CHOP_Mouse3D,COP2_GPULighting,COP2_GPUFog,COP2_GPUEnvironment,COP2_GPUZComposite,COP2_EnableGPU,SHOP_OGL,SOP_VDBUI,VEX_OpRender,USD_Ops}*
 
-上記につきまして補足でドキュメントにも記載したので、お手数をおかけしますがご確認の程宜しくお願い致します。
+このように、2つのパスが連結された状態で記述されてしまっていることが原因で、モジュールの読み込みが正常に行われていないことを確認しました。
+上記を踏まえ、2つの環境変数を以下のように別々に設定することで、正常に読み込みが行えることを確認しています。
++ houdiniEngine 1.0 D:/HoudiniEngineForMaya-Houdini20.5/install_maya2025/maya2025
+PATH += D:/HoudiniEngineForMaya-Houdini20.5/install_maya2025/maya2025/
+PATH += C:/Program Files/Side Effects Software/Houdini 20.5.487/bin
+HOUDINI_DSO_EXCLUDE_PATTERN={CHOP_Mouse3D,COP2_GPULighting,COP2_GPUFog,COP2_GPUEnvironment,COP2_GPUZComposite,COP2_EnableGPU,SHOP_OGL,SOP_VDBUI,VEX_OpRender,USD_Ops}*
+
+以上を踏まえてCMake.txtにて上記設定がされるように修正を行いました。
+CMake.txtの修正内容についてはドキュメントに記載しましたので、
+お手数をおかけいたしますが、ご確認のほどよろしくお願いいたします。
+
 お手数をおかけしてしまい大変恐縮ですが、引き続きご確認の程宜しくお願い致します。
+
+
+●CMakeLists修正ソース
+string(
+    APPEND MODULE_DESCRIPTION_ABSOLUTE_ENVIRONMENTS
+    "PATH += ${install_module_absolute_dir}/\n"
+)
+string(
+    APPEND MODULE_DESCRIPTION_ABSOLUTE_ENVIRONMENTS
+    "PATH += ${install_module_dir_to_houdiniengine_bin_dir}\n"
+)
