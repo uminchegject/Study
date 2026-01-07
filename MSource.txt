@@ -1,134 +1,15 @@
-●get_hull_pts
-int num_pts = npoints(0);
-if (num_pts < 2){
-    return;
-}
-    
-int hull_pts[];
+●処理概要
+※ノードごとに画像を用意
+・boolean(seam)
+・凸包
+・パラメーターを参照し、メッシュを生成
+・マテリアルを設定
+ -mayaにおいて、meshにマテリアルが設定されず、頂点カラーが確認できないため
 
-// 最左下の点を取得
-int start_pt = 0;
-for (int i = 1; i < num_pts; i++)
-{
-    vector p = point(0,"P",i);
-    vector s = point(0,"P",start_pt);
-    if (p.x < s.x || (p.x == s.x && p.z < s.z)){
-        start_pt = i;
-    }
-}
-append(hull_pts, start_pt);
-
-// 最左下の点から外周のポイントを順に取得
-int current_pt = start_pt;
-while (1)
-{
-    int next_pt = -1;
-    for (int i = 0; i < num_pts; i++)
-    {
-        if (i == current_pt) continue;
-        if (next_pt == -1) {
-            next_pt = i; 
-            continue; 
-        }
-
-        vector current_pos = point(0, "P", current_pt);
-        vector next_candidate_pos = point(0, "P", next_pt);
-        vector test_candidate_pos = point(0, "P", i);
-        
-        vector to_next = next_candidate_pos - current_pos;
-        vector to_test = test_candidate_pos - current_pos;
-        
-        // 外積のy成分
-        float cross_y = to_next.x * to_test.z - to_next.z * to_test.x;
-        
-        // より左回りになる点を選択
-        if (cross_y < 0) {
-            next_pt = i;
-        }
-    }
-
-    // 一周したら終了
-    if (next_pt == start_pt) break; 
-        
-    append(hull_pts, next_pt);
-    current_pt = next_pt;
-}
-
-// 船のメッシュを削除
-for (int i = 0; i < nprimitives(0); i++)
-{
-    removeprim(0, i, 1);
-}
-
-// ポリライン生成
-int prim = addprim(0,"polyline");
-foreach (int idx; hull_pts)
-{
-    vector pos = point(0,"P",idx);
-    int pt = addpoint(0, pos);
-    addvertex(0, prim, pt);
-}
-addvertex(0, prim, hull_pts[0]);
-
-
-●create_mesh
-string param_name = "add_vertex";
-int prim_pts[] = primpoints(0, @primnum);
-int new_pts[];
-
-for(int param_index = 0; param_index < chi(param_name); ++param_index)
-{
-    //lampパラメーターから値を取得
-    float position = ch(param_name + itoa(param_index + 1) + "pos");
-    float value = ch(param_name + itoa(param_index + 1) + "value");
-    
-    //lampパラメーターの値からオフセット値、カラー値を設定
-    float offset = -ch("offset") * position;    
-    vector color = set(1, 0, 0);
-    color *= value;
-
-    // ポリラインのポイントを生成
-    int num_pts = len(prim_pts);
-    for (int i=0; i<num_pts; i++)
-    {
-        int pt = prim_pts[i];
-        vector pos = point(0, "P", pt);
-    
-        // 前後のポイント取得
-        int prev = prim_pts[i == 0 ? num_pts - 1 : i - 1];
-        int next = prim_pts[(i + 1) % num_pts];
-        vector pos_prev = point(0, "P", prev);
-        vector pos_next = point(0, "P", next);
-    
-        // 接線ベクトル
-        vector tangent = normalize(pos_next - pos_prev);
-    
-        // 法線ベクトル
-        vector normal = set(-tangent.z, 0, tangent.x);
-    
-        // 新しいポイントを追加
-        vector new_pos = pos + normal * offset;
-        int new_pt = addpoint(0, new_pos);
-        setpointattrib(0, "Cd", new_pt, color);
-        append(new_pts, new_pt);
-    }
-    
-    //for文の最初はpoint生成のみ
-    if(param_index == 0) continue;
-
-    //メッシュを生成
-    for (int i = 0; i < num_pts; i++)
-    {
-        int i2 = (i + 1) % num_pts;
-        int poly_pts[] = array(
-            new_pts[num_pts * param_index + i],
-            new_pts[num_pts * param_index + i2],
-            new_pts[num_pts * (param_index - 1) + i2],
-            new_pts[num_pts * (param_index - 1) + i]
-        );
-        addprim(0, "poly", poly_pts);
-    }   
-}
-
-//基礎のポリラインを削除
-removeprim(0, @primnum, 1);
+●使用手順
+・HDAのロード
+・パラメーターの説明
+ -offset
+ -color_ramp
+ -sea_level
+・Meshにインプットし、パラメーターで調整
