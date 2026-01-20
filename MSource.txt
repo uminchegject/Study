@@ -1,15 +1,10 @@
-●処理概要
-※ノードごとに画像を用意
-・boolean(seam)
-・凸包
-・パラメーターを参照し、メッシュを生成
-・マテリアルを設定
- -mayaにおいて、meshにマテリアルが設定されず、頂点カラーが確認できないため
+$log = "sample.log"
 
-●使用手順
-・HDAのロード
-・パラメーターの説明
- -offset
- -color_ramp
- -sea_level
-・Meshにインプットし、パラメーターで調整
+function Log($msg) {
+    "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') $msg" |
+        Out-File $log -Append -Encoding UTF8
+}
+
+Log "start"
+Log "middle"
+Log "end"
