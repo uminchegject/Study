@@ -1,10 +1,14 @@
-$log = "sample.log"
+import sys
+import json
+from pathlib import Path
 
-function Log($msg) {
-    "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') $msg" |
-        Out-File $log -Append -Encoding UTF8
+output_path = Path("/tmp/sys_path.json")  # ← ここを好きなパスに
+
+data = {
+    "sys_path": sys.path
 }
 
-Log "start"
-Log "middle"
-Log "end"
+output_path.parent.mkdir(parents=True, exist_ok=True)
+
+with output_path.open("w", encoding="utf-8") as f:
+    json.dump(data, f, indent=2, ensure_ascii=False)
