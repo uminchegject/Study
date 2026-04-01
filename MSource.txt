@@ -1,14 +1,134 @@
-import sys
-import json
-from pathlib import Path
+●参照資料
+・SdfFileFormat Class Reference
+https://openusd.org/dev/api/class_sdf_file_format.html#details
+・SdfAbstractData Class Reference
+https://openusd.org/dev/api/class_sdf_abstract_data.html#details
 
-output_path = Path("/tmp/sys_path.json")  # ← ここを好きなパスに
+●UsdAbcAlembicFileFormat
+ファイル形式ごとの処理を作るためのクラス SdfFileFormat を継承して実装されています。
+書き込み処理を行う場合は、親クラスのWrite系関数をオーバーライドする必要があり、
+WriteToFile 関数内で UsdAbc_AlembicData を定義して、これを利用して実際の書き込み処理を呼び出す仕組みになっています。
 
-data = {
-    "sys_path": sys.path
+bool
+UsdAbcAlembicFileFormat::WriteToFile(
+    const SdfLayer& layer,
+    const std::string& filePath,
+    const std::string& comment,
+    const FileFormatArguments& args) const
+{
+    // Write.
+    SdfAbstractDataConstPtr data = _GetLayerData(layer);
+    return TF_VERIFY(data) && UsdAbc_AlembicData::Write(data, filePath, comment);
 }
 
-output_path.parent.mkdir(parents=True, exist_ok=True)
 
-with output_path.open("w", encoding="utf-8") as f:
-    json.dump(data, f, indent=2, ensure_ascii=False)
+●AlembicData
+シーン記述データを格納するクラス SdfAbstractData を継承して実装されています。
+書き込み処理では、WriteToFile 関数内から UsdAbc_AlembicData::Write を呼び出し、
+Write 関数では UsdAbc_AlembicDataWriter を作成した上で、Open、Write、Close の順に呼び出して Alembic ファイルを書き出します。
+
+bool
+UsdAbc_AlembicData::Write(
+    const SdfAbstractDataConstPtr& data,
+    const std::string& filePath,
+    const std::string& comment)
+{
+    TfAutoMallocTag2 tag("UsdAbc_AlembicData", "UsdAbc_AlembicData::Write");
+    TRACE_FUNCTION();
+
+    std::string finalComment = comment;
+    if (data && finalComment.empty()) {
+        VtValue value = data->Get(
+            SdfPath::AbsoluteRootPath(), SdfFieldKeys->Comment);
+        if (value.IsHolding<std::string>()) {
+            finalComment = value.UncheckedGet<std::string>();
+        }
+    }
+
+    // Prepare the writer.
+    UsdAbc_AlembicDataWriter writer;
+    //writer.SetFlag(UsdAbc_AlembicContextFlagNames->verbose);
+
+    // Write the archive.
+    if (writer.Open(filePath, finalComment)) {
+        if (writer.Write(data) && writer.Close()) {
+            return true;
+        }
+        TfDeleteFile(filePath);
+    }
+    TF_RUNTIME_ERROR("Alembic error: %s", writer.GetErrors().c_str());
+    return false;
+}
+
+
+●AlembicDataWriter
+AlembicDataWriter は、Alembic ファイルの書き込み処理を管理するクラスです。
+内部で _WriterContext クラスを定義し、これを用いて Open、Write、Close の3つの関数で書き込み処理を実行します。
+
+bool
+UsdAbc_AlembicDataWriter::Open(
+    const std::string& filePath,
+    const std::string& comment)
+{
+    TRACE_FUNCTION();
+
+    _errorLog.clear();
+
+    const std::string dir = TfGetPathName(filePath);
+    if (!dir.empty() && !TfIsDir(dir) && !TfMakeDirs(dir)) {
+        TF_RUNTIME_ERROR("Could not create directory '%s'", dir.c_str());
+        return false;
+    }
+
+    try {
+        _impl->SetArchive(
+            CreateArchiveWithInfo(Alembic::AbcCoreOgawa::WriteArchive(),
+                                  filePath, writerName, comment));
+        return true;
+    }
+    catch (std::exception& e) {
+        _errorLog.append(e.what());
+        _errorLog.append("\n");
+        return false;
+    }
+}
+
+bool
+UsdAbc_AlembicDataWriter::Write(const SdfAbstractDataConstPtr& data)
+{
+    TRACE_FUNCTION();
+
+    try {
+        if (_impl->GetArchive().valid() && data) {
+            const _WriterSchema& schema = _GetSchema();
+            _impl->SetSchema(&schema);
+            _impl->SetData(data);
+            _WritePrim(*_impl, _Parent(), SdfPath::AbsoluteRootPath());
+        }
+        return true;
+    }
+    catch (std::exception& e) {
+        _errorLog.append(e.what());
+        _errorLog.append("\n");
+        return false;
+    }
+}
+
+bool
+UsdAbc_AlembicDataWriter::Close()
+{
+    TRACE_FUNCTION();
+
+    // Alembic does not appear to be robust when closing an archive.
+    // ~AwImpl does real writes and the held std::ostream is configured
+    // to throw exceptions, so any exceptions when writing should leak
+    // from the d'tor.  This is a fatal error.
+    //
+    // For now we just destroy the archive and don't bother looking for
+    // errors.
+    _impl->SetArchive(OArchive());
+    return true;
+}
+
+●_WriterContext
+このクラスからAlembicライブラリ関数を呼び出して書き込み処理を呼び出しています。
