@@ -1,6 +1,56 @@
+●コマンド
+cd C:\Users\yusuke.nakamura\AppData\Local\Programs\Python\Python39
+python D:\OpenUSD\build_scripts\build_usd.py D:\OpenUSD_Debug_Build --build-variant debug --alembic
+python D:\OpenUSD\build_scripts\build_usd.py D:\OpenUSD_Adobe_Build --onetbb --no-examples --draco --openimageio --build-variant release
+  
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=bin -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="/utf-8"^
+  -Dpxr_ROOT=D:\OpenUSD_Adobe_Build ^
+  -DUSD_FILEFORMATS_ENABLE_OBJ=ON ^
+  -DUSD_FILEFORMATS_ENABLE_FBX=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_GLTF=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_PLY=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_SPZ=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_STL=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_SBSAR=OFF ^
+  
+cmake --build   build --config release
+cmake --install build --config release
+
+set TF_DEBUG=PLUG_* && usdview test.usd
+
+cmake -S . -B debug_build -DCMAKE_INSTALL_PREFIX=bin -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="/utf-8"^
+  -Dpxr_ROOT=D:\OpenUSD_Adobe_Debug_Build ^
+  -DUSD_FILEFORMATS_ENABLE_OBJ=ON ^
+  -DUSD_FILEFORMATS_ENABLE_FBX=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_GLTF=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_PLY=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_SPZ=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_STL=OFF ^
+  -DUSD_FILEFORMATS_ENABLE_SBSAR=OFF
+
+cmake --build debug_build --config Debug
+cmake --install debug_build --config Debug
+
+
+■処理
+●Obj
+-readLayer
+ -readPrim
+ -readMeshOrPoints
+  -readMeshOrPointsData
+-exportObj
+ -writeNode
+  -exportMesh
+-writeObj
+ -writeObjHeader(comments)
+ -writeObjGeometry(objects)
+
+●Alembic
+※旧ドキュメントベース
+
+
 ■概要
 alembicプラグインとobjプラグインの2つの処理を比較しながら調査を行いました。
-
 
 
 ■fileformatplugin
