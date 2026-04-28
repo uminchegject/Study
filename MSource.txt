@@ -1,595 +1,416 @@
-●コマンド
-cd C:\Users\yusuke.nakamura\AppData\Local\Programs\Python\Python39
-python D:\OpenUSD\build_scripts\build_usd.py D:\OpenUSD_Debug_Build --build-variant debug --alembic
-python D:\OpenUSD\build_scripts\build_usd.py D:\OpenUSD_Adobe_Build --onetbb --no-examples --draco --openimageio --build-variant release
-  
-cmake -S . -B build -DCMAKE_INSTALL_PREFIX=bin -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="/utf-8"^
-  -Dpxr_ROOT=D:\OpenUSD_Adobe_Build ^
-  -DUSD_FILEFORMATS_ENABLE_OBJ=ON ^
-  -DUSD_FILEFORMATS_ENABLE_FBX=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_GLTF=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_PLY=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_SPZ=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_STL=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_SBSAR=OFF ^
-  
-cmake --build   build --config release
-cmake --install build --config release
+■usda
+#usda 1.0
+(
+    defaultPrim = "root"
+)
 
-set TF_DEBUG=PLUG_* && usdview test.usd
-
-cmake -S . -B debug_build -DCMAKE_INSTALL_PREFIX=bin -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="/utf-8"^
-  -Dpxr_ROOT=D:\OpenUSD_Adobe_Debug_Build ^
-  -DUSD_FILEFORMATS_ENABLE_OBJ=ON ^
-  -DUSD_FILEFORMATS_ENABLE_FBX=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_GLTF=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_PLY=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_SPZ=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_STL=OFF ^
-  -DUSD_FILEFORMATS_ENABLE_SBSAR=OFF
-
-cmake --build debug_build --config Debug
-cmake --install debug_build --config Debug
-
-
-■処理
-●Obj
--readLayer
- -readPrim
- -readMeshOrPoints
-  -readMeshOrPointsData
--exportObj
- -writeNode
-  -exportMesh
--writeObj
- -writeObjHeader(comments)
- -writeObjGeometry(objects)
-
-●Alembic
-※旧ドキュメントベース
-
-
-■概要
-alembicプラグインとobjプラグインの2つの処理を比較しながら調査を行いました。
-
-
-■fileformatplugin
-●WriteToFile WriteToStream, WriteToString
-SdfFileFormat クラスには、書き込み処理を行う抽象関数として以下の3つがあります。
-他フォーマットへの書き込みを実装する際は、基本的に WriteToFile をオーバーライドするのがメインです。
-
-・WriteToFile
-* SdfLayer全体をファイルへ書き出すAPI
-* 出力先はディスク上のファイルパス
-
-・WriteToStream
-* SdfSpec（PrimやPropertyなど）をストリームへ書き出すAPI
-* 出力先はstd::ostream（cout / file stream / stringstream など）
-
-・WriteToString
-* SdfLayer全体を文字列へ書き出すAPI
-* 出力先はstd::string
-
-
-●alembic_pluginの実装
-SdfFileFormatクラスを継承し、WriteToFile関数をオーバーライドして書き込み処理を実装しています
-
-bool UsdAbcAlembicFileFormat::WriteToFile(
-    const SdfLayer& layer,
-    const std::string& filePath,
-    const std::string& comment,
-    const FileFormatArguments& args) const
+def Xform "root"
 {
-    // Layer から内部データを取得
-    SdfAbstractDataConstPtr data = _GetLayerData(layer);
-	
-	// データ取得に失敗した場合は false && Alembic形式で書き込み
-    return TF_VERIFY(data) && UsdAbc_AlembicData::Write(data, filePath, comment);
-}
-
-●adobe_obj_pluginの実装
-UsdObjFileFormat クラスで WriteToFile 関数をオーバーライドし、USD レイヤを読み込んで OBJ データに変換し、OBJ ファイルとして書き出す処理を実装しています
-
-UsdObjFileFormat::WriteToFile(
-    const SdfLayer& layer,
-    const std::string& filename,
-    const std::string& comment,
-    const FileFormatArguments& args) const
-{
-    // 処理時間計測用のストップウォッチを作成・開始
-    TfStopwatch w;
-    w.Start();
-
-    // デバッグログ出力：どのファイルを書き込むか表示
-    TF_DEBUG_MSG(FILE_FORMAT_OBJ, "WriteToFile: %s\n", filename.c_str());
-
-    // USDデータとOBJデータを格納するオブジェクトを用意
-    UsdData usd;   // USDレイヤを読み込むための中間データ
-    Obj obj;       // OBJ形式に変換するためのデータ構造
-
-    // USDレイヤ読み込み時のオプション設定
-    ReadLayerOptions layerOptions;
-    layerOptions.flatten = true;        // 階層構造を平坦化
-    layerOptions.ignoreInvisible = true; // 非表示プリムは無視
-
-    // FileFormatArguments から OBJ 出力用のオプションを取得
-    argReadString(args, "outputColorSpace", obj.outputColorSpace, DEBUG_TAG);
-
-    // OBJ書き出し用のオプション設定
-    ExportObjOptions options;
-    options.filename = filename;
-
-    // -------------------------------
-    // メイン処理
-    // -------------------------------
-
-    // 1. USDレイヤの読み込み
-    GUARD(readLayer(layerOptions, layer, usd, DEBUG_TAG),
-          "Error reading USD\n");
-
-    // 2. USDデータをOBJデータに変換
-    GUARD(exportObj(options, usd, obj),
-          "Error translating USD to OBJ\n");
-
-    // 3. OBJファイルとして書き込み
-    GUARD(writeObj(obj, filename, false),
-          "Error writing OBJ to %s\n", filename.c_str());
-
-    // -------------------------------
-    // 処理時間計測終了
-    // -------------------------------
-    w.Stop();
-
-    // デバッグログ出力：処理にかかった時間
-    TF_DEBUG_MSG(FILE_FORMAT_OBJ, "Total time: %ld\n",
-                 static_cast<long int>(w.GetMilliseconds()));
-
-    // 書き込み成功
-    return true;
-}
-
-
-■Obj_Plugin(Adobe)の書き込み処理概要
-USD データの読み込みから OBJ ファイル出力までの流れは、readLayer、exportObj、writeObj の順に処理されます。
-readLayer では USD ステージを走査し、プリムや属性、アニメーション情報を UsdData に格納します。
-exportObj では UsdData を元に座標系・単位・マテリアル・メッシュ情報を OBJ データ構造に変換し、頂点・法線・UV・カラーなどをグループ単位で整理します。
-最後に writeObj で OBJ ファイルとして書き出し、マテリアルライブラリやテクスチャ画像も同時に出力されます。
-
-●readLayer
-readLayer は、USDステージの DefaultPrim が存在すればそれを起点に、
-存在しなければ全ルートプリムを再帰的に読み込み、プリムの属性・子プリム・アニメーション情報を UsdData に反映する処理です。
-
-```
-// UsdPrim defaultPrim を初期化（読み込む起点プリム）
-UsdPrim defaultPrim;
-
-// ステージに DefaultPrim が設定されているか確認
-if (ctx.stage->HasDefaultPrim()) {
-    // DefaultPrim を取得
-    defaultPrim = ctx.stage->GetDefaultPrim();
-
-    // 取得した DefaultPrim が有効か確認
-    if (!defaultPrim.IsValid()) {
-        // 無効な場合は警告を出力
-        TF_WARN("Stage has default prim %s, which is not valid",
-                ctx.stage->GetRootLayer()->GetDefaultPrim().GetText());
-    }
-}
-
-// 読み込み対象のプリムを決定
-if (defaultPrim) {
-    // DefaultPrim が有効なら、それを起点に再帰的に読み込む
-    readPrim(ctx, defaultPrim, -1);
-} else {
-    // DefaultPrim が存在しない場合は、PseudoRoot 配下のすべてのルートプリムを読み込む
-    for (const UsdPrim& rootPrim : ctx.stage->GetPseudoRoot().GetChildren()) {
-        readPrim(ctx, rootPrim, -1);
-    }
-}
-```
-
-プリムの書き込み処理に着目すると、
-readPrim でプリムの型を判定し、スコープ、ジオメトリ、カメラ、ライト、マテリアルなどそれぞれ専用の読み込み関数に振り分けています。
-```
-std::function<bool(ReadLayerContext&, UsdPrim, int)> f;
-
-if (prim.IsA<UsdGeomScope>()) {
-    // スコーププリム
-    f = readScope;
-} else if (prim.IsA<UsdGeomXform>()) {
-    // 変換プリム
-    f = readXform;
-} else if (prim.IsA<UsdGeomMesh>() || prim.IsA<UsdGeomPoints>()) {
-    // メッシュやポイントプリム
-    f = readMeshOrPoints;
-} else if (prim.IsA<UsdSkelRoot>()) {
-    // スケルトンルートプリム
-    f = readSkelRoot;
-} else if (prim.IsA<UsdShadeMaterial>()) {
-    // マテリアルプリム（parent は使用しない）
-    f = [](ReadLayerContext& ctx, const UsdPrim& prim, int /*parent*/) {
-        return readMaterial(ctx, prim);
-    };
-} else if (prim.IsA<UsdGeomCamera>()) {
-    // カメラプリム
-    f = readCamera;
-} else if (prim.IsA<UsdGeomPointInstancer>()) {
-    // ポイントインスタンサー
-    f = readPointInstancer;
-} else if (prim.IsA<UsdVolVolume>()) {
-    // ボリュームプリム
-    f = readVolume;
-} else if (prim.IsA<UsdLuxBoundableLightBase>() ||
-           prim.IsA<UsdLuxNonboundableLightBase>()) {
-    // ライトプリム
-    f = readLight;
-} else {
-    // 未知のプリム
-    f = readUnknown;
-}
-```
-さらに、UsdGeomMesh の場合に着目すると、readMeshOrPoints で UsdData 内にメッシュの枠を作成し、
-readMeshOrPointsData で頂点、法線、UV、マテリアル、サブセットなどの全データを実際に読み込む処理を行っています。
-
-
-
-●exportObj
-exportObj は、USDデータの座標系・単位・画像・マテリアル・メッシュ情報をOBJ形式に変換して書き出す処理です。
-メッシュの書き込み部分に着目すると、まずOBJ内にオブジェクトを作成し、
-writeNode でUSDノードを再帰的に探索してリーフノードのメッシュをOBJに書き出しています。
-```
-if (usd.meshes.size()) {
-    obj.objects.push_back(ObjObject()); // OBJ 内のオブジェクトを作成
-    ObjObject& o = obj.objects.back();
-    o.name = "Object_0";
-
-    for (size_t i = 0; i < usd.rootNodes.size(); i++) {
-        writeNode(obj, usd, usd.rootNodes[i], correctionTransform); 
-        // 再帰的にノードを探索し、リーフノードのメッシュをOBJに書き込み
-    }
-}
-```
-
-writeNode に着目すると、ノードのワールド変換に座標系補正を適用しつつ、
-スキン付きメッシュや静的メッシュをOBJに書き出し、子ノードも再帰的に処理しています。
-実際のメッシュ変換は exportMesh で行われ、
-USDメッシュの頂点・法線・UV・カラー・マテリアル・サブセットをOBJのグループに変換し、ワールド変換を適用して書き出します。
-```
-void
-writeNode(Obj& obj, const UsdData& usd, size_t nodeIndex, const GfMatrix4d& correctionTransform)
-{
-    // 対象ノードを取得
-    const Node& n = usd.nodes[nodeIndex];
-
-    // ノードのワールド変換行列に座標系補正を適用
-    GfMatrix4d finalWorldTransform = n.worldTransform * correctionTransform;
-
-    // スキン付きメッシュの書き出し
-    for (const auto& [skeletonIndex, meshIndices] : n.skinnedMeshes) {
-        for (int meshIndex : meshIndices) {
-            exportMesh(obj, usd, finalWorldTransform, nodeIndex, meshIndex);
-        }
-    }
-
-    // 静的メッシュの書き出し
-    for (int meshIndex : n.staticMeshes) {
-        exportMesh(obj, usd, finalWorldTransform, nodeIndex, meshIndex);
-    }
-
-    // 子ノードを再帰的に書き出す
-    for (size_t i = 0; i < n.children.size(); i++) {
-        writeNode(obj, usd, n.children[i], correctionTransform);
-    }
-}
-```
-
-
-
-●writeObj
-writeObj は、Obj データを指定されたファイルパスに OBJ 形式として書き出す処理で、
-ヘッダ情報、ジオメトリ情報、マテリアルライブラリ、テクスチャ画像の順にファイル出力を行っています。
-
-```
-bool writeObj(const Obj& obj, const std::string& filename, bool sameMaterialName)
-{
-    // 保存先ディレクトリを作成
-    const std::string& parentPath = TfGetPathName(filename);
-    TfMakeDirs(parentPath, -1, true);
-
-    // OBJ ファイルを開く
-    std::fstream objFile(filename, std::ios_base::out);
-    if (!objFile.is_open()) {
-        TF_WARN("Failed to open obj file \"%s\"", filename.c_str());
-        return false;
-    }
-
-    // ヘッダ情報を書き込み
-    writeObjHeader(obj, objFile);
-
-    // ジオメトリ情報を書き込み
-    writeObjGeometry(obj, objFile);
-
-    // マテリアルライブラリを書き込み
-    for (const ObjMaterialLibrary& library : obj.libraries) {
-        const std::string& mtlFilename = parentPath + library.filename;
-        std::fstream mtlFile(mtlFilename, std::ios_base::out);
-        if (!mtlFile.is_open()) {
-            TF_WARN("Failed to open obj material library file \"%s\"", mtlFilename.c_str());
-            return false;
-        }
-        writeObjMaterials(obj, library, mtlFile);
-    }
-
-    // テクスチャ画像を書き込み
-    for (const ImageAsset& image : obj.images) {
-        if (image.uri.empty()) continue;
-        const std::string& imgFilename = parentPath + image.uri;
-        const std::string& imgParentPath = TfGetPathName(imgFilename);
-        TfMakeDirs(imgParentPath, -1, true);
-
-        std::fstream textureFile(imgFilename, std::ios::out | std::ios::binary);
-        if (!textureFile.is_open()) {
-            TF_WARN("Failed to open texture file \"%s\"", imgFilename.c_str());
-            return false;
-        }
-        textureFile.write(reinterpret_cast<const char*>(image.image.data()), image.image.size());
-        textureFile.close();
-    }
-
-    return true;
-}
-```
-
-メッシュ周りの書き込みに着目すると、
-writeObjGeometry 内で OBJ フォーマットとして頂点・UV・法線・マテリアル・フェース情報を出力しています。
-```
-// OBJ の頂点、UV、法線を書き込む
-for (const ObjGroup& g : o.groups) {
-    // 頂点
-    for (const GfVec3f& v : g.vertices)
-        buffer.write("\nv {} {} {}", v[0], v[1], v[2]);
-
-    // UV
-    for (const GfVec2f& uv : g.uvs)
-        buffer.write("\nvt {} {}", uv[0], uv[1]);
-
-    // 法線
-    for (const GfVec3f& n : g.normals)
-        buffer.write("\nvn {} {} {}", n[0], n[1], n[2]);
-
-    // サブセット単位でマテリアル指定とフェース書き込み
-    for (const ObjSubset& s : g.subsets) {
-        if (s.material != -1)
-            buffer.write("\n\nusemtl {}", obj.materials[s.material].name);
-
-        for (const int& faceId : s.faces) {
-            buffer.write("\nf");
-            for (int f = faceOffsets[faceId]; f < faceOffsets[faceId] + g.faces[faceId]; f++) {
-                const bool hasTextures = f < static_cast<int>(g.uvIndices.size());
-                const bool hasNormals  = f < static_cast<int>(g.normalIndices.size());
-                if (hasTextures && hasNormals)
-                    buffer.write(" {}/{}/{}", g.indices[f]+vOffset, g.uvIndices[f]+vtOffset, g.normalIndices[f]+vnOffset);
-                else if (!hasTextures && !hasNormals)
-                    buffer.write(" {}", g.indices[f]+vOffset);
-                else if (hasTextures && !hasNormals)
-                    buffer.write(" {}/{}", g.indices[f]+vOffset, g.uvIndices[f]+vtOffset);
-                else if (!hasTextures && hasNormals)
-                    buffer.write(" {}//{}", g.indices[f]+vOffset, g.normalIndices[f]+vnOffset);
-            }
-        }
-    }
-}
-```
-
-
-■alembic_pluginの書き込み処理概要
-UsdAbcAlembicFileFormat::WriteToFile から呼び出される UsdAbc_AlembicData::Write 関数では、
-UsdAbc_AlembicDataWriter クラスを生成し、Alembic 形式への書き込み処理を実行します。
-処理の流れとしては、まず Open により出力先の Archive を初期化し、
-続いて Write で USD データをもとにシーン情報を Alembic 形式へ書き出します。
-最後に Close を呼び出して Archive を破棄し、書き込み処理を完了します。
-```
-// Prepare the writer.
-UsdAbc_AlembicDataWriter writer;
-//writer.SetFlag(UsdAbc_AlembicContextFlagNames->verbose);
-
-// Write the archive.
-if (writer.Open(filePath, finalComment)) {
-	if (writer.Write(data) && writer.Close()) {
-		return true;
-	}
-	TfDeleteFile(filePath);
-}
-```
-
-
-●Open
-Alembicファイルの書き出し先（アーカイブ）を初期化する処理を行っています。
-
-```
-bool
-UsdAbc_AlembicDataWriter::Open(
-    const std::string& filePath,
-    const std::string& comment)
-{
-    TRACE_FUNCTION(); // デバッグ用トレース
-
-    _errorLog.clear(); // エラーログクリア
-
-    const std::string dir = TfGetPathName(filePath); // ディレクトリ取得
-
-    // ディレクトリが存在しない場合は作成
-    if (!dir.empty() && !TfIsDir(dir) && !TfMakeDirs(dir)) {
-        TF_RUNTIME_ERROR("Could not create directory '%s'", dir.c_str());
-        return false;
-    }
-
-    try {
-        _impl->SetArchive(
-            CreateArchiveWithInfo(
-                Alembic::AbcCoreOgawa::WriteArchive(), // Ogawa形式ライタ
-                filePath,                              // 出力先パス
-                writerName,                            // 書き出しツール名
-                comment));                             // コメント
-
-        return true;
-    }
-    catch (std::exception& e) {
-        _errorLog.append(e.what());
-        _errorLog.append("\n");
-        return false;
-    }
-}
-```
-
-
-●:Write
-実際にUSDデータをAlembicに書き出す処理を行っています。
-```
-bool
-UsdAbc_AlembicDataWriter::Write(const SdfAbstractDataConstPtr& data)
-{
-    TRACE_FUNCTION();
-
-    try {
-        if (_impl->GetArchive().valid() && data) {
-            // スキーマ（Prim 型ごとの書き込み関数群）を取得
-            const _WriterSchema& schema = _GetSchema();
-            _impl->SetSchema(&schema);   // コンテキストに設定
-            _impl->SetData(data);        // 書き込み対象データを設定
-
-            // ルートプリムから再帰的に書き込み
-            _WritePrim(*_impl, _Parent(), SdfPath::AbsoluteRootPath());
-        }
-        return true;
-    }
-    catch (std::exception& e) {
-        _errorLog.append(e.what());
-        _errorLog.append("\n");
-        return false;
-    }
-}
-```
-
-まず、Prim の種類ごとの書き込み処理を管理している _WriterSchema に注目します。
-スキーマを取得する _GetSchema は以下の通りです。
-```
-static
-const _WriterSchema&
-_GetSchema()
-{
-    static _WriterSchemaBuilder builder;
-    return builder.schema;
-}
-```
-_WriterSchemaBuilder では、Prim の型ごとに必要な書き込み関数を整理しています。
-```
-    schema.AddType(UsdAbcPrimTypeNames->Xform)
-        .AppendWriter(_WriteXform)
-        .AppendWriter(_WriteImageable)
-        .AppendWriter(_WriteArbGeomParams)
-        .AppendWriter(_WriteUserProperties)
-        .AppendWriter(_WriteOther)
-        ;
-    schema.AddType(UsdAbcPrimTypeNames->Mesh)
-        .AppendWriter(_WriteXformParent)
-        .AppendWriter(_WriteSubD)
-        .AppendWriter(_WriteMayaColor)
-        .AppendWriter(_WriteGprim)
-        .AppendWriter(_WriteImageable)
-        .AppendWriter(_WriteArbGeomParams)
-        .AppendWriter(_WriteUserProperties)
-        .AppendWriter(_WriteOther)
-        ;
-```
-
-例えば Mesh の書き込みにおける _WriteSubD では、実際にポイントやフェース、UV などを Alembic に書き込みます。
-```
-// AlembicのSubDオブジェクト作成
-shared_ptr<OSubD> object(new OSubD(...));
-context->SetParent(object);
-
-// USDデータ取得
-UsdSamples points = context->ExtractSamples(...);
-UsdSamples indices = context->ExtractSamples(...);
-UsdSamples counts = context->ExtractSamples(...);
-
-// 面の向きを補正
-_ReverseWindingOrder(context, &indices, counts);
-
-// 時間ごとに書き込み
-for (double time : context->GetSampleTimesUnion()) {
-    SampleT sample;
-
-    _Copy(schema, time, points, &sample, &SampleT::setPositions);
-    _Copy(schema, time, indices, &sample, &SampleT::setFaceIndices);
-    _Copy(schema, time, counts, &sample, &SampleT::setFaceCounts);
-
-    object->getSchema().set(sample);
-}
-```
-
-以上の工程で用意したスキーマと USD データをコンテキストに設定した上で、_WritePrim によって書き込みが行われます。
-
-指定された USD プリムの型を判定して対応するプリムライターを呼び出し、
-ポイント・フェース・マテリアル・UV などの属性を Alembic 形式に書き込みます。
-さらに子プリムが存在する場合は再帰的に同じ処理を行い、USD の階層構造と属性データを丸ごと Alembic ファイルに出力します。
-```
-static
-void
-_WritePrim(
-    _WriterContext& context,
-    const _Parent& parent,
-    const SdfPath& path)
-{
-    _Parent prim; // 書き込み後の親プリムを保持する変数
+    double3 xformOp:translate = (0, 1, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+    def Xform "cubeXform"
     {
-        // プリムの型を判定（例: Mesh, SubD, Camera など）
-        const TfToken typeName = _ComputeTypeName(context, path);
+        double3 xformOp:translate = (-5, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
 
-        // 書き込み用コンテキストを作成
-        _PrimWriterContext primContext(context, parent, path);
+        def Mesh "cube"
+        {
+            int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+            int[] faceVertexIndices = [
+                0, 1, 2, 3,
+                4, 5, 6, 7,
+                0, 1, 5, 4,
+                2, 3, 7, 6,
+                0, 3, 7, 4,
+                1, 2, 6, 5
+            ]
 
-        // 型に対応するプリムライターを順番に呼び出す
-        for (const auto& writer : context.GetSchema().GetPrimWriters(typeName)) {
-            TRACE_SCOPE("UsdAbc_AlembicDataWriter:_WritePrim"); // デバッグ・トレース
-            writer(&primContext); // 各プリムライターでプロパティを書き込む
+            point3f[] points = [
+                (-1, -1, -1),
+                ( 1, -1, -1),
+                ( 1,  1, -1),
+                (-1,  1, -1),
+                (-1, -1,  1),
+                ( 1, -1,  1),
+                ( 1,  1,  1),
+                (-1,  1,  1)
+            ]
+
+            color3f[] primvars:displayColor = [(0, 0, 1)]
+            uniform token subdivisionScheme = "none"
         }
-
-        // 書き込み後の親プリムを保存
-        prim = primContext.GetParent();
     }
 
-    // 子プリムの名前を取得
-    const VtValue childrenNames =
-        context.GetData().Get(path, SdfChildrenKeys->PrimChildren);
+    def Xform "pyramidXform"
+    {
+        double3 xformOp:translate = (5, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
 
-    // 子プリムが存在する場合、再帰的に書き込み
-    if (childrenNames.IsHolding<TfTokenVector>()) {
-        for (const auto& childName :
-                 childrenNames.UncheckedGet<TfTokenVector>()) {
-            _WritePrim(context, prim, path.AppendChild(childName)); 
-            // 子プリムのパスを作り再帰的に処理
+        def Mesh "pyramid"
+        {
+            int[] faceVertexCounts = [4, 3, 3, 3, 3]
+            int[] faceVertexIndices = [
+                0, 1, 2, 3,   # 底面
+                0, 1, 4,
+                1, 2, 4,
+                2, 3, 4,
+                3, 0, 4
+            ]
+
+            point3f[] points = [
+                (-1, -1, 0),  # 底面
+                ( 1, -1, 0),
+                ( 1,  1, 0),
+                (-1,  1, 0),
+                ( 0,  0, 2)   # 頂点
+            ]
+
+            color3f[] primvars:displayColor = [(1, 0, 0)]
+            uniform token subdivisionScheme = "none"
         }
     }
 }
-```
 
-●Close
-Alembicファイルの書き出し先（アーカイブ）を破棄する処理を行っています。
-```
-bool
-UsdAbc_AlembicDataWriter::Close()
+
+■Header
+#ifndef PXR_EXTRAS_USD_EXAMPLES_USD_OBJ_EXPORTER_H
+#define PXR_EXTRAS_USD_EXAMPLES_USD_OBJ_EXPORTER_H
+
+#include <string>
+#include <vector>
+
+#include <pxr/usd/usd/prim.h>
+#include <pxr/usd/usd/stage.h>
+#include <pxr/usd/sdf/layer.h>
+#include <pxr/usd/usdGeom/xform.h>
+#include <pxr/usd/usdGeom/mesh.h>
+
+#include <pxr/base/gf/matrix4d.h>
+#include <pxr/base/gf/vec3f.h>
+#include <pxr/base/gf/vec3d.h>
+#include <pxr/base/gf/quatf.h>
+
+PXR_NAMESPACE_OPEN_SCOPE
+
+// ============================================================
+// Node
+// ============================================================
+
+struct Node
 {
-    TRACE_FUNCTION(); // 関数トレース（デバッグ用）
+    std::string name;
+    std::string path;
 
-    _impl->SetArchive(OArchive()); // 空のアーカイブを設定して既存のアーカイブを破棄
+    bool hasTransform = false;
 
-    return true; // 常に成功扱い
+    pxr::GfMatrix4d transform = pxr::GfMatrix4d(1.0);
+    pxr::GfMatrix4d worldTransform = pxr::GfMatrix4d(1.0);
+
+    int parent = -1;
+
+    std::vector<int> children;
+    std::vector<int> staticMeshes;
+};
+
+// ============================================================
+// Mesh
+// ============================================================
+
+struct Mesh
+{
+    std::string name;
+
+    pxr::VtIntArray   faces;
+    pxr::VtIntArray   indices;
+    pxr::VtVec3fArray points;
+};
+
+// ============================================================
+// exporter
+// ============================================================
+
+class exporter
+{
+public:
+    bool main(const pxr::SdfLayer& layer);
+
+private:
+    // ----------------------------
+    // Core Data
+    // ----------------------------
+    std::vector<int>  rootNodes;
+    std::vector<Node> nodes;
+    std::vector<Mesh> meshes;
+
+    // ----------------------------
+    // Read
+    // ----------------------------
+    bool readPrim(const pxr::UsdPrim& prim, int parent);
+    bool readXform(const pxr::UsdPrim& prim, int parent);
+    bool readMesh(const pxr::UsdPrim& prim, int parent);
+
+    std::pair<int, Node&> addNode(int parent);
+
+    void readXformInternal(Node& node,
+        const pxr::UsdPrim& prim,
+        int parent);
+
+    void readTransform(const pxr::UsdPrim& prim,
+        Node& node,
+        int parent);
+
+    // ----------------------------
+    // Export 
+    // ----------------------------
+    void exportData();
+    void writeNode(size_t nodeIndex,
+        const pxr::GfMatrix4d& correctionTransform);
+
+    void exportMesh(const pxr::GfMatrix4d& worldTransform,
+        int nodeIndex,
+        int meshIndex);
+};
+
+PXR_NAMESPACE_CLOSE_SCOPE
+
+#endif
+
+
+■CPP
+#include "exporter.h"
+
+PXR_NAMESPACE_OPEN_SCOPE
+
+// ============================================================
+// main
+// ============================================================
+
+bool exporter::main(const SdfLayer& constLayer)
+{
+    auto layer = SdfCreateNonConstHandle<SdfLayer>(&constLayer);
+    UsdStageRefPtr stage = UsdStage::Open(layer);
+
+    if (!stage)
+        return false;
+
+    UsdPrim defaultPrim;
+
+    if (stage->HasDefaultPrim())
+        defaultPrim = stage->GetDefaultPrim();
+
+    if (defaultPrim)
+    {
+        readPrim(defaultPrim, -1);
+    }
+    else
+    {
+        for (const UsdPrim& prim : stage->GetPseudoRoot().GetChildren())
+        {
+            readPrim(prim, -1);
+        }
+    }
+
+    exportData();
+
+    return true;
 }
-```
 
+// ============================================================
+// readPrim
+// ============================================================
 
-■処理の流れ
-・フロー図
-・コメント付きソース
+bool exporter::readPrim(const UsdPrim& prim, int parent)
+{
+    if (prim.IsA<UsdGeomXform>())
+        return readXform(prim, parent);
+
+    if (prim.IsA<UsdGeomMesh>())
+        return readMesh(prim, parent);
+
+    return true;
+}
+
+// ============================================================
+// readXform
+// ============================================================
+
+bool exporter::readXform(const UsdPrim& prim, int parent)
+{
+    auto [nodeIndex, node] = addNode(parent);
+
+    readXformInternal(node, prim, parent);
+
+    for (const UsdPrim& child :
+        prim.GetFilteredChildren(UsdTraverseInstanceProxies()))
+    {
+        readPrim(child, nodeIndex);
+    }
+
+    return true;
+}
+
+// ============================================================
+// addNode
+// ============================================================
+
+std::pair<int, Node&> exporter::addNode(int parent)
+{
+    int index = static_cast<int>(nodes.size());
+
+    nodes.emplace_back();
+    Node& node = nodes.back();
+
+    node.parent = parent;
+
+    if (parent >= 0)
+        nodes[parent].children.push_back(index);
+    else
+        rootNodes.push_back(index);
+
+    return { index, node };
+}
+
+// ============================================================
+// readXformInternal
+// ============================================================
+
+void exporter::readXformInternal(Node& node,
+    const UsdPrim& prim,
+    int parent)
+{
+    node.name = prim.GetName().GetString();
+    node.path = prim.GetPath().GetString();
+
+    readTransform(prim, node, parent);
+}
+
+// ============================================================
+// readTransform
+// ============================================================
+
+void exporter::readTransform(const UsdPrim& prim,
+    Node& node,
+    int parent)
+{
+    UsdGeomXformable xformable(prim);
+
+    bool reset = false;
+
+    xformable.GetLocalTransformation(
+        &node.transform,
+        &reset,
+        UsdTimeCode::EarliestTime());
+
+    node.hasTransform =
+        node.transform != GfMatrix4d(0.0) &&
+        node.transform != GfMatrix4d(1.0);
+
+    GfMatrix4d parentWorld =
+        (parent >= 0) ? nodes[parent].worldTransform
+        : GfMatrix4d(1.0);
+
+    node.worldTransform = node.transform * parentWorld;
+}
+
+// ============================================================
+// readMesh
+// ============================================================
+
+bool exporter::readMesh(const UsdPrim& prim, int parent)
+{
+    Mesh mesh;
+    mesh.name = prim.GetName().GetString();
+
+    UsdGeomMesh usdMesh(prim);
+
+    usdMesh.GetFaceVertexCountsAttr().Get(&mesh.faces, 0);
+    usdMesh.GetFaceVertexIndicesAttr().Get(&mesh.indices, 0);
+    usdMesh.GetPointsAttr().Get(&mesh.points, 0);
+
+    int meshIndex = static_cast<int>(meshes.size());
+    meshes.push_back(mesh);
+
+    if (parent >= 0)
+        nodes[parent].staticMeshes.push_back(meshIndex);
+
+    return true;
+}
+
+// ============================================================
+// exportData
+// ============================================================
+
+void exporter::exportData()
+{
+    GfMatrix4d correctionTransform(1.0);
+
+    for (int root : rootNodes)
+    {
+        writeNode(root, correctionTransform);
+    }
+}
+
+// ============================================================
+// writeNode
+// ============================================================
+
+void exporter::writeNode(size_t nodeIndex,
+    const GfMatrix4d& correctionTransform)
+{
+    const Node& node = nodes[nodeIndex];
+
+    GfMatrix4d finalWorld =
+        node.worldTransform * correctionTransform;
+
+    for (int meshIndex : node.staticMeshes)
+    {
+        exportMesh(finalWorld,
+            static_cast<int>(nodeIndex),
+            meshIndex);
+    }
+
+    for (int child : node.children)
+    {
+        writeNode(child, correctionTransform);
+    }
+}
+
+// ============================================================
+// exportMesh
+// ============================================================
+
+void exporter::exportMesh(const GfMatrix4d& worldTransform,
+    int nodeIndex,
+    int meshIndex)
+{
+    const Mesh& mesh = meshes[meshIndex];
+
+    const std::string name =
+        mesh.name.empty()
+        ? "Node_" + std::to_string(nodeIndex) +
+        "_Mesh_" + std::to_string(meshIndex)
+        : mesh.name;
+
+    // faces
+    for (int face : mesh.faces)
+    {
+        (void)face;
+    }
+
+    // indices
+    for (int index : mesh.indices)
+    {
+        (void)index;
+    }
+
+    // points（ワールド変換）
+    for (const auto& p : mesh.points)
+    {
+        GfVec3f worldPos =
+            GfVec3f(worldTransform.Transform(GfVec3d(p)));
+
+        (void)worldPos;
+    }
+}
+
+PXR_NAMESPACE_CLOSE_SCOPE
