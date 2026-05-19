@@ -1,15 +1,93 @@
-●概要
-USDフォーマットは階層構造を持ち、Primをベースに管理されています。そのため、出力処理の実装においては、Prim単位でUSDから情報を取得する方法が適しています。
-本検証では、数あるPrimの中から、メッシュ情報を管理するUsdMeshと、階層構造においてオブジェクトのワールド座標や管理を担うXFormの2種類のPrimに着目しました。
-これらの情報取得および書き出し処理を実装し、その内容をドキュメントとしてまとめています。
+node = hou.pwd()
+geo = node.geometry()
 
-実装では、出力処理を管理するexporterクラスを作成し、WriteToFile関数から呼び出す構成としました。
-以降では、このexporterクラスの処理に沿って説明を行います。
+path = "C:/Users/yusuke.nakamura/Desktop/test.txt"
 
-●Usdからの情報取得処理
-・XForm
-・Mesh
+with open(path, "w", encoding="utf-8") as f:
 
-●取得した情報からの書き出し処理
-・XForm
-・Mesh
+    # =========================================
+    # POINT ATTRIBUTES
+    # =========================================
+
+    f.write("=== POINT ATTRIBUTES ===\n\n")
+
+    point_attribs = geo.pointAttribs()
+
+    for pt in geo.points():
+
+        f.write("Point {}\n".format(pt.number()))
+
+        for attrib in point_attribs:
+
+            name = attrib.name()
+            value = pt.attribValue(attrib)
+
+            f.write("  {} : {}\n".format(name, value))
+
+        f.write("\n")
+
+    # =========================================
+    # PRIMITIVE ATTRIBUTES
+    # =========================================
+
+    f.write("\n=== PRIMITIVE ATTRIBUTES ===\n\n")
+
+    prim_attribs = geo.primAttribs()
+
+    for prim in geo.prims():
+
+        f.write("Prim {}\n".format(prim.number()))
+
+        for attrib in prim_attribs:
+
+            name = attrib.name()
+            value = prim.attribValue(attrib)
+
+            f.write("  {} : {}\n".format(name, value))
+
+        f.write("\n")
+
+    # =========================================
+    # VERTEX ATTRIBUTES
+    # =========================================
+
+    f.write("\n=== VERTEX ATTRIBUTES ===\n\n")
+
+    vertex_attribs = geo.vertexAttribs()
+
+    for prim in geo.prims():
+
+        for vtx in prim.vertices():
+
+            f.write(
+                "Vertex prim={} vertex={}\n".format(
+                    prim.number(),
+                    vtx.number()
+                )
+            )
+
+            for attrib in vertex_attribs:
+
+                name = attrib.name()
+                value = vtx.attribValue(attrib)
+
+                f.write("  {} : {}\n".format(name, value))
+
+            f.write("\n")
+
+    # =========================================
+    # DETAIL ATTRIBUTES
+    # =========================================
+
+    f.write("\n=== DETAIL ATTRIBUTES ===\n\n")
+
+    detail_attribs = geo.globalAttribs()
+
+    for attrib in detail_attribs:
+
+        name = attrib.name()
+        value = geo.attribValue(attrib)
+
+        f.write("{} : {}\n".format(name, value))
+
+print("Exported:", path)
